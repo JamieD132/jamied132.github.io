@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown 'til Natan is allowed on Darflen</title>
+    <style>
+        html, body{
+            background-color: rgb(0, 0, 60);
+            color:white;
+            font-weight: bold;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            justify-content: center;
+            padding: auto 0;
+            user-select: none;
+        }
+        h1{
+            margin-top: 30vh;
+        }
+    </style>
+</head>
+<body>
+    <h1>Countdown until Natan can be allowed on Darflen</h1>
+    <h2>loading...</h2>
+    <script>
+        
+        function convertSecondsToTime(seconds) {
+            const secondsInYear = 31536000;
+            const secondsInMonth = 2628000;
+            const secondsInDay = 86400;
+            const secondsInHour = 3600;
+            const secondsInMinute = 60;
+            let years = Math.floor(seconds / secondsInYear);
+            let remainingSeconds = seconds % secondsInYear;
+            
+            let months = Math.floor(remainingSeconds / secondsInMonth);
+            remainingSeconds %= secondsInMonth;
+            let days = Math.floor(remainingSeconds / secondsInDay);
+            remainingSeconds %= secondsInDay;
+            
+            let hours = Math.floor(remainingSeconds / secondsInHour);
+            remainingSeconds %= secondsInHour;
+            
+            let minutes = Math.floor(remainingSeconds / secondsInMinute);
+            let finalSeconds = remainingSeconds % secondsInMinute;
+            return {
+                years,
+                months,
+                days,
+                hours,
+                minutes,
+                seconds: finalSeconds
+            };
+        }
+        let date1 = new Date();
+        let date2 = new Date("2025-03-09T00:00:00");
+        let timeLeft = (date2 - date1) / 1000;
+        setInterval(update, 500);
+        function update() {
+            date1 = new Date();
+            timeLeft = (date2 - date1) / 1000;
+            let res = convertSecondsToTime(timeLeft);
+            let set = res.years + " Years, " + res.months + " Months, " + res.days + " Days, " + res.hours + " Hours, " + res.minutes + " Minutes, " + Math.round(res.seconds) + " Seconds";
+            document.getElementsByTagName("h2")[0].innerHTML = set;
+        }
+
+        
+    </script>
+</body>
+</html>
