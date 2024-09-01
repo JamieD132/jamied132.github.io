@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JamieD132</title>
+    <link rel="stylesheet" href="index.css">
+
+</head>
+<body>
+    <div class="title">
+        <h1>JamieD132</h1>
+        <img draggable="false" src="cheese.png">
+    </div>
+    <h3>Projects</h3>
+    <div class="scroll">
+        <div class="reel">
+            <div class="box">
+                <a draggable="false" href="https://github.com/JamieD132/wasteof-addons">
+                    <div class="contents">
+                        <h2>Wasteof Addons</h2>
+                        <img draggable="false"  src="wasteofaddons.png">
+                        <p>Customise wasteof</p>
+                    </div>    
+                </a>
+            </div>
+            <div class="box">
+                <div class="contents">
+                    <h2>BitCode</h2>
+                    <img draggable="false"  src="bitcode.png">
+                    <p>A logic gate based coding editor</p>
+                </div>    
+            </div>
+            <div class="box">
+                <div class="contents">
+                    <h2>Post Office</h2>
+                    <img draggable="false"  src="postoffice.png">
+                    <p>A browser focusing on the ability to make different methods of requests</p>
+                </div>    
+            </div>
+            <div class="box">
+                <a draggable="false" href="https://jamied132.github.io/nachos">
+                    <div class="contents">
+                        <h2>Nachos</h2>
+                        <img draggable="false"  src="nachos.jpeg">
+                        <p>A virus</p>
+                    </div>    
+                </a>
+            </div>
+            <div class="box">
+                <a draggable="false" href="https://elaruu.github.io">
+                    <div class="contents">
+                        <h2>Elaruu Wiki</h2>
+                        <img draggable="false"  src="elaruuwiki.png">
+                        <p>A wiki designed to preserve information related to elaruu</p>
+                    </div>    
+                </a>
+            </div>
+            <div class="box">
+                <a draggable="false" href="https://scroll-fun.w3spaces.com">
+                    <div class="contents">
+                        <h2>Scroll-fun</h2>
+                        <img draggable="false"  src="scrollfun.jpg">
+                        <p>Some random website that lets you visit the moon</p>
+                    </div> 
+                </a>   
+            </div>
+            <div class="box">
+                <div class="contents">
+                    <h2>Text-based adventure game creator</h2>
+                    <p>Create 100% customiseable text-based adventure games</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h3>Edit the text - hard edition</h3>
+    <p>To save changes, you must enter a prime number with <var>n</var> digits. <var>n</var> increases by 1 every time you save changes, so that it is harder for the next person. <var>n</var> will reset to 1 at the start of every month.</p>
+    <p class="scrollforever">I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese </p>
+    <textarea cols="100" maxlength="8000">loading ett data...</textarea>
+    <div class="maths">
+        <p>Enter a prime number with <var>n</var> digits, where <var>n</var> = 1</p>
+        <input type="number">
+        <button id="save">Save changes</button>
+    </div>
+    <p class="scrollforever">I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese </p>
+    <div class="stats">
+        <h3>Stats</h3>
+        <p>This website has had</p>
+        <img src="https://hitwebcounter.com/counter/counter.php?page=15991540&style=0005&nbdigits=10&type=page&initCount=0">
+        <p>visitors, and</p>
+        <img src="https://hitwebcounter.com/counter/counter.php?page=15991597&style=0005&nbdigits=10&type=ip&initCount=0">
+        <p>unique visitors.</p>
+    </div>
+    <div class="old">
+        <div class="corners">
+            <iframe src="old.html"></iframe>
+        </div>
+    </div>
+</body>
+<script>
+    const database = "ce43100903af9f554c354da7";
+    const csrf="b4c50e45cbfda8b4b2f916202994229ec362d6e90d29605e145338c6b5e3020f4979474d5468316f3364685a617a576d334f4e636b634757464d316763733d594778474a";
+    const prefix="https://api.darflen.com/posts/";
+    fetch(prefix + database)
+    .then(response => response.json())
+    .then(data => JSON.parse(data.post.content))
+    .then(content => {
+        const db = content.database.jd;
+        const endpoints = db.endpoints;
+        fetch(prefix + endpoints.ett)
+        .then(response => response.json())
+        .then(data => JSON.parse(data.post.content))
+        .then(content => {
+            document.querySelector("textarea").value = content.ett;
+            document.querySelector("#save").addEventListener("click", function() {
+                content.ett = document.querySelector("textarea").value;
+                fetch(prefix + endpoints.ett, {
+                    method: "POST",
+                    credentials: "include",
+                    mode: "no-cors",
+                    body: JSON.stringify({
+                        "textarea": content.ett,
+                        "csrf-token": csrf,
+                        "audience":"private",
+                    })
+                })
+                .then(data => {
+                    console.log(data);
+                });
+            });
+        });
+    });
+    
+</script>
