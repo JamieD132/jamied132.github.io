@@ -98,37 +98,6 @@
     </div>
 </body>
 <script>
-    const database = "ce43100903af9f554c354da7";
-    const csrf="b4c50e45cbfda8b4b2f916202994229ec362d6e90d29605e145338c6b5e3020f4979474d5468316f3364685a617a576d334f4e636b634757464d316763733d594778474a";
-    const prefix="https://api.darflen.com/posts/";
-    fetch(prefix + database)
-    .then(response => response.json())
-    .then(data => JSON.parse(data.post.content))
-    .then(content => {
-        const db = content.database.jd;
-        const endpoints = db.endpoints;
-        fetch(prefix + endpoints.ett)
-        .then(response => response.json())
-        .then(data => JSON.parse(data.post.content))
-        .then(content => {
-            document.querySelector("textarea").value = content.ett;
-            document.querySelector("#save").addEventListener("click", function() {
-                content.ett = document.querySelector("textarea").value;
-                fetch(prefix + endpoints.ett, {
-                    method: "POST",
-                    credentials: "include",
-                    mode: "no-cors",
-                    body: JSON.stringify({
-                        "textarea": content.ett,
-                        "csrf-token": csrf,
-                        "audience":"private",
-                    })
-                })
-                .then(data => {
-                    console.log(data);
-                });
-            });
-        });
-    });
+    
     
 </script>
