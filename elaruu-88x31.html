@@ -77,32 +77,32 @@
   </body>
 </html>
 <script>
-  document.querySelector("#copy_1").addEventListener("click"){
+  document.querySelector("#copy_1").addEventListener("click", function(){
     var copyText = document.querySelector("#text_1");
     copyText.select();
     copyText.setSelectionRange(0, 99999); // For mobile devices
     navigator.clipboard.writeText(copyText.innerHTML);
     alert("Copied");
-  }
-  document.querySelector("#copy_2").addEventListener("click"){
+  });
+  document.querySelector("#copy_2").addEventListener("click", function(){
     var copyText = document.querySelector("#text_2");
     copyText.select();
     copyText.setSelectionRange(0, 99999); // For mobile devices
     navigator.clipboard.writeText(copyText.innerHTML);
     alert("Copied");
-  }
-  document.querySelector("#copy_3").addEventListener("click"){
+  });
+  document.querySelector("#copy_3").addEventListener("click", function(){
     var copyText = document.querySelector("#text_3");
     copyText.select();
     copyText.setSelectionRange(0, 99999); // For mobile devices
     navigator.clipboard.writeText(copyText.innerHTML);
     alert("Copied");
-  }
-  document.querySelector("#copy_4").addEventListener("click"){
+  });
+  document.querySelector("#copy_4").addEventListener("click", function(){
     var copyText = document.querySelector("#text_4");
     copyText.select();
     copyText.setSelectionRange(0, 99999); // For mobile devices
     navigator.clipboard.writeText(copyText.innerHTML);
     alert("Copied");
-  }
+  });
 </script>
