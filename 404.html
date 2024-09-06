@@ -1,1 +1,157 @@
-Test yay
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>four zero four ... .... ........... ............................................................hmm...? cheees :) elaruu :) bye</title>
+</head>
+<style>
+    .stool{
+        position: absolute;
+        top: 50%;
+        left: calc(50% - 100px);
+        width: 200px;
+        z-index: 0;
+    }
+    .tv{
+        position: absolute;
+        z-index:5;
+        height: 100px;
+        width: 122.5px;
+        top: calc(50% - 24px);
+        left: calc(50% - 61.25px);
+    }
+    .static{
+        position: absolute;
+        z-index: 4;
+        height: 60px;
+        width: 80px;
+        top: calc(50% - 15px);
+        left: calc(50% - 50px);
+    }
+    .power{
+        position: absolute;
+        z-index: 6;
+        width: 12.75px;
+        height: 4.5px;
+        top: calc(50% + 47.5px);
+        left: calc(50% + 43px);
+    }
+    .at1, .at2{
+        position: absolute;
+        z-index: 3;
+    }
+    .at1{
+        height: 60px;
+        left: calc(50% + 20px);
+        top: calc(50% - 78px);
+        transform-origin: bottom left;
+        transform: rotate(-30deg)
+    }
+    .at2{
+        height: 70px;
+        left: calc(50% + 20px);
+        top: calc(50% - 88px);
+        transform-origin: bottom right;
+        transform: rotate(35deg)
+    }
+    h1{
+        width: 100%;
+        font-size: 300px;
+        text-align: center;
+        color: white;
+        -webkit-text-stroke: 2px rgb(0, 0, 186);
+        filter: blur(5px);
+    }
+    .knob{
+        position: absolute;
+        z-index: 6;
+        width: 10px;
+        height: 9.75px;
+        top: calc(50% - 8.5px);
+        left: calc(50% + 39.75px);
+
+    }
+</style>
+<body>
+    <h1>404</h1>
+    <img src="stool.png" class="stool" draggable="false">
+    <img src="tv2.png" class="tv" draggable="false">
+    <img src="static.gif" class="static" draggable="false">
+    <img src="antenna.png" class="at1" draggable="false" style="transform: rotate(-30deg)">
+    <img src="antenna.png" class="at2" draggable="false" style="transform: rotate(35deg)">
+    <img src="power.png" class="power" draggable="false">
+    <img src="knob.png" class="knob" draggable="false" style="transform: rotate(0deg)">
+</body>
+</html>
+<script>
+    const tv = document.querySelector(".tv");
+    const static = document.querySelector(".static");
+    const at1 = document.querySelector(".at1");
+    const at2 = document.querySelector(".at2");
+    const power = document.querySelector(".power");
+    const knob = document.querySelector(".knob");
+    var mx, my, i, cx, cy, rect;
+    document.addEventListener("mousemove", function(e){
+        cx = e.clientX;
+        cy = e.clientY;
+    });
+    power.addEventListener("click", function(){
+        if(static.getAttribute("src") == "static.gif" || static.getAttribute("src") == "astley.gif"){
+            static.setAttribute("src", "off.gif");
+        }else{
+            static.setAttribute("src", "static.gif");
+            checkready();
+        }
+    });
+    at1.addEventListener("mousedown", function(e){
+        mx = e.clientX;
+        my = e.clientY;
+        rect = at1.getBoundingClientRect();
+        var ax = rect.x;
+        var ay = rect.y + (rect.height / 2);
+        i = setInterval(function(){
+            dx = cx - ax;
+            dy = cy - ay;
+            at1.style.transform = `rotate(${Math.atan2(dy, dx) * 180 / Math.PI + 90}deg)`;
+            checkready();
+        }, 10)
+        document.addEventListener("mouseup", remover);
+        
+    });
+    function remover(){
+        clearInterval(i);
+        document.removeEventListener("mouseup", remover);
+    }
+    at2.addEventListener("mousedown", function(e){
+        mx = e.clientX;
+        my = e.clientY;
+        rect = at2.getBoundingClientRect();
+        var ax = rect.x;
+        var ay = rect.y + (rect.height / 2);
+        i = setInterval(function(){
+            dx = cx - ax;
+            dy = cy - ay;
+            at2.style.transform = `rotate(${Math.atan2(dy, dx) * 180 / Math.PI + 90}deg)`;
+            checkready();
+        }, 10)
+        document.addEventListener("mouseup", remover);
+    });
+    function checkready(){
+        var a1v = parseFloat(at1.style.transform.split("(")[1].split("deg)")[0]);
+        var a2v = parseFloat(at2.style.transform.split("(")[1].split("deg)")[0]);
+        if(a1v > 60 && a1v < 80 && a2v > -35 && a2v < -25){
+            if(static.getAttribute("src") == "static.gif"){
+                static.setAttribute("src", "astley.gif");
+            }  
+        }else{
+            if(static.getAttribute("src") == "astley.gif"){
+                static.setAttribute("src", "static.gif");
+            }
+        }
+    }
+    knob.addEventListener("click", function(){
+        var dir = parseInt(knob.style.transform.split("(")[1].split("deg)")[0]);
+        knob.style.transform = `rotate(${dir + 10}deg)`;
+    });
+</script>
