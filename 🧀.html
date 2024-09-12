@@ -2,25 +2,12 @@
 <head></head>
 <body></body>
 <script>
-  function convertBase3ToText(base3Number) {
-    // Validate input to ensure it's a valid base 3 number
-    if (!/^[0-2]+$/.test(base3Number)) {
-      throw new Error("Invalid base 3 number: " + base3Number);
-    }
-  
-    // Convert base 3 number to decimal
-    var decimalNumber = parseInt(base3Number, 3);
-  
-    // Convert decimal number to text using a lookup table
-    const textLookup = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-    let text = "";
-    while (decimalNumber > 0) {
-      var remainder = decimalNumber % 26;
-      text = textLookup[remainder] + text;
-      decimalNumber = Math.floor(decimalNumber / 26);
-    }
-  
-    return text;
+  function binaryToText(str) {
+    let output = [];
+    str.split(" ").forEach((element) => {
+      output.push(String.fromCharCode(parseInt(element, 2)));
+    });
+    return output.join("");
   }
 
   const digits = ["🧀","🟡","🟨"]
@@ -28,7 +15,7 @@
   if(fragment){
     var errorlevel = 0;
     var string = fragment.split("#")[1].replaceAll("%F0%9F%A7%80","0").replaceAll("%F0%9F%9F%A1","1").replaceAll("%F0%9F%9F%A8"," ");
-    var url = convertBase3ToText(string);
+    var url = binaryToText(string);
     console.log(url);
   }else{
     window.location.href="https://jamied132.is-a.dev/cheesifier"
