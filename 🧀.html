@@ -9,13 +9,13 @@
     }
   
     // Convert base 3 number to decimal
-    const decimalNumber = parseInt(base3Number, 3);
+    var decimalNumber = parseInt(base3Number, 3);
   
     // Convert decimal number to text using a lookup table
     const textLookup = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
     let text = "";
     while (decimalNumber > 0) {
-      const remainder = decimalNumber % 26;
+      var remainder = decimalNumber % 26;
       text = textLookup[remainder] + text;
       decimalNumber = Math.floor(decimalNumber / 26);
     }
