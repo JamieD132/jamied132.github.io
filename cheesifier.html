@@ -1,0 +1,22 @@
+<!doctype html>
+<head></head>
+<body>
+  <h1>Cheesify your URLs</h1>
+  <p>Convert your url to a string of cheese</p>
+  <input type="text" id="cheese">
+  <button id="go">Cheesify</button>
+  <p id="output"></p>
+</body>
+<script>
+  function textToBinary(str) {
+    let output = "";
+    str.split("").forEach((element) => {
+      let char = element.charCodeAt(0).toString(2);
+      output += ("00000000" + char).slice(-8).concat(" ");
+    });
+    return output;
+  }
+  document.getElementById("go").addEventListener("click", function() {
+    document.getElementById("output").innerHTML="<a href=\"https://jamied132.is-a.dev/🧀#"+textToBinary(document.getElementById("cheese").value).replaceAll("0","🧀").replaceAll("1","🟡").replaceAll(" ","🟨")+"\">https://jamied132.is-a.dev/🧀#"+textToBinary(document.getElementById("cheese").value).replaceAll("0","🧀").replaceAll("1","🟡").replaceAll(" ","🟨")+"</a>";
+  });
+</script>
