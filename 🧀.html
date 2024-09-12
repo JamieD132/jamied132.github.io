@@ -16,7 +16,7 @@
     var errorlevel = 0;
     var string = fragment.split("#")[1].replaceAll("%F0%9F%A7%80","0").replaceAll("%F0%9F%9F%A1","1").replaceAll("%F0%9F%9F%A8"," ");
     var url = binaryToText(string);
-    console.log(url);
+    window.location.href=url;
   }else{
     window.location.href="https://jamied132.is-a.dev/cheesifier"
   }
