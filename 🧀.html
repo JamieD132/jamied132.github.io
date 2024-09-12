@@ -1,0 +1,34 @@
+<!doctype html>
+<head></head>
+<body></body>
+<script>
+  function convertBase3ToText(base3Number) {
+    // Validate input to ensure it's a valid base 3 number
+    if (!/^[0-2]+$/.test(base3Number)) {
+      throw new Error("Invalid base 3 number: " + base3Number);
+    }
+  
+    // Convert base 3 number to decimal
+    const decimalNumber = parseInt(base3Number, 3);
+  
+    // Convert decimal number to text using a lookup table
+    const textLookup = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    let text = "";
+    while (decimalNumber > 0) {
+      const remainder = decimalNumber % 26;
+      text = textLookup[remainder] + text;
+      decimalNumber = Math.floor(decimalNumber / 26);
+    }
+  
+    return text;
+  }
+
+  const digits = ["🧀","🟡","🟨"]
+  const fragment = window.location.hash;
+  if(fragment){
+    var string = fragment.replaceAll(digits[0],"0").replaceAll(digits[1],"1").replaceAll(digits[2],"2");
+    console.log(string);
+  }else{
+    window.location.href="https://jamied132.is-a.dev/cheesifier"
+  }
+</script>
