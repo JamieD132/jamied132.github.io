@@ -27,7 +27,7 @@
   const fragment = window.location.hash;
   if(fragment){
     var errorlevel = 0;
-    var string = fragment.split("#")[1].replaceAll("%F0%9F%A7%80","0").replaceAll("%F0%9F%9F%A1","1").replaceAll("%F0%9F%9F%A8","2");
+    var string = fragment.split("#")[1].replaceAll("%F0%9F%A7%80","0").replaceAll("%F0%9F%9F%A1","1").replaceAll("%F0%9F%9F%A8"," ");
     var url = convertBase3ToText(string);
     console.log(url);
   }else{
