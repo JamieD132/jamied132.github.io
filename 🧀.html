@@ -26,7 +26,8 @@
   const digits = ["🧀","🟡","🟨"]
   const fragment = window.location.hash;
   if(fragment){
-    var string = fragment.replaceAll(digits[0],"0").replaceAll(digits[1],"1").replaceAll(digits[2],"2");
+    var errorlevel = 0;
+    var string = fragment.split("#")[1].replaceAll("%F0%9F%A7%80","0").replaceAll("%F0%9F%9F%A1","1").replaceAll("%F0%9F%9F%A7","2");
     console.log(string);
   }else{
     window.location.href="https://jamied132.is-a.dev/cheesifier"
