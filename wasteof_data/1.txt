@@ -1,0 +1,31 @@
+//Wasteof Data | Timestamp 16-9-24 
+//Description of this dataset:
+//A collection of all 3char and num usernames
+
+//List of all 3char usernames:
+['abc', 'abe', 'ace', 'ads', 'air', 'aks', 'all', 'alo', 'alt', 'and', 'ant', 'ao3', 'apc', 'api', 'app', 'arc', 'ari', 'art', 'asd', 'ash', 'ass', 'bad', 'ban', 'bar', 'bbb', 'bed', 'bee', 'ben', 'bet', 'bin', 'bio', 'bit', 'bjk', 'bmw', 'bob', 'boi', 'bop', 'bot', 'boy', 'bpb', 'bro', 'btc', 'bug', 'buy', 'bye', 'car', 'cat', 'cia', 'cis', 'cnn', 'com', 'con', 'cow', 'cpp', 'cvs', 'dad', 'day', 'dcs', 'dea', 'dev', 'dgd', 'die', 'dna', 'dog', 'dot', 'dvc', 'eee', 'ee2', 'egg', 'emo', 'est', 'etc', 'eth', 'euh', 'eve', 'eye', 'fae', 'fag', 'fap', 'faq', 'fbi', 'fem', 'ffs', 'fin', 'fl8', 'fox', 'fsh', 'fug', 'f4f', 'gay', 'geo', 'ggg', 'ggs', 'gif', 'gmk', 'gmt', 'god', 'gov', 'gsa', 'gum', 'gun', 'guy', 'hah', 'ham', 'hex', 'him', 'hot', 'how', 'huh', 'ian', 'ice', 'icy', 'idc', 'idk', 'img', 'inf', 'ira', 'irs', 'ivy', 'i8d', 'i_i', 'jay', 'jef', 'jhb', 'jim', 'joe', 'jon', 'jum', 'kai', 'kaj', 'key', 'kfc', 'kid', 'kon', 'kup', 'k7e', 'leo', 'let', 'lim', 'lol', 'lxs', 'mac', 'man', 'max', 'ma6', 'mdl', 'mef', 'mew', 'mfa', 'mit', 'mmm', 'mod', 'mow', 'mws', 'nac', 'nah', 'nan', 'nbc', 'nbn', 'nbo', 'new', 'nft', 'nil', 'nou', 'now', 'npc', 'npg', 'nvm', 'nwu', 'nyc', 'off', 'oha', 'ohw', 'oil', 'omg', 'one', 'oni', 'ooc', 'org', 'owl', 'owo', 'o3o', 'o_o', 'pan', 'pay', 'pew', 'pex', 'pig', 'pin', 'pog', 'poo', 'pop', 'ppp', 'pro', 'qns', 'rae', 'rap', 'red', 'rei', 'rgb', 'rip', 'rmc', 'ron', 'rpg', 'run', 'rye', 'r87', 'sad', 'sam', 'say', 'scp', 'sea', 'sec', 'sev', 'sex', 'sfw', 'she', 'sid', 'sky', 'sm2', 'sob', 'sss', 'sun', 'sup', 'sus', 'sxr', 'syz', 's8n', 'tea', 'ten', 'the', 'til', 'tim', 'tit', 'tnc', 'tnt', 'tom', 'tos', 'tux', 'two', 't_t', 'ufo', 'uno', 'usa', 'uwu', 'uwv', 'var', 'vcs', 'vex', 'vpn', 'v_v', 'wan', 'war', 'was', 'who', 'why', 'wii', 'win', 'wom', 'wow', 'wtf', 'www', 'wyd', 'xan', 'xor', 'xst', 'xxx', 'xyz', 'x_x', 'yay', 'yes', 'yob', 'yoo', 'you', 'zae', 'zag', 'zay', 'zed', 'zid', 'zig', 'zip', 'zlf', 'zoe', 'zoo', 'zye', 'zyx', 'zzz', '000', '001', '0_o', '0_0', '1st', '100', '116', '123', '167', '180', '256', '277', '3am', '334', '360', '404', '420', '429', '444', '608', '666', '68r', '7vv', '7_7', '9gr', '911', '999', '___', '_--', '-a-', '-gr', '-w-', '-zu', '-_-', '---']
+
+/*formatted nicely
+@abc @abe @ace @ads @air @aks @all @alo @alt @and @ant @ao3 @apc @api @app @arc @ari @art @asd @ash @ass @bad @ban @bar @bbb @bed @bee @ben @bet @bin @bio @bit @bjk @bmw @bob @boi @bop @bot @boy @bpb @bro @btc @bug @buy @bye @car @cat @cia @cis @cnn @com @con @cow @cpp @cvs @dad @day @dcs @dea @dev @dgd @die @dna @dog @dot @dvc @eee @ee2 @egg @emo @est @etc @eth @euh @eve @eye @fae @fag @fap @faq @fbi @fem @ffs @fin @fl8 @fox @fsh @fug @f4f @gay @geo @ggg @ggs @gif @gmk @gmt @god @gov @gsa @gum @gun @guy @hah @ham @hex @him @hot @how @huh @ian @ice @icy @idc @idk @img @inf @ira @irs @ivy @i8d @i_i @jay @jef @jhb @jim @joe @jon @jum @kai @kaj @key @kfc @kid @kon @kup @k7e @leo @let @lim @lol @lxs @mac @man @max @ma6 @mdl @mef @mew @mfa @mit @mmm @mod @mow @mws @nac @nah @nan @nbc @nbn @nbo @new @nft @nil @nou @now @npc @npg @nvm @nwu @nyc @off @oha @ohw @oil @omg @one @oni @ooc @org @owl @owo @o3o @o_o @pan @pay @pew @pex @pig @pin @pog @poo @pop @ppp @pro @qns @rae @rap @red @rei @rgb @rip @rmc @ron @rpg @run @rye @r87 @sad @sam @say @scp @sea @sec @sev @sex @sfw @she @sid @sky @sm2 @sob @sss @sun @sup @sus @sxr @syz @s8n @tea @ten @the @til @tim @tit @tnc @tnt @tom @tos @tux @two @t_t @ufo @uno @usa @uwu @uwv @var @vcs @vex @vpn @v_v @wan @war @was @who @why @wii @win @wom @wow @wtf @www @wyd @xan @xor @xst @xxx @xyz @x_x @yay @yes @yob @yoo @you @zae @zag @zay @zed @zid @zig @zip @zlf @zoe @zoo @zye @zyx @zzz @000 @001 @0_o @0_0 @1st @100 @116 @123 @167 @180 @256 @277 @3am @334 @360 @404 @420 @429 @444 @608 @666 @68r @7vv @7_7 @9gr @911 @999 @___ @_-- @-a- @-gr @-w- @-zu @-_- @---
+*/
+
+//That cheesewhisk3rs is not following:
+['abe', 'aks', 'bjk', 'bpb', 'cia', 'cis', 'dcs', 'dna', 'dvc', 'ee2', 'euh', 'fae', 'ffs', 'fug', 'ggs', 'gmk', 'ivy', 'jhb', 'jum', 'kai', 'kid', 'kon', 'let', 'lim', 'ma6', 'mdl', 'mfa', 'mws', 'npc', 'o3o', 'pew', 'rpg', 'r87', 'sid', 'sm2', 'syz', 's8n', 'til', 'tnc', 'ufo', 'var', 'vcs', 'vex', 'wan', 'wii', 'wyd', 'zae', 'zay', 'zye', '167', '180', '256', '277', '334', '68r', '7vv', '7_7']
+
+/*formatted nicely
+@abe @aks @bjk @bpb @cia @cis @dcs @dna @dvc @ee2 @euh @fae @ffs @fug @ggs @gmk @ivy @jhb @jum @kai @kid @kon @let @lim @ma6 @mdl @mfa @mws @npc @o3o @pew @rpg @r87 @sid @sm2 @syz @s8n @til @tnc @ufo @var @vcs @vex @wan @wii @wyd @zae @zay @zye @167 @180 @256 @277 @334 @68r @7vv @7_7
+*/
+
+//List of all 4num usernames
+['0000', '0345', '1000', '1010', '1024', '1101', '1111', '1234', '1337', '1984', '2000', '2022', '2179', '2222', '2500', '2600', '3333', '3994', '3995', '3996', '3997', '3998', '4000', '4321', '4444', '4992', '4993', '4994', '4995', '4996', '4997', '4998', '4999', '5001', '5555', '6666', '6767', '7777', '8888', '9000', '9474', '9998', '9999']
+
+/*formatted nicely
+@0000 @0345 @1000 @1010 @1024 @1101 @1111 @1234 @1337 @1984 @2000 @2022 @2179 @2222 @2500 @2600 @3333 @3994 @3995 @3996 @3997 @3998 @4000 @4321 @4444 @4992 @4993 @4994 @4995 @4996 @4997 @4998 @4999 @5001 @5555 @6666 @6767 @7777 @8888 @9000 @9474 @9998 @9999
+*/
+
+//That cheesewhisk3rs isn’t following
+['0345', '3994', '3995', '3996', '3997', '3998', '9474']
+
+/*formatted nicely
+@0345 @3994 @3995 @3996 @3997 @3998 @9474
+*/
