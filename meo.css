@@ -1,0 +1,36 @@
+body{
+animation: wobble 4s linear infinite;
+}
+@keyframes wobble{
+0%{
+background-color:#ffffff;
+}50%{
+background-color:#ffdd00;
+}
+100%{
+background-color:#ffffff;
+}
+}
+.side{
+animation: spin 4s ease-in-out infinite;
+}
+@keyframes spin{
+0%{
+transform: perspective(1000px) rotateY(0deg);
+}100%{
+transform: perspective(1000px) rotateY(360deg);
+}
+}
+.pfp-inner{
+animation: spin 4s linear infinite;
+}
+#main{
+animation: whirl 10s cubic-bezier(1,0,.77,.99) infinite;
+}
+@keyframes whirl{
+0%{
+transform: perspective(1000px) rotateY(0deg) rotateX(0deg) rotateZ(0deg);
+}100%{
+transform: perspective(1000px) rotateY(360deg) rotateX(360deg) rotateZ(360deg);
+}
+}
