@@ -3,3 +3,24 @@
   <input type="password" name="password" placeholder="Password">
   <button type="submit">Submit</button>
 </form>
+<script>
+  document.getElementById("myForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent default form submission behavior   
+
+    // Create a FormData object to collect form data
+    var formData = new FormData(this);
+    // Send the form data to the Python script using fetch
+    fetch("your_python_script.py", {
+      method: "POST",
+      body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+      // Handle the response from the Python script here
+      console.log(data);
+    })
+    .catch(error => {
+      console.error("Error:", error);
+    });
+  });
+</script>
