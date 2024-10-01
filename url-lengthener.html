@@ -38,8 +38,8 @@
     const go = document.querySelector("#go");
     const a = document.querySelector("#a");
     go.addEventListener("click",(e)=>{
-      var bin = textToBinary(url).replaceAll('0', pri).replaceAll('1', sec).replaceAll(' ',ter);
-      var out = 'https://jamied132.is-a.dev/🔗#'+pre+bin+suf+'.'+pre.length.lenth+pre.length+suf.length.length+suf.length+'\\\\'+pri+'\\\\'+sec+'\\\\'+ter;
+      var bin = textToBinary(url()).replaceAll('0', pri()).replaceAll('1', sec()).replaceAll(' ',ter());
+      var out = 'https://jamied132.is-a.dev/🔗#'+pre()+bin+suf()+'.'+pre().length.lenth+pre().length+suf().length.length+suf().length+'\\\\'+pri()+'\\\\'+sec()+'\\\\'+ter();
       a.setAttribute('href',out);
       a.innerHTML=out;
     });
