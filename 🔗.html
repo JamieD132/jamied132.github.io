@@ -1,0 +1,22 @@
+<!doctype html>
+<head></head>
+<body></body>
+<script>
+  const fragment = window.location.fragment;
+  if(!fragment){
+    window.location.href='/url-lengthener';
+  }else{
+    var parts = fragment.split('#')[1].split('.');
+    var string = parts[0];
+    var code = parts[1]; //e.g. 13252\\s\\A\\b
+    var prelen = parseInt(code.substr(0,1));
+    var prefix = parseInt(code.substr(1,prelen));
+    var suflen = parseInt(code.substr(prelen+1,1));
+    var suffix = parseInt(code.substr(prelen+2,suflen));
+    var chars = code.split('\\')
+    var primary = chars[1];
+    var secondary = chars[2];
+    var tertiary = chars[3];
+    console.log(prefix,suffix,primary,secondary,tertiary);
+  }
+</script>
