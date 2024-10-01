@@ -2,17 +2,17 @@
 <body>
   <h1>URL lengthener</h1>
   <label for="url" value="URL:">URL:</label>
-  <input type="text" id="url">
+  <input type="text" id="url"><br>
   <label for="primary" value="Primary character:">Primary character:</label>
-  <input type="text" width="40" id="primary">
+  <input type="text" width="40" id="primary"><br>
   <label for="Secondary" value="Secondary character:">Secondary character:</label>
-  <input type="text" width="40" id="Secondary">
+  <input type="text" width="40" id="Secondary"><br>
   <label for="Tertiary" value="Tertiary character:">Tertiary character:</label>
-  <input type="text" width="40" id="Tertiary">
+  <input type="text" width="40" id="Tertiary"><br>
   <label for="prefix" value="Prefix:">Prefix:</label>
-  <input type="text" width="80" id="prefix">
+  <input type="text" width="80" id="prefix"><br>
   <label for="suffix" value="Suffix:">Suffix:</label>
-  <input type="text" width="80" id="suffix">
+  <input type="text" width="80" id="suffix"><br>
   <button id="go">Generate</button>
   <a href="" id="a"></a>
   <h2>Presets</h2>
@@ -39,7 +39,7 @@
     const a = document.querySelector("#a");
     go.addEventListener("click",(e)=>{
       var bin = textToBinary(url).replaceAll('0', pri).replaceAll('1', sec).replaceAll(' ',ter);
-      var out = 'https://jamied132.is-a.dev/🔗#'+pre+bin+suf+'.'+pre.length.lenth+pre.length+suf.length.length+suf.length+'\\\\'+pri++'\\\\'+sec+'\\\\'+ter;
+      var out = 'https://jamied132.is-a.dev/🔗#'+pre+bin+suf+'.'+pre.length.lenth+pre.length+suf.length.length+suf.length+'\\\\'+pri+'\\\\'+sec+'\\\\'+ter;
       a.setAttribute('href',out);
       a.innerHTML=out;
     });
