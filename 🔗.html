@@ -18,7 +18,8 @@
     var primary = chars[1];
     var secondary = chars[2];
     var tertiary = chars[3];
-    var encoded = string.substr(prefix).substr(0-suffix);
+    var encoded = string.substr(0,string.length-suffix).substr(prefix);
+    var decoded = encoded.replaceAll(primary,'0').replaceAll(secondary,'1').replaceAll(tertiary,' ');
     
     console.log(encoded);
   }
