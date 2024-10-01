@@ -4,7 +4,7 @@
 <script>
   const fragment = window.location.hash;
   if(!fragment){
-    //window.location.href='/url-lengthener';
+    window.location.href='/url-lengthener';
     console.log('no-hash');
   }else{
     var parts = fragment.split('#')[1].split('.');
@@ -18,6 +18,8 @@
     var primary = chars[1];
     var secondary = chars[2];
     var tertiary = chars[3];
-    console.log(prefix,suffix,primary,secondary,tertiary);
+    var encoded = string.substr(prefix).substr(0-suffix);
+    
+    console.log(encoded);
   }
 </script>
