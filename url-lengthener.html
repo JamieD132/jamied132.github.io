@@ -1,0 +1,49 @@
+<!doctype html>
+<body>
+  <h1>URL lengthener</h1>
+  <label for="url" value="URL:">URL:</label>
+  <input type="text" id="url">
+  <label for="primary" value="Primary character:">Primary character:</label>
+  <input type="text" width="40" id="primary">
+  <label for="Secondary" value="Secondary character:">Secondary character:</label>
+  <input type="text" width="40" id="Secondary">
+  <label for="Tertiary" value="Tertiary character:">Tertiary character:</label>
+  <input type="text" width="40" id="Tertiary">
+  <label for="prefix" value="Prefix:">Prefix:</label>
+  <input type="text" width="80" id="prefix">
+  <label for="suffix" value="Suffix:">Suffix:</label>
+  <input type="text" width="80" id="suffix">
+  <button id="go">Generate</button>
+  <a href="" id="a"></a>
+  <h2>Presets</h2>
+  <button id="elaruu">Elaruu</button>
+  <button id="cheese">Cheese</button>
+  <script>
+    function textToBinary(str) {
+      let output = "";
+      str.split("").forEach((element) => {
+        let char = element.charCodeAt(0).toString(2);
+        output += ("00000000" + char).slice(-8).concat(" ");
+      });
+      return output;
+    }
+    const url = document.querySelector("#url").value;
+    const pri = document.querySelector("#primary").value;
+    const sec = document.querySelector("#secondary").value;
+    const ter = document.querySelector("#tertiary").value;
+    const pre = document.querySelector("#prefix").value;
+    const suf = document.querySelector("#suffix").value;
+    const ela = document.querySelector("#elaruu");
+    const che = document.querySelector("#cheese");
+    const go = document.querySelector("#go");
+    const a = document.querySelector("#a");
+    go.addEventListener("click",(e)=>{
+      var bin = textToBinary(url).replaceAll('0', pri).replaceAll('1', sec).replaceAll(' ',ter);
+      var out = 'https://jamied132.is-a.dev/🔗#'+pre+bin+suf+'.'+pre.length.lenth+pre.length+suf.length.length+suf.length+'\\\\'+pri++'\\\\'+sec+'\\\\'+ter;
+      a.setAttribute('href',out);
+      a.innerHTML=out;
+    });
+  </script>
+  
+  
+</body>
