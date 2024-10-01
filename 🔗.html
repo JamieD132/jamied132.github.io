@@ -4,7 +4,8 @@
 <script>
   const fragment = window.location.hash;
   if(!fragment){
-    window.location.href='/url-lengthener';
+    //window.location.href='/url-lengthener';
+    console.log('no-hash');
   }else{
     var parts = fragment.split('#')[1].split('.');
     var string = parts[0];
