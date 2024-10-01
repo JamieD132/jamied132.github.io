@@ -2,17 +2,17 @@
 <body>
   <h1>URL lengthener</h1>
   <label for="url" value="URL:">URL:</label>
-  <input type="text" id="url"><br>
+  <input type="text" id="url"><br><br>
   <label for="primary" value="Primary character:">Primary character:</label>
-  <input type="text" width="40" id="primary"><br>
+  <input type="text" width="40" id="primary"><br><br>
   <label for="Secondary" value="Secondary character:">Secondary character:</label>
-  <input type="text" width="40" id="Secondary"><br>
+  <input type="text" width="40" id="Secondary"><br><br>
   <label for="Tertiary" value="Tertiary character:">Tertiary character:</label>
-  <input type="text" width="40" id="Tertiary"><br>
+  <input type="text" width="40" id="Tertiary"><br><br>
   <label for="prefix" value="Prefix:">Prefix:</label>
-  <input type="text" width="80" id="prefix"><br>
+  <input type="text" width="80" id="prefix"><br><br>
   <label for="suffix" value="Suffix:">Suffix:</label>
-  <input type="text" width="80" id="suffix"><br>
+  <input type="text" width="80" id="suffix"><br><br>
   <button id="go">Generate</button>
   <a href="" id="a"></a>
   <h2>Presets</h2>
@@ -27,12 +27,12 @@
       });
       return output;
     }
-    const url = document.querySelector("#url").value;
-    const pri = document.querySelector("#primary").value;
-    const sec = document.querySelector("#Secondary").value;
-    const ter = document.querySelector("#Tertiary").value;
-    const pre = document.querySelector("#prefix").value;
-    const suf = document.querySelector("#suffix").value;
+    const url = () => { return document.querySelector("#url").value };
+    const pri = () => { return document.querySelector("#primary").value };
+    const sec = () => { return document.querySelector("#Secondary").value };
+    const ter = () => { return document.querySelector("#Tertiary").value };
+    const pre = () => { return document.querySelector("#prefix").value };
+    const suf = () => { return document.querySelector("#suffix").value };
     const ela = document.querySelector("#elaruu");
     const che = document.querySelector("#cheese");
     const go = document.querySelector("#go");
