@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html></html>
+
+<script>
+const def = `<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>four zero four ... .... ........... ............................................................hmm...? cheees :) elaruu :) bye</title>
@@ -83,7 +85,6 @@
     <img src="power.png" class="power" draggable="false">
     <img src="knob.png" class="knob" draggable="false" style="transform: rotate(0deg)">
 </body>
-</html>
 <script>
     const tv = document.querySelector(".tv");
     const static = document.querySelector(".static");
@@ -113,7 +114,7 @@
         i = setInterval(function(){
             dx = cx - ax;
             dy = cy - ay;
-            at1.style.transform = `rotate(${Math.atan2(dy, dx) * 180 / Math.PI + 90}deg)`;
+            at1.style.transform = \`rotate(\${Math.atan2(dy, dx) * 180 / Math.PI + 90}deg)\`;
             checkready();
         }, 10)
         document.addEventListener("mouseup", remover);
@@ -132,7 +133,7 @@
         i = setInterval(function(){
             dx = cx - ax;
             dy = cy - ay;
-            at2.style.transform = `rotate(${Math.atan2(dy, dx) * 180 / Math.PI + 90}deg)`;
+            at2.style.transform = \`rotate(\${Math.atan2(dy, dx) * 180 / Math.PI + 90}deg)\`;
             checkready();
         }, 10)
         document.addEventListener("mouseup", remover);
@@ -152,6 +153,23 @@
     }
     knob.addEventListener("click", function(){
         var dir = parseInt(knob.style.transform.split("(")[1].split("deg)")[0]);
-        knob.style.transform = `rotate(${dir + 10}deg)`;
+        knob.style.transform = \`rotate(\${dir + 10}deg\`);
     });
+<\/script>
+`;
+//all available paths:
+// /users/:username
+// /users/:username/followers
+// /users/:username/following
+var path = window.location.pathname.split('/');
+if(path[1] == 'users' && path[2] && !path[3]){
+    // /users/:username
+}else if(path[1] == 'users' && path[2] && path[3] == 'followers' && !path[4]){
+    // /users/:username/followers
+}else if(path[1] == 'users' && path[2] && path[3] == 'following' && !path[4]){
+    // /users/:username/following
+}else{
+    //404
+    document.querySelector('#html').innerHTML=def;
+}
 </script>
