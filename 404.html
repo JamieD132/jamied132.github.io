@@ -157,6 +157,54 @@ const def = `<head>
     });
 <\/script>
 `;
+const usrpge = `<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${window.location.pathname.split('/')[2]} on Scratch</title>
+    <link rel="stylesheet" href="/elaruu/index.css">
+    <link rel="stylesheet" href="/elaruu/profile.css">
+    <link rel="stylesheet" href="/elaruu/handshield.css" media="handheld, only screen and (max-device-width:480px)">
+    <link rel="stylesheet" href="/elaruu/vendors/jquery.ui.all.css">
+    <link rel="stylesheet" href="/elaruu/modal.css">
+</head>
+<body>
+    <script type="module">
+            import { loadProfile } from "/elaruu/profile.js";
+            loadProfile(${window.location.pathname.split('/')[2]});
+        <\/script>
+    </body>`;
+const usrfwr = `<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${window.location.pathname.split('/')[2]} on Scratch</title>
+    <link rel="stylesheet" href="/elaruu/index.css">
+    <link rel="stylesheet" href="/elaruu/profile.css">
+    <link rel="stylesheet" href="/elaruu/handshield.css" media="handheld, only screen and (max-device-width:480px)">
+    <link rel="stylesheet" href="/elaruu/vendors/jquery.ui.all.css">
+    <link rel="stylesheet" href="/elaruu/modal.css">
+</head>
+<body>
+    <script type="module">
+            import { loadFollowers } from "/elaruu/profile.js";
+            loadFollowers(${window.location.pathname.split('/')[2]});
+        <\/script>
+    </body>`;
+const usrfwn = `<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${window.location.pathname.split('/')[2]} on Scratch</title>
+    <link rel="stylesheet" href="/elaruu/index.css">
+    <link rel="stylesheet" href="/elaruu/profile.css">
+    <link rel="stylesheet" href="/elaruu/handshield.css" media="handheld, only screen and (max-device-width:480px)">
+    <link rel="stylesheet" href="/elaruu/vendors/jquery.ui.all.css">
+    <link rel="stylesheet" href="/elaruu/modal.css">
+</head>
+<body>
+    <script type="module">
+            import { loadFollowing } from "/elaruu/profile.js";
+            loadProfile(${window.location.pathname.split('/')[2]});
+        <\/script>
+    </body>`;
 //all available paths:
 // /users/:username
 // /users/:username/followers
@@ -164,12 +212,15 @@ const def = `<head>
 var path = window.location.pathname.split('/');
 if(path[1] == 'users' && path[2] && !path[3]){
     // /users/:username
+    document.querySelector('html').innerHTML=usrpge;
 }else if(path[1] == 'users' && path[2] && path[3] == 'followers' && !path[4]){
     // /users/:username/followers
+    document.querySelector('html').innerHTML=usrfwr;
 }else if(path[1] == 'users' && path[2] && path[3] == 'following' && !path[4]){
     // /users/:username/following
+    document.querySelector('html').innerHTML=usrfwn;
 }else{
     //404
-    document.querySelector('#html').innerHTML=def;
+    document.querySelector('html').innerHTML=def;
 }
 </script>
