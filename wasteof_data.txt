@@ -1,0 +1,3 @@
+Issue 1: ./wasteof_data/1.txt
+Issue 2: ./wasteof_data/2.json
+Issue 3: ./wasteof_data/3.txt
