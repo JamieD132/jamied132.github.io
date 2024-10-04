@@ -137,7 +137,7 @@
         <p>Enter a prime number with <var>n</var> digits, where <var>n</var> = <p id="n"></p></p>
         a = <input type="number" id="a">
 	<p>Prove that this number is the sum of two other prime numbers:</p>
-	a = <input type="number" id="b"> + <inuput type="number" id="c"><br>
+	a = <input type="number" id="b"> + <input type="number" id="c"><br>
 	logs:
 	<textarea cols="50" height=100 id="logs">ETT logs</textarea>
         <button id="save">Save changes</button>
@@ -169,14 +169,14 @@ function checkPrime(num) {
 }
 
 var nn;
-fetch('https://api.jamied132.workers.dev/n').then((n)=>{ n.json()}).then((r)=>{
+fetch('https://api.jamied132.workers.dev/n').then((n)=> n.json()).then((r)=>{
 		console.log(r);
 		nn = r["n"];
 		document.querySelectorAll('#n').forEach((elem)=>{
 			elem.innerHTML=nn;
 		})
 	})
-fetch('https://api.jamied132.workers.dev/ett').then((j)=>{ j.json()}).then((r)=>{
+fetch('https://api.jamied132.workers.dev/ett').then((j)=> j.json()).then((r)=>{
 		console.log(r);
 		document.querySelector('#ett').innerHTML=r["ett"];
 	})
