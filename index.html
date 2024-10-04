@@ -170,7 +170,7 @@ function checkPrime(num) {
 
 var nn;
 fetch('https://api.jamied132.workers.dev/n')
-	.then((n)=>{JSON.parse(n)})
+	.then((n)=>{n.json()})
 	.then((r)=>{
 		nn = r["n"];
 		document.querySelectorAll('#n').forEach((elem)=>{
@@ -178,7 +178,7 @@ fetch('https://api.jamied132.workers.dev/n')
 		})
 	})
 fetch('https://api.jamied132.workers.dev/ett')
-	.then((j)=>{JSON.parse(j)})
+	.then((j)=>{j.json()})
 	.then((r)=>{
 		document.querySelector('#ett').innerHTML=r["ett"];
 	})
