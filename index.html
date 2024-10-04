@@ -169,17 +169,15 @@ function checkPrime(num) {
 }
 
 var nn;
-fetch('https://api.jamied132.workers.dev/n')
-	.then((n)=>{n.json()})
-	.then((r)=>{
+fetch('https://api.jamied132.workers.dev/n').then((n)=>{ n.json()}).then((r)=>{
+		console.log(r);
 		nn = r["n"];
 		document.querySelectorAll('#n').forEach((elem)=>{
 			elem.innerHTML=nn;
 		})
 	})
-fetch('https://api.jamied132.workers.dev/ett')
-	.then((j)=>{j.json()})
-	.then((r)=>{
+fetch('https://api.jamied132.workers.dev/ett').then((j)=>{ j.json()}).then((r)=>{
+		console.log(r);
 		document.querySelector('#ett').innerHTML=r["ett"];
 	})
 document.querySelector("#save").addEventListener('click',(e)=>{
