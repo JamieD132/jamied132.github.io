@@ -134,10 +134,10 @@
     <p class="scrollforever">I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese </p>
     <textarea cols="100" maxlength="8000" id="ett">loading ett data...</textarea>
     <div class="maths">
-        <p>Enter a prime number with <var>n</var> digits, where <var>n</var> = <p id="n"></p></p>
-        a = <input type="number" id="a">
+        <p>Enter a prime number with <var>n</var> digits, where <var>n</var> = <p id="n" style="display:inline;"></p></p>
+        a = <input type="number" id="a"  style="display:inline;">
 	<p>Prove that this number is the sum of two other prime numbers:</p>
-	a = <input type="number" id="b"> + <input type="number" id="c"><br>
+	a = <input type="number" id="b" style="display:inline;"> + <input type="number" id="c" style="display:inline;"><br>
 	logs:
 	<textarea cols="50" height=100 id="logs">ETT logs</textarea>
         <button id="save">Save changes</button>
@@ -184,12 +184,16 @@ document.querySelector("#save").addEventListener('click',(e)=>{
 	var logs = document.querySelector("#logs");
 	var errors = 0;
 	var a = document.querySelector("#a").value;
-	if(!checkPrime(a)){logs.innerHTML += '<br>'+a+' is not prime'; errors++;}
+	if(!checkPrime(a)){logs.innerHTML += `
+ `+a+' is not prime'; errors++;}
 	var b = document.querySelector("#b").value;
-	if(!checkPrime(b)){logs.innerHTML += '<br>'+b+' is not prime'; errors++;}
+	if(!checkPrime(b)){logs.innerHTML += `
+ `+b+' is not prime'; errors++;}
 	var c = document.querySelector("#c").value;
-	if(!checkPrime(c)){logs.innerHTML += '<br>'+c+' is not prime'; errors++;}
-	if(!(b+c==a)){logs.innerHTML += `<br>`+a+' does not equal '+b+' + '+c;errors++;}
+	if(!checkPrime(c)){logs.innerHTML += `
+ `+c+' is not prime'; errors++;}
+	if(!(a==b+c)){logs.innerHTML += `
+ `+a+' does not equal '+b+' + '+c;errors++;}
 	if(errors<1){
 		fetch('https://api.jamied132.workers.dev/ett',{'method':'POST','body':{'ett':document.querySelector("#ett").innerHTML}});
 		fetch('https://api.jamied132.workers.dev/n',{'method':'POST'})
