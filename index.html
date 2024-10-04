@@ -192,7 +192,7 @@ document.querySelector("#save").addEventListener('click',(e)=>{
 	var c = document.querySelector("#c").value;
 	if(!checkPrime(c)){logs.innerHTML += `
  `+c+' is not prime'; errors++;}
-	if(!(a==b+c)){logs.innerHTML += `
+	if(!(parseInt(a)==parseInt(b)+parseInt(c))){logs.innerHTML += `
  `+a+' does not equal '+b+' + '+c;errors++;}
 	if(errors<1){
 		fetch('https://api.jamied132.workers.dev/ett',{'method':'POST','body':{'ett':document.querySelector("#ett").innerHTML}});
