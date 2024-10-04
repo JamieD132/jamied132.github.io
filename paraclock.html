@@ -31,12 +31,12 @@
 <body>
   <h2>ParaClock</h1>
   <h3>The time is is for Paradock</h2>
-  <h1>12:34:56 AM</h1>
+  <h1>...</h1>
 </body>
 <script>
   function updateTime(){
     var date = new Date();
-    var paraclock = date.toLocaleTimeString("en-CA", {timeZone: "Canada/Mountain"});
+    var paraclock = date.toLocaleTimeString("en-CA", {timeZone: "Canada/Eastern"});
     document.querySelector("h1").innerHTML=paraclock;
   }
   setInterval(updateTime,20);
