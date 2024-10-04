@@ -499,5 +499,32 @@ export async function loadProfile(user){
         </div>
       </div>
         `
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  document.querySelector('body').innerHTML=text;
   
 }
