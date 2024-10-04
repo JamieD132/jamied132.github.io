@@ -32,12 +32,11 @@
   <h2>ParaClock</h1>
   <h3>The time is is for Paradock</h2>
   <h1>12:34:56 AM</h1>
-  <p>(Paraclock is accurate to +/- 2 hours)</p>
 </body>
 <script>
   function updateTime(){
     var date = new Date();
-    var paraclock = date.toLocaleTimeString("en-CA", {timeZone: "Canada/Central"});
+    var paraclock = date.toLocaleTimeString("en-CA", {timeZone: "Canada/Mountain"});
     document.querySelector("h1").innerHTML=paraclock;
   }
   setInterval(updateTime,20);
