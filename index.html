@@ -130,11 +130,11 @@
         </div>
     </div>
     <h3>Edit the text - hard edition</h3>
-    <p>To save you must prove that a prime number of <var>n</var> digits is the sum of two other prime numbers, where <var>n</var> increases by one every time someone successfully saves. <var>n</var> is currently <p id="n"></p></p>
+    <p>To save you must prove that a number of <var>n</var> digits is the sum of two prime numbers, where <var>n</var> increases by one every time someone successfully saves. <var>n</var> is currently <p id="n"></p></p>
     <p class="scrollforever">I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese I am a cheese </p>
     <textarea cols="100" maxlength="8000" id="ett">loading ett data...</textarea>
     <div class="maths">
-        <p style="display:inline;">Enter a prime number with <var>n</var> digits, where <var>n</var> = </p><p id="n" style="display:inline;"></p>
+        <p style="display:inline;">Enter a number with <var>n</var> digits, where <var>n</var> = </p><p id="n" style="display:inline;"></p>
         <input type="number" id="a"  style="display:inline;">
 	<p>Prove that this number is the sum of two other prime numbers:</p>
 	<input type="number" id="b" style="display:inline;"><input type="number" id="c" style="display:inline;"><br>
@@ -184,8 +184,6 @@ document.querySelector("#save").addEventListener('click',(e)=>{
 	var logs = document.querySelector("#logs");
 	var errors = 0;
 	var a = document.querySelector("#a").value;
-	if(!checkPrime(parseInt(a))){logs.innerHTML += `
- `+a+' is not prime'; errors++;}
 	var b = document.querySelector("#b").value;
 	if(!checkPrime(parseInt(b))){logs.innerHTML += `
  `+b+' is not prime'; errors++;}
@@ -197,7 +195,7 @@ document.querySelector("#save").addEventListener('click',(e)=>{
 	if(!(a.length == nn)){logs.innerHTML +=`
  `+a+' is not '+nn+' digits long'; errors++;}
 	if(errors<1){
-		fetch('https://api.jamied132.workers.dev/ett',{'method':'POST','body':{'ett':document.querySelector("#ett").innerHTML}}).then(a => console.log('ok'));
+		fetch('https://api.jamied132.workers.dev/ett',{'method':'POST','body':document.querySelector("#ett").innerHTML}).then(a => console.log('ok'));
 		fetch('https://api.jamied132.workers.dev/n',{'method':'POST'})
 		
 	}
