@@ -184,16 +184,18 @@ document.querySelector("#save").addEventListener('click',(e)=>{
 	var logs = document.querySelector("#logs");
 	var errors = 0;
 	var a = document.querySelector("#a").value;
-	if(!checkPrime(a)){logs.innerHTML += `
+	if(!checkPrime(parseInt(a))){logs.innerHTML += `
  `+a+' is not prime'; errors++;}
 	var b = document.querySelector("#b").value;
-	if(!checkPrime(b)){logs.innerHTML += `
+	if(!checkPrime(parseInt(b))){logs.innerHTML += `
  `+b+' is not prime'; errors++;}
 	var c = document.querySelector("#c").value;
-	if(!checkPrime(c)){logs.innerHTML += `
+	if(!checkPrime(parseInt(c))){logs.innerHTML += `
  `+c+' is not prime'; errors++;}
 	if(!(parseInt(a)==parseInt(b)+parseInt(c))){logs.innerHTML += `
  `+a+' does not equal '+b+' + '+c;errors++;}
+	if(!(a.length == nn){logs.innerHTML +=`
+ `+a+' is not '+nn+' digits long'; errors++;}
 	if(errors<1){
 		fetch('https://api.jamied132.workers.dev/ett',{'method':'POST','body':{'ett':document.querySelector("#ett").innerHTML}}).then(a => console.log('ok'));
 		fetch('https://api.jamied132.workers.dev/n',{'method':'POST'})
