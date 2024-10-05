@@ -505,6 +505,7 @@ function loadProfile(user){
 var path = window.location.pathname.split('/');
 if(path[1] == 'users' && path[2] && !path[3]){
     // /users/:username
+  console.log('hello')
     loadProfile(path[2])
 }else if(path[1] == 'users' && path[2] && path[3] == 'followers' && !path[4]){
     // /users/:username/followers
