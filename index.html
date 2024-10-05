@@ -195,9 +195,9 @@ document.querySelector("#save").addEventListener('click',(e)=>{
 	if(!(parseInt(a)==parseInt(b)+parseInt(c))){logs.innerHTML += `
  `+a+' does not equal '+b+' + '+c;errors++;}
 	if(errors<1){
-		fetch('https://api.jamied132.workers.dev/ett',{'method':'POST','body':{'ett':document.querySelector("#ett").innerHTML}});
+		fetch('https://api.jamied132.workers.dev/ett',{'method':'POST','body':{'ett':document.querySelector("#ett").innerHTML}}).then(a => console.log('ok'));
 		fetch('https://api.jamied132.workers.dev/n',{'method':'POST'})
-		window.location.href="/#ett"
+		
 	}
 	
 });
