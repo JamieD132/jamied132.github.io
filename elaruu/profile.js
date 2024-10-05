@@ -1,4 +1,4 @@
-export async function loadProfile(user){
+function loadProfile(user){
   var text = ``;
   text += `<div id="pagewrapper">
         <div id="topnav">
@@ -499,32 +499,17 @@ export async function loadProfile(user){
         </div>
       </div>
         `
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  document.querySelector('body').innerHTML=text;
+    document.querySelector('body').innerHTML=text;
   
+}
+var path = window.location.pathname.split('/');
+if(path[1] == 'users' && path[2] && !path[3]){
+    // /users/:username
+    loadProfile(path[2])
+}else if(path[1] == 'users' && path[2] && path[3] == 'followers' && !path[4]){
+    // /users/:username/followers
+    
+}else if(path[1] == 'users' && path[2] && path[3] == 'following' && !path[4]){
+    // /users/:username/following
+    
 }
