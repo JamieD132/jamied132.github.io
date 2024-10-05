@@ -1,0 +1,40 @@
+html {
+    --nav-background: var(--light-100);
+    --nav-background-selected: var(--light-300);
+    --nav-search-background: var(--light-100);
+    --nav-search-background-selected: var(--light-300);
+    --nav-icon-filter: none;
+    --nav-text-color: var(--dark-700);
+    --default-background-color: var(--light-100);
+    --default-text-color: var(--dark-700);
+    --filter-barely-invert: var(--filter-invert);
+    --default-background-color-dark: var(--light-300);
+    --default-background-color-darker: var(--light-400);
+    --default-background-color-darkest: var(--light-500);
+    --form-border-color: var(--dark-700);
+    --form-hover-background-color: var(--light-300);
+    --form-hover-border-color: var(--dark-700);
+    --form-focus-border-color: var(--dark-700);
+    --poll-background-color-focus: var(--light-500);
+    --poll-border-color: var(--dark-700);
+    --poll-border-color-focus: var(--dark-700);
+    --poll-progrss-background-color-focus: var(--light-300);
+    --poll-border-color-voted: var(--dark-700);
+    --poll-border-color-voted-focus: var(--brand-700);
+    --poll-progress-background-color-voted: #ffc400;
+    --poll-progress-background-color-voted-focus: #ffc400;
+    --poll-time-color: var(--dark-700);
+    --user-poster-background-color-focus: var(--form-hover-background-color);
+    --user-poster-border-color-focus: var(--form-hover-border-color);
+    --user-poster-border-color: var(--form-border-color);
+    --group-card-hover-background: var(--light-100)
+}
+html #website {
+    background-color: var(--light-100)
+}
+html img {
+    filter: brightness(2);
+}
+html .user-post, html[data-theme=brightwhite] #user-poster-container, html[data-theme=brightwhite] .lb-box {
+    border:1px solid black;
+}
