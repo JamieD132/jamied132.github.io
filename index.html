@@ -135,10 +135,10 @@
     <textarea cols="100" maxlength="8000" id="ett">loading ett data...</textarea>
     <div class="maths">
         <p style="display:inline;">Enter a prime number with <var>n</var> digits, where <var>n</var> = </p><p id="n" style="display:inline;"></p>
-        a = <input type="number" id="a"  style="display:inline;">
+        <input type="number" id="a"  style="display:inline;">
 	<p>Prove that this number is the sum of two other prime numbers:</p>
-	a = <input type="number" id="b" style="display:inline;"> + <input type="number" id="c" style="display:inline;"><br>
-	logs:
+	<input type="number" id="b" style="display:inline;"><input type="number" id="c" style="display:inline;"><br>
+	
 	<textarea cols="50" height=100 id="logs">ETT logs</textarea>
         <button id="save">Save changes</button>
     </div>
@@ -194,7 +194,7 @@ document.querySelector("#save").addEventListener('click',(e)=>{
  `+c+' is not prime'; errors++;}
 	if(!(parseInt(a)==parseInt(b)+parseInt(c))){logs.innerHTML += `
  `+a+' does not equal '+b+' + '+c;errors++;}
-	if(!(a.length == nn){logs.innerHTML +=`
+	if(!(a.length == nn)){logs.innerHTML +=`
  `+a+' is not '+nn+' digits long'; errors++;}
 	if(errors<1){
 		fetch('https://api.jamied132.workers.dev/ett',{'method':'POST','body':{'ett':document.querySelector("#ett").innerHTML}}).then(a => console.log('ok'));
