@@ -168,10 +168,7 @@ const usrpge = `<head>
     <link rel="stylesheet" href="/elaruu/modal.css">
 </head>
 <body>
-    <script type="module">
-            import { loadProfile } from "/elaruu/profile.js";
-            loadProfile(${window.location.pathname.split('/')[2]});
-        <\/script>
+    <script src = "/elaruu/profile.js"><\/script>
     </body>`;
 const usrfwr = `<head>
     <meta charset="UTF-8">
@@ -215,10 +212,10 @@ if(path[1] == 'users' && path[2] && !path[3]){
     document.querySelector('html').innerHTML=usrpge;
 }else if(path[1] == 'users' && path[2] && path[3] == 'followers' && !path[4]){
     // /users/:username/followers
-    document.querySelector('html').innerHTML=usrfwr;
+    document.querySelector('html').innerHTML=usrpge;
 }else if(path[1] == 'users' && path[2] && path[3] == 'following' && !path[4]){
     // /users/:username/following
-    document.querySelector('html').innerHTML=usrfwn;
+    document.querySelector('html').innerHTML=usrpge;
 }else{
     //404
     document.querySelector('html').innerHTML=def;
