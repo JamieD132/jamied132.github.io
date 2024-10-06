@@ -1342,7 +1342,16 @@ fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.j
     setTimeout(load_comments,3000)
 
     
-})
+});
+var signedin;
+if(sessionStorage.getItem('session')){
+    var session = JSON.parse(sessionStorgae.getItem('session').btoa());
+    if(session.username && session.password){
+        fetch('https://api.jamied132.workers.dev/auth/signin',{method:'POST',body:{username:session.username,password:session.password}}).then(res=>res.json()).then(j=>{
+            if(!)
+        })
+    }
+}
 
 
 
