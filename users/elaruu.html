@@ -4,33 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>elaruu on Scratch</title>
-    <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="profile.css">
-    <link rel="stylesheet" href="handshield.css" media="handheld, only screen and (max-device-width:480px)">
-    <link rel="stylesheet" href="vendors/jquery.ui.all.css">
-    <link rel="stylesheet" href="modal.css">
+    <link rel="stylesheet" href="/elaruu/index.css">
+    <link rel="stylesheet" href="/elaruu/profile.css">
+    <link rel="stylesheet" href="/elaruu/handshield.css" media="handheld, only screen and (max-device-width:480px)">
+    <link rel="stylesheet" href="/elaruu/vendors/jquery.ui.all.css">
+    <link rel="stylesheet" href="/elaruu/modal.css">
 </head>
 <body>
     <div id="pagewrapper">
         <div id="topnav">
             <div class="innerwrap">
                 <div class="container">
-                    <a href="/" class="logo"><span class="scratch"></span></a>
+                    <a href="/users/elaruu" class="logo"><span class="scratch"></span></a>
                     <ul class="site-nav">
                         <li>
-                            <a id="project-create" href="/projects/editor/?tip_bar=home">Create</a>
+                            <a id="project-create" href="//elaruu.jamied132.is-a.dev">Forum</a>
                         </li>
                         <li>
-                            <a href="/explore/projects/all">Explore</a>
+                            <a href="/stats">Stats</a>
                         </li>
                         <li>
-                            <a href="/ideas">Ideas</a>
+                            <a href="/users/elaruu">Chat</a>
                         </li>
                         <li class="last">
                             <a href="/about/">About</a>
                         </li>
                     </ul>
-                    <form class="search" action="/search/projects" method="get">
+                    <form class="search" action="/search" method="get">
                         <input type="submit" class="glass" value="">
                         <input id="search-input" type="text" placeholder="Search" name="q">
                     </form>               
@@ -53,7 +53,7 @@
                                         <div class="ajax-loader" style="display:none; float: left;"></div>
                                         <button type="submit">Sign in</button>
                                         <span class="forgot-password">
-                                            <a href="/accounts/password_reset/">Need help?</a>
+                                            <a href="/faq">Need help?</a>
                                         </span>
                                         <div class="error"></div>
                                     </form>
@@ -65,12 +65,44 @@
                         </li>
                     </ul>
                     <script type="text/template" id="template-account-nav-logged-in">
-                        <ul class="account-nav logged-in"><li class="messages"><a title="messages - updates and notices" href="/messages" class="messages-icon"><span class="notificationsCount none">0</span></a></li><li class="my-stuff"><a title="my stuff - manage projects and studios" href="/mystuff/" class="mystuff-icon"></a></li><li class="logged-in-user dropdown"><span class="user-name dropdown-toggle" data-toggle="dropdown"><img class="user-icon" src="<%- LOGGED_IN_USER.model.thumbnail_url %>" width="24" height="24"><%- LOGGED_IN_USER.model.username_truncated %><span class="caret"></span></span><div class="dropdown-menu blue" ><ul class="user-nav"><li><a href="<%- LOGGED_IN_USER.model.profile_url %>">Profile</a></li><li><a href="/mystuff/">My Stuff</a></li><% if (LOGGED_IN_USER.model.is_educator){ %><li><a href="/educators/classes/">My Classes</a></li><% } %><% if (LOGGED_IN_USER.model.is_student){ %><li><a href="/classes/<%- LOGGED_IN_USER.model.classroom_id %>/">My Class</a></li><% } %><li><a href="/accounts/settings/">Account settings</a></li><li id="logout" class="logout divider"><form method="post" action="/accounts/logout/"><input type='hidden' name='csrfmiddlewaretoken' value='Xn2kHtspw0dLulAU7pg1XEQ8rikjAwX6' /><input type="submit" value="Sign out"></form></li></ul></div></li></ul>
+                        <ul class="account-nav logged-in">
+                            <li class="messages">
+                                <a title="messages - updates and notices" href="/messages" class="messages-icon">
+                                    <span class="notificationsCount none">0</span>
+                                </a>
+                            </li>
+                            <li class="my-stuff">
+                                <a title="my stuff - manage projects and studios" href="/mystuff/" class="mystuff-icon"></a>
+                            </li>
+                            <li class="logged-in-user dropdown">
+                                <span class="user-name dropdown-toggle" data-toggle="dropdown">
+                                    <img class="user-icon" src="" width="24" height="24" id="userimage">
+                                    <rando id="username"></rando>
+                                    <span class="caret"></span>
+                                </span>
+                                <div class="dropdown-menu blue" >
+                                    <ul class="user-nav">
+                                        <li>
+                                            <a href="" id="profileurl">Profile</a>    
+                                        </li>
+                                        <li>
+                                            <a href="/mystuff/">My Stuff</a>
+                                        </li>
+                                        <li>
+                                            <a href="/settings">Account settings</a>
+                                        </li>
+                                        <li id="logout" class="logout divider">
+                                            <a href="/logout">Logout</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
                     </script>
                 </div>
                 <iframe class="iframeshim" frameborder="0" scrolling="no"><html><head></head><body></body></html></iframe>
             </div>
-            </div>
+            </div> 
             <div class="confirm-email banner" data-cue="confirmed_email" style="display:none">
               <div class="container">
                 <span><a id="confirm-email-popup" href="#">Confirm your email</a> to enable sharing. <a href="/info/faq/#accounts">Having trouble?</a></span>
@@ -83,17 +115,17 @@
                 <div class="box-head">
                     <form id="profile-avatar" class="portrait">
                         <div class="avatar">
-                            <a href="/users/griffpatch/">
-                                <img src="cdn2.scratch.mit.edu/get_image/user/1882674_60x60.png" width="55" height="55">
+                            <a href="" id="profileurl">
+                                <img src="" width="55" height="55" id="profileimage">
                                 <div class="loading-img s48"></div>
                             </a>  
                         </div>
                     </form>
                     <div class="header-text">
-                        <h2>elaruu</h2>
+                        <h2 id="username">elaruu</h2>
                         <p class="profile-details">
                             <span class="group">New Scratcher</span> 
-                            Joined <span title="2022-10-29">1 year, 11 months</span> ago
+                            Joined <span title="" id="userjoin"></span> ago
                             <span class="location">Australia</span>
                         </p>
                     </div>
@@ -110,13 +142,13 @@
                         <h3>About me</h3>
                         <div id="bio-readonly" class="read-only">
                             <div class="viewport" style="overflow: auto;">
-                                <p class="overview"></p>
+                                <p class="overview" id="bio"></p>
                             </div>
                         </div>
                         <h3>What I'm working on</h3>
                         <div id="status-readonly" class="read-only">
                             <div class="viewport" style="overflow: auto;">
-                                <p class="overview"></p>
+                                <p class="overview" id="wiwo"></p>
                             </div>
                         </div>
                     </div>
@@ -153,12 +185,12 @@
         <div class="box slider-carousel-container prevent-select">
             <div class="box-head">
                 <h4>Shared Projects (0)</h4>
-            <!--<a href="/users/griffpatch/projects/" data-control="view-all">View all</a>-->
+            <a href="/users/griffpatch/projects/" data-control="view-all" style="display:none;">View all</a>
             </div>
             <div class="box-content slider-carousel horizontal sliderCarousel" id="shared">
                 <div class="viewport empty-field">
                     <div class="content">
-                        <h4>elaruu hasn't shared any projects yet</h4>
+                        <h4><rando id="username"></rando> hasn't shared any projects yet</h4>
                         <span></span>
                     </div>
                 </div>
@@ -172,7 +204,7 @@
             <div class="box-content slider-carousel horizontal sliderCarousel" id="shared">
                 <div class="viewport empty-field">
                     <div class="content">
-                        <h4>elaruu hasn't favorited any projects yet</h4>
+                        <h4><rando id="username"></rando> hasn't favorited any projects yet</h4>
                         <span></span>
                     </div>
                 </div>
@@ -186,7 +218,7 @@
             <div class="box-content slider-carousel horizontal sliderCarousel" id="shared">
                 <div class="viewport empty-field">
                     <div class="content">
-                        <h4>elaruu isn't following anyone yet</h4>
+                        <h4><rando id="username"></rando> isn't following anyone yet</h4>
                         <span></span>
                     </div>
                 </div>
@@ -197,171 +229,20 @@
       <div class="box slider-carousel-container prevent-select">
         <div class="box-head">
           <h4>Followers</h4>
-          <a href="/users/griffpatch/followers/" data-control="view-all">View all</a>
+          <a href="" data-control="view-all" id="profileurl">View all</a>
         </div>
         <div class="box-content slider-carousel horizontal sliderCarousel" id="featured" style="height: 100.5px;">
             <div class="viewport" style="overflow: hidden; height: 90.5px;">
-                <ul class="scroll-content" style="width: 1909px; overflow: hidden; left: 0px;">
-                    <li class="user thumb item">
+                <ul class="scroll-content" style="width: 1909px; overflow: hidden; left: 0px;" id="15followers">
+                    <!--<li class="user thumb item">
                         <a href="/users/JamieD132/">
                             <img class="lazy" data-original="/data/users/JamieD132/pfp.png" width="60" height="60" src="/data/users/JamieD132/pfp.png" style="display: block;">
                         </a>
                         <span class="title">
                             <a href="/users/JamieD132/">JamieD132</a>
                         </span>
-                    </li>
-                    <li class="user thumb item">
-                        <a href="/users/JamieD132/">
-                            <img class="lazy" data-original="/data/users/JamieD132/pfp.png" width="60" height="60" src="/data/users/JamieD132/pfp.png" style="display: block;">
-                        </a>
-                        <span class="title">
-                            <a href="/users/JamieD132/">JamieD132</a>
-                        </span>
-                    </li>
-                    <li class="user thumb item">
-                        <a href="/users/JamieD132/">
-                            <img class="lazy" data-original="/data/users/JamieD132/pfp.png" width="60" height="60" src="/data/users/JamieD132/pfp.png" style="display: block;">
-                        </a>
-                        <span class="title">
-                            <a href="/users/JamieD132/">JamieD132</a>
-                        </span>
-                    </li>
-                    <li class="user thumb item">
-                        <a href="/users/JamieD132/">
-                            <img class="lazy" data-original="/data/users/JamieD132/pfp.png" width="60" height="60" src="/data/users/JamieD132/pfp.png" style="display: block;">
-                        </a>
-                        <span class="title">
-                            <a href="/users/JamieD132/">JamieD132</a>
-                        </span>
-                    </li>
-                    <li class="user thumb item">
-                        <a href="/users/JamieD132/">
-                            <img class="lazy" data-original="/data/users/JamieD132/pfp.png" width="60" height="60" src="/data/users/JamieD132/pfp.png" style="display: block;">
-                        </a>
-                        <span class="title">
-                            <a href="/users/JamieD132/">JamieD132</a>
-                        </span>
-                    </li>
-                    <li class="user thumb item">
-                        <a href="/users/JamieD132/">
-                            <img class="lazy" data-original="/data/users/JamieD132/pfp.png" width="60" height="60" src="/data/users/JamieD132/pfp.png" style="display: block;">
-                        </a>
-                        <span class="title">
-                            <a href="/users/JamieD132/">JamieD132</a>
-                        </span>
-                    </li>
-                    <li class="user thumb item">
-                        <a href="/users/JamieD132/">
-                            <img class="lazy" data-original="/data/users/JamieD132/pfp.png" width="60" height="60" src="/data/users/JamieD132/pfp.png" style="display: block;">
-                        </a>
-                        <span class="title">
-                            <a href="/users/JamieD132/">JamieD132</a>
-                        </span>
-                    </li>
-                    <li class="user thumb item">
-                        <a href="/users/JamieD132/">
-                            <img class="lazy" data-original="/data/users/JamieD132/pfp.png" width="60" height="60" src="/data/users/JamieD132/pfp.png" style="display: block;">
-                        </a>
-                        <span class="title">
-                            <a href="/users/JamieD132/">JamieD132</a>
-                        </span>
-                    </li>
-                    <li class="user thumb item">
-                        <a href="/users/JamieD132/">
-                            <img class="lazy" data-original="/data/users/JamieD132/pfp.png" width="60" height="60" src="/data/users/JamieD132/pfp.png" style="display: block;">
-                        </a>
-                        <span class="title">
-                            <a href="/users/JamieD132/">JamieD132</a>
-                        </span>
-                    </li>
-                    <li class="user thumb item">
-                        <a href="/users/JamieD132/">
-                            <img class="lazy" data-original="/data/users/JamieD132/pfp.png" width="60" height="60" src="/data/users/JamieD132/pfp.png" style="display: block;">
-                        </a>
-                        <span class="title">
-                            <a href="/users/JamieD132/">JamieD132</a>
-                        </span>
-                    </li>
-                    <li class="user thumb item">
-                        <a href="/users/JamieD132/">
-                            <img class="lazy" data-original="/data/users/JamieD132/pfp.png" width="60" height="60" src="/data/users/JamieD132/pfp.png" style="display: block;">
-                        </a>
-                        <span class="title">
-                            <a href="/users/JamieD132/">JamieD132</a>
-                        </span>
-                    </li>
-                    <li class="user thumb item">
-                        <a href="/users/JamieD132/">
-                            <img class="lazy" data-original="/data/users/JamieD132/pfp.png" width="60" height="60" src="/data/users/JamieD132/pfp.png" style="display: block;">
-                        </a>
-                        <span class="title">
-                            <a href="/users/JamieD132/">JamieD132</a>
-                        </span>
-                    </li>
-                    <li class="user thumb item">
-                        <a href="/users/JamieD132/">
-                            <img class="lazy" data-original="/data/users/JamieD132/pfp.png" width="60" height="60" src="/data/users/JamieD132/pfp.png" style="display: block;">
-                        </a>
-                        <span class="title">
-                            <a href="/users/JamieD132/">JamieD132</a>
-                        </span>
-                    </li>
-                    <li class="user thumb item">
-                        <a href="/users/JamieD132/">
-                            <img class="lazy" data-original="/data/users/JamieD132/pfp.png" width="60" height="60" src="/data/users/JamieD132/pfp.png" style="display: block;">
-                        </a>
-                        <span class="title">
-                            <a href="/users/JamieD132/">JamieD132</a>
-                        </span>
-                    </li>
-                    <li class="user thumb item">
-                        <a href="/users/JamieD132/">
-                            <img class="lazy" data-original="/data/users/JamieD132/pfp.png" width="60" height="60" src="/data/users/JamieD132/pfp.png" style="display: block;">
-                        </a>
-                        <span class="title">
-                            <a href="/users/JamieD132/">JamieD132</a>
-                        </span>
-                    </li>
-                    <li class="user thumb item">
-                        <a href="/users/JamieD132/">
-                            <img class="lazy" data-original="/data/users/JamieD132/pfp.png" width="60" height="60" src="/data/users/JamieD132/pfp.png" style="display: block;">
-                        </a>
-                        <span class="title">
-                            <a href="/users/JamieD132/">JamieD132</a>
-                        </span>
-                    </li>
-                    <li class="user thumb item">
-                        <a href="/users/JamieD132/">
-                            <img class="lazy" data-original="/data/users/JamieD132/pfp.png" width="60" height="60" src="/data/users/JamieD132/pfp.png" style="display: block;">
-                        </a>
-                        <span class="title">
-                            <a href="/users/JamieD132/">JamieD132</a>
-                        </span>
-                    </li>
-                    <li class="user thumb item">
-                        <a href="/users/JamieD132/">
-                            <img class="lazy" data-original="/data/users/JamieD132/pfp.png" width="60" height="60" src="/data/users/JamieD132/pfp.png" style="display: block;">
-                        </a>
-                        <span class="title">
-                            <a href="/users/JamieD132/">JamieD132</a>
-                        </span>
-                    </li>
-                    <li class="user thumb item">
-                        <a href="/users/JamieD132/">
-                            <img class="lazy" data-original="/data/users/JamieD132/pfp.png" width="60" height="60" src="/data/users/JamieD132/pfp.png" style="display: block;">
-                        </a>
-                        <span class="title">
-                            <a href="/users/JamieD132/">JamieD132</a>
-                        </span>
-                    </li>
-                    <li class="user thumb item">
-                        <a href="/users/JamieD132/">
-                            <img class="lazy" data-original="/data/users/JamieD132/pfp.png" width="60" height="60" src="/data/users/JamieD132/pfp.png" style="display: block;">
-                        </a>
-                        <span class="title">
-                            <a href="/users/JamieD132/">JamieD132</a>
-                        </span>
-                    </li>
+                    </li>-->
+                    
 
                 </ul>
             </div><a class="slider-carousel-control left arrow-left off" href="#">‹</a><a class="slider-carousel-control right arrow-right on" href="#">›</a>
@@ -407,7 +288,7 @@
           <div class="clearfix"></div>
         </div>
         <div>
-          <ul class="comments" data-content="comments">
+          <ul class="comments" data-content="comments" id="comments">
             
           
       <!-- templates/comments/list.html -->
@@ -491,31 +372,31 @@
               <h4>About</h4>
               <ul>
                 <li><a href="/about/">About Scratch</a></li>
-                <li><a href="/parents/">For Parents</a></li>
-                <li><a href="/educators/">For Educators</a></li>
+                <li><a href="/elaruuians/">For Elaruuians</a></li>
+                <li><a href="/kettles/">For Kettles</a></li>
                 <li><a href="/developers">For Developers</a></li>
                 <li><a href="/info/credits/">Our Team</a></li>
-                <li><a href="https://www.scratchfoundation.org/supporters">Donors</a></li>
-                <li><a href="/jobs/">Jobs</a></li>
-                <li><a href="/donate">Donate</a></li>
+                <li><a href="" title="There are no Donors :P">Donors</a></li>
+                <li><a href="" title="We aren't hiring!">Jobs</a></li>
+                <li><a href="" title="no need to donate :)">Donate</a></li>
               </ul>
             </li>
             <li>
               <h4>Community</h4>
               <ul>
                 <li><a href="/community_guidelines/">Community Guidelines</a></li>
-                <li><a href="/discuss/">Discussion Forums</a></li>
-                <li><a href="http://wiki.scratch.mit.edu/">Scratch Wiki</a></li>
-                <li><a href="/statistics/">Statistics</a></li>
+                <li><a href="/users/elaruu/">Chat</a></li>
+                <li><a href="https://elaruu.jamied132.is-a.dev/">Elaruu Forum</a></li>
+                <li><a href="/stats/">Statistics</a></li>
               </ul>
             </li>
             <li>
               <h4>Resources</h4>
               <ul>
-                <li><a href="/ideas">Ideas</a></li>
+                <li><a href="//api.jamied132.workers.dev/docs">API Docs</a></li>
                 <li><a href="/info/faq/">FAQ</a></li>
-                <li><a href="/download">Download</a></li>
-                <li><a href="/contact-us/">Contact Us</a></li>
+                <li><a href="//api.jamied132.workers.dev">API</a></li>
+                <li><a href="mailto:jamied132.email@gmail.com">Contact Us</a></li>
               </ul>
             </li>
             <li>
@@ -523,18 +404,13 @@
               <ul>
                 <li><a href="/terms_of_use/">Terms of Use</a></li>
                 <li><a href="/privacy_policy/">Privacy Policy</a></li>
-                <li><a href="/DMCA/">DMCA</a></li>
+                <li><a href="" title="What does dmca mean??">DMCA</a></li>
               </ul>
             </li>
             <li>
               <h4>Scratch Family</h4>
               <ul>
-                <li><a href="http://scratched.gse.harvard.edu/">ScratchEd</a></li>
-                <li><a href="http://www.scratchjr.org/">ScratchJr</a></li>
-                <li><a href="http://day.scratch.mit.edu/">Scratch Day</a></li>
-                <li><a href="/conference/">Scratch Conference</a></li>
-                <li><a href="http://www.scratchfoundation.org/">Scratch Foundation</a></li>
-                <li><a href="/store">Scratch Store</a></li>
+                
               </ul>
             </li>
           </ul>
@@ -543,165 +419,7 @@
               <form id="lang-dropdown" method="post" action="/i18n/setlang/">
                 <select id="language-selection" name="language">
                 
-                  <option value="ab">Аҧсшәа</option>
-                
-                  <option value="af">Afrikaans</option>
-                
-                  <option value="ar">العربية</option>
-                
-                  <option value="ast">Asturianu</option>
-                
-                  <option value="am">አማርኛ</option>
-                
-                  <option value="an">Aragonés</option>
-                
-                  <option value="az">Azeri</option>
-                
-                  <option value="id">Bahasa Indonesia</option>
-                
-                  <option value="bn">বাংলা</option>
-                
-                  <option value="be">Беларуская</option>
-                
-                  <option value="bg">Български</option>
-                
-                  <option value="ca">Català</option>
-                
-                  <option value="cs">Česky</option>
-                
-                  <option value="cy">Cymraeg</option>
-                
-                  <option value="da">Dansk</option>
-                
-                  <option value="de">Deutsch</option>
-                
-                  <option value="et">Eesti</option>
-                
-                  <option value="el">Ελληνικά</option>
-                
-                  <option value="en" selected="">English</option>
-                
-                  <option value="es">Español (España)</option>
-                
-                  <option value="es-419">Español Latinoamericano</option>
-                
-                  <option value="eo">Esperanto</option>
-                
-                  <option value="eu">Euskara</option>
-                
-                  <option value="fa">فارسی</option>
-                
-                  <option value="fil">Filipino</option>
-                
-                  <option value="fr">Français</option>
-                
-                  <option value="fy">Frysk</option>
-                
-                  <option value="ga">Gaeilge</option>
-                
-                  <option value="gd">Gàidhlig</option>
-                
-                  <option value="gl">Galego</option>
-                
-                  <option value="ko">한국어</option>
-                
-                  <option value="ha">Hausa</option>
-                
-                  <option value="hy">Հայերեն</option>
-                
-                  <option value="he">עִבְרִית</option>
-                
-                  <option value="hi">हिंदी</option>
-                
-                  <option value="hr">Hrvatski</option>
-                
-                  <option value="xh">isiXhosa</option>
-                
-                  <option value="zu">isiZulu</option>
-                
-                  <option value="is">Íslenska</option>
-                
-                  <option value="it">Italiano</option>
-                
-                  <option value="ka">ქართული ენა</option>
-                
-                  <option value="kk">қазақша</option>
-                
-                  <option value="qu">Kichwa</option>
-                
-                  <option value="sw">Kiswahili</option>
-                
-                  <option value="ht">Kreyòl ayisyen</option>
-                
-                  <option value="ku">Kurdî</option>
-                
-                  <option value="ckb">کوردیی ناوەندی</option>
-                
-                  <option value="lv">Latviešu</option>
-                
-                  <option value="lt">Lietuvių</option>
-                
-                  <option value="hu">Magyar</option>
-                
-                  <option value="mi">Māori</option>
-                
-                  <option value="mn">Монгол хэл</option>
-                
-                  <option value="nl">Nederlands</option>
-                
-                  <option value="ja">日本語</option>
-                
-                  <option value="ja-Hira">にほんご</option>
-                
-                  <option value="nb">Norsk Bokmål</option>
-                
-                  <option value="nn">Norsk Nynorsk</option>
-                
-                  <option value="oc">Occitan</option>
-                
-                  <option value="or">ଓଡ଼ିଆ</option>
-                
-                  <option value="uz">Oʻzbekcha</option>
-                
-                  <option value="th">ไทย</option>
-                
-                  <option value="km">ភាសាខ្មែរ</option>
-                
-                  <option value="pl">Polski</option>
-                
-                  <option value="pt">Português</option>
-                
-                  <option value="pt-br">Português Brasileiro</option>
-                
-                  <option value="rap">Rapa Nui</option>
-                
-                  <option value="ro">Română</option>
-                
-                  <option value="ru">Русский</option>
-                
-                  <option value="nso">Sepedi</option>
-                
-                  <option value="tn">Setswana</option>
-                
-                  <option value="sk">Slovenčina</option>
-                
-                  <option value="sl">Slovenščina</option>
-                
-                  <option value="sr">Српски</option>
-                
-                  <option value="fi">Suomi</option>
-                
-                  <option value="sv">Svenska</option>
-                
-                  <option value="vi">Tiếng Việt</option>
-                
-                  <option value="tr">Türkçe</option>
-                
-                  <option value="uk">Українська</option>
-                
-                  <option value="zh-cn">简体中文</option>
-                
-                  <option value="zh-tw">繁體中文</option>
+                  <option value="en">English</option>
                 
                 </select>
               </form>
