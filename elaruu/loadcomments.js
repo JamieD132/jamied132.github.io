@@ -1,8 +1,5 @@
 var comments;
-fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.json()).then(result=>{
-    var comments= result.comments;
-    console.log('success');
-})
+
 var archivedcomments = [
     {"user":"$system","comment":"Elaruu was deleted on the 16th of february.","replies":[]},
     {"user":"$system","comment":"comments between December 24 and 16 February were not restored","replies":[]},
@@ -1067,10 +1064,7 @@ var archivedcomments = [
         {"user":"ElEvatEd_ElEphant","comment":"@TheMindScratcher yay! But this is worse again :("}
     ]}
     ];
-comments.forEach(com=>{
-    archivedcomments.unshift(com);
-});
-comments = archivedcomments;
+
 
 
 
@@ -1256,6 +1250,28 @@ comments = archivedcomments;
         ap(l,m);
     });
     */
+
+
+
+
+
+
+fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.json()).then(result=>{
+    var comments= result.comments;
+    console.log('success');
+        comments.forEach(com=>{
+        archivedcomments.unshift(com);
+    });
+    comments = archivedcomments;
+    setTimeout(load_comments,3000)
+
+    
+})
+
+
+
+
+
     function load_comments(){
         let text = ``;
         let id = 0;
@@ -1331,8 +1347,7 @@ comments = archivedcomments;
             });
         });
     }
-    setTimeout(load_comments,3000)
-
+    
     const text = "@everyone follow @mike.marc now pls lmao";
 const replacedText = text.replace(/@([a-zA-Z0-9_-]+)/g, '<a href="/users/$1">@$1</a>');
 console.log(replacedText); 
