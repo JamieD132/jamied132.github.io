@@ -1263,6 +1263,7 @@ fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.j
         archivedcomments.unshift(com);
     });
     comments = archivedcomments;
+    console.log(comments);
     setTimeout(load_comments,3000)
 
     
