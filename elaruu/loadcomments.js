@@ -1,4 +1,9 @@
-const comments = [
+var comments;
+fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.json()).then(result=>{
+    var comments= result.comments;
+    console.log('success');
+})
+var archivedcomments = [
     {"user":"$system","comment":"Elaruu was deleted on the 16th of february.","replies":[]},
     {"user":"$system","comment":"comments between December 24 and 16 February were not restored","replies":[]},
     {"user":"youDD1","comment":"/svcaanc = so very cool and absolutely not clickbait","replies":[
@@ -1062,7 +1067,10 @@ const comments = [
         {"user":"ElEvatEd_ElEphant","comment":"@TheMindScratcher yay! But this is worse again :("}
     ]}
     ];
-
+comments.forEach(com=>{
+    archivedcomments.unshift(com);
+});
+comments = archivedcomments;
 
 
 
