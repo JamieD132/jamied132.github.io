@@ -1257,23 +1257,7 @@ var archivedcomments = [
 
 
 fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.json()).then(result=>{
-    var comments= result.comments;
-    console.log('success');
-        comments.forEach(com=>{
-        archivedcomments.unshift(com);
-    });
-    comments = archivedcomments;
-    console.log(comments);
-    setTimeout(load_comments,3000)
-
-    
-})
-
-
-
-
-
-    function load_comments(){
+        function load_comments(){
         let text = ``;
         let id = 0;
         comments.forEach((com)=>{
@@ -1348,6 +1332,23 @@ fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.j
             });
         });
     }
+    var comments= result.comments;
+    console.log('success');
+        comments.forEach(com=>{
+        archivedcomments.unshift(com);
+    });
+    comments = archivedcomments;
+    console.log(comments);
+    setTimeout(load_comments,3000)
+
+    
+})
+
+
+
+
+
+
     
     const text = "@everyone follow @mike.marc now pls lmao";
 const replacedText = text.replace(/@([a-zA-Z0-9_-]+)/g, '<a href="/users/$1">@$1</a>');
