@@ -1273,7 +1273,7 @@ fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.j
                 </div>
                 <div class="content">`+com.content.replace(/@([a-zA-Z0-9_-]+)/g, '<a href="/users/$1">@$1</a>').replace(/https:\/\/jamied132.is-a.dev([a-zA-Z0-9_-]+)/g, '<a href="/$1">https://jamied132.is-a.dev$1</a>')+`</div>
                 <div>
-                <span class="time" title="exact date">how long ago</span>
+                <span class="time" title="${com.date ? new Date(com.date).toLocalDateString() : 'This is not a comment by a real user. It was archived from the original elaruu.'}">${com.date ? moment.unix(rep.date/1000).fromNow() : 'archived comment'}</span>
                 <a class="reply" style="display: none;" href="#null">
                     <span class="reply" title="reply">reply</span>
                 </a>
@@ -1298,7 +1298,7 @@ fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.j
                     </div>
                     <div class="content">`+rep.content.replace(/@([a-zA-Z0-9_-]+)/g, '<a href="/users/$1">@$1</a>')+`</div>
                     <div>
-                    <span class="time" title="exact date">how long ago</span>
+                    <span class="time" title="${rep.date ? new Date(rep.date).toLocalDateString() : 'This is not a comment by a real user. It was archived from the original elaruu.'}">${rep.date ? moment.unix(rep.date/1000).fromNow() : 'archived comment'}</span>
                     <a class="reply" style="display: none;" href="#null">
                         <span class="reply" title="reply">reply</span>
                     </a>
