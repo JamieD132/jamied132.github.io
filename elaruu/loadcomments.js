@@ -1346,7 +1346,7 @@ fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.j
 
 var signedin = false;
 if(sessionStorage.getItem('session')){
-    var session = JSON.parse(sessionStorgae.getItem('session').btoa());
+    var session = JSON.parse(atob(sessionStorgae.getItem('session')));
     if(session.username && session.password){
         fetch('https://api.jamied132.workers.dev/auth/signin',{method:'POST',body:session}).then(res=>res.json()).then(j=>{
             if(!j.error){
