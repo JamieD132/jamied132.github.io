@@ -1348,12 +1348,12 @@ var signedin = false;
 if(sessionStorage.getItem('session')){
     var session = JSON.parse(atob(sessionStorage.getItem('session')));
     if(session.username && session.password){
-        fetch('https://api.jamied132.workers.dev/auth/signin',{method:'POST',body:session}).then(res=>res.json()).then(j=>{
+        fetch('https://api.jamied132.workers.dev/auth/signin',{method:'POST',body:JSON.stringify(session)}).then(res=>res.json()).then(j=>{
             if(!j.error){
                 signedin=true;
                 document.querySelector("#actall").innerHTML=document.querySelector("#signedintemp").innerHTML;
                 var settings;
-                fetch('https://api.jamied132.workers.dev/users/'+session.username+'/settings',{method:"POST",body:session}).then(res=>res.json()).then(j=>{
+                fetch('https://api.jamied132.workers.dev/users/'+session.username+'/settings',{method:"POST",body:JSON.stringify({auth:session.password})}).then(res=>res.json()).then(j=>{
                     settings=j;
                     var pfp=settings.pfp;
                     if(pfp){
