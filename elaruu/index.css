@@ -4751,7 +4751,7 @@ span[data-control-comment-count] {
 }
 
 #topnav ul.account-nav .my-stuff .mystuff-icon {
-    background: url(../images/mystuff.png) no-repeat center center;
+    background: url(/elaruu/img/mystuff.png) no-repeat center center;
     display: block;
     width: 45px;
     height: 35px;
@@ -4759,7 +4759,7 @@ span[data-control-comment-count] {
 }
 
 #topnav ul.account-nav .messages .messages-icon {
-    background: url(../images/nav-notifications.png) no-repeat center center;
+    background: url(/elaruu/img/notifs.png) no-repeat center center;
     display: block;
     width: 42px;
     height: 35px;
