@@ -1345,11 +1345,11 @@ fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.j
 });
 fetch('https://api.jamied132.workers.dev/users/elaruu/pfp').then(res=>res.json()).then(j=>{
                         var pfp = j.pfp;
-                        if(pfp){
-                            document.querySelectorAll("#userimage").forEach(img=>{
-                                img.setAttribute('src',pfp);
-                            });
-                        }
+                        
+                        document.querySelectorAll("#userimage").forEach(img=>{
+                            img.setAttribute('src',pfp == 'default' ? '/elaruu/img/defaultpfp.png' : pfp);
+                        });
+                        
                         document.querySelectorAll("#username").forEach(p=>{
                             p.innerText='elaruu';
                         });
