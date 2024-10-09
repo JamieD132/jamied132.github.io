@@ -1343,7 +1343,20 @@ fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.j
 
     
 });
-
+fetch('https://api.jamied132.workers.dev/users/elaruu/pfp').then(res=>res.json()).then(j=>{
+                        var pfp = j.pfp;
+                        if(pfp){
+                            document.querySelectorAll("userimage").forEach(img=>{
+                                img.setAttribute('src',pfp);
+                            });
+                        }
+                        document.querySelectorAll("username").forEach(p=>{
+                            p.innerText='elaruu';
+                        });
+                        document.querySelectorAll("profileurl").forEach(a=>{
+                            a.setAttribute('href','/users/elaruu')
+                        });
+                    })
 var signedin = false;
 if(sessionStorage.getItem('session')){
     var session = JSON.parse(atob(sessionStorage.getItem('session')));
@@ -1357,77 +1370,22 @@ if(sessionStorage.getItem('session')){
                     settings=j;
                     var pfp=settings.pfp;
                     if(pfp){
-                        document.querySelectorAll("myuserimage").forEach(img=>{
+                        document.querySelectorAll("#myuserimage").forEach(img=>{
                             img.setAttribute('src',pfp);
                         });
                     }
-                    document.querySelectorAll("myusername").forEach(p=>{
+                    document.querySelectorAll("#myusername").forEach(p=>{
                         p.innerText=session.username;
                     });
-                    document.querySelectorAll("myprofileurl").forEach(a=>{
+                    document.querySelectorAll("#myprofileurl").forEach(a=>{
                         a.setAttribute('href','/users/'+session.username)
                     });
-                    fetch('https://api.jamied132.workers.dev/users/elaruu/pfp').then(res=>res.json()).then(j=>{
-                        if(pfp){
-                            document.querySelectorAll("userimage").forEach(img=>{
-                                img.setAttribute('src',pfp);
-                            });
-                        }
-                        document.querySelectorAll("username").forEach(p=>{
-                            p.innerText='elaruu';
-                        });
-                        document.querySelectorAll("profileurl").forEach(a=>{
-                            a.setAttribute('href','/users/elaruu')
-                        });
-                    })
+                    
                 })
-            }else{
-                fetch('https://api.jamied132.workers.dev/users/elaruu/pfp').then(res=>res.json()).then(j=>{
-                        if(pfp){
-                            document.querySelectorAll("userimage").forEach(img=>{
-                                img.setAttribute('src',pfp);
-                            });
-                        }
-                        document.querySelectorAll("username").forEach(p=>{
-                            p.innerText='elaruu';
-                        });
-                        document.querySelectorAll("profileurl").forEach(a=>{
-                            a.setAttribute('href','/users/elaruu')
-                        });
-                    })
             }
         })
-    }else{
-        fetch('https://api.jamied132.workers.dev/users/elaruu/pfp').then(res=>res.json()).then(j=>{
-                        if(pfp){
-                            document.querySelectorAll("userimage").forEach(img=>{
-                                img.setAttribute('src',pfp);
-                            });
-                        }
-                        document.querySelectorAll("username").forEach(p=>{
-                            p.innerText='elaruu';
-                        });
-                        document.querySelectorAll("profileurl").forEach(a=>{
-                            a.setAttribute('href','/users/elaruu')
-                        });
-                    })
     }
-}else{
-    fetch('https://api.jamied132.workers.dev/users/elaruu/pfp').then(res=>res.json()).then(j=>{
-                        if(pfp){
-                            document.querySelectorAll("userimage").forEach(img=>{
-                                img.setAttribute('src',pfp);
-                            });
-                        }
-                        document.querySelectorAll("username").forEach(p=>{
-                            p.innerText='elaruu';
-                        });
-                        document.querySelectorAll("profileurl").forEach(a=>{
-                            a.setAttribute('href','/users/elaruu')
-                        });
-                    })
 }
-
 
 
 
