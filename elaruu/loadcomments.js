@@ -1346,7 +1346,7 @@ fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.j
 fetch('https://api.jamied132.workers.dev/users/elaruu/pfp').then(res=>res.json()).then(j=>{
                         var pfp = j.pfp;
                         
-                        document.querySelectorAll("#userimage").forEach(img=>{
+                        document.querySelectorAll("#profileimage").forEach(img=>{
                             img.setAttribute('src',pfp == 'default' ? '/elaruu/img/defaultpfp.png' : pfp);
                         });
                         
@@ -1366,7 +1366,7 @@ if(sessionStorage.getItem('session')){
                 signedin=true;
                 document.querySelector("#actall").innerHTML=document.querySelector("#signedintemp").innerHTML;
                 var settings;
-                fetch('https://api.jamied132.workers.dev/users/'+session.username+'/settings',{method:"POST",body:JSON.stringify({auth:session.password})}).then(res=>res.json()).then(j=>{
+                fetch('https://api.jamied132.workers.dev/users/'+session.username.toLowerCase()+'/settings',{method:"POST",body:JSON.stringify({auth:session.password})}).then(res=>res.json()).then(j=>{
                     settings=j;
                     var pfp=settings.pfp;
                     if(pfp){
