@@ -1369,11 +1369,11 @@ if(sessionStorage.getItem('session')){
                 fetch('https://api.jamied132.workers.dev/users/'+session.username.toLowerCase()+'/settings',{method:"POST",body:JSON.stringify({auth:session.password,user:session.username})}).then(res=>res.json()).then(j=>{
                     settings=j;
                     var pfp=settings.pfp;
-                    if(pfp){
-                        document.querySelectorAll("#myuserimage").forEach(img=>{
-                            img.setAttribute('src',pfp);
-                        });
-                    }
+                    
+                    document.querySelectorAll("#myuserimage").forEach(img=>{
+                        img.setAttribute('src',pfp == 'default' ? '/elaruu/img/defaultpfp.png' : pfp);
+                    });
+                    
                     document.querySelectorAll("#myusername").forEach(p=>{
                         p.innerText=session.username;
                     });
