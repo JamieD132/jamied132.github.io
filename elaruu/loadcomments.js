@@ -1268,7 +1268,7 @@ fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.j
         async function load_comments(){
         let text = ``;
         let id = 0;
-        for(const com of result){
+        for(const com of comments){
             id ++;
             text+= `
             <li class="top-level-reply">
