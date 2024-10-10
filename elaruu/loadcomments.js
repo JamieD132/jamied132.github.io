@@ -1264,7 +1264,7 @@ async function get_pfp(user){
 
 
 
-await fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.json()).then(result=>{
+fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.json()).then(result=>{
         async function load_comments(){
         let text = ``;
         let id = 0;
