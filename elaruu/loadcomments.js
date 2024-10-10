@@ -1264,11 +1264,11 @@ async function get_pfp(user){
 
 
 
-fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.json()).then(result=>{
+await fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.json()).then(result=>{
         async function load_comments(){
         let text = ``;
         let id = 0;
-        comments.forEach((com)=>{
+        for(const com of result){
             id ++;
             text+= `
             <li class="top-level-reply">
@@ -1292,7 +1292,7 @@ fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.j
             <ul class="replies" data-thread="347700843">
             `;
             rid=0;
-            com.replies.forEach((rep)=>{
+            for(const rep of com.replies){
                 rid++;
                 id++;
                 text+=`
@@ -1317,13 +1317,13 @@ fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.j
                 </li>
                 `;
                 
-            });
+            };
             text+= `</ul>`;
             if(rid>3 && rid == com.replies.length){
                 text+=`<div class="more-replies"><span class="pulldown">See all `+rid+` replies<span class="arrow"> ▼</span></span></div>`;
             }
             text+= `</li>`;
-        });
+        };
         text+=`<div class="button grey" style="position: relative; left: 47%;" data-control="load-more"><span>Load more</span></div>`
         document.querySelector(".comments").innerHTML = text;
 
