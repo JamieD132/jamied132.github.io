@@ -1366,7 +1366,7 @@ if(sessionStorage.getItem('session')){
                 signedin=true;
                 document.querySelector("#actall").innerHTML=document.querySelector("#signedintemp").innerHTML;
                 var settings;
-                fetch('https://api.jamied132.workers.dev/users/'+session.username.toLowerCase()+'/settings',{method:"POST",body:JSON.stringify({auth:session.password,user:session.username})}).then(res=>res.json()).then(j=>{
+                fetch('https://api.jamied132.workers.dev/users/'+session.username.toLowerCase()+'/pfp',{method:"POST",body:JSON.stringify({auth:session.password,user:session.username})}).then(res=>res.json()).then(j=>{
                     settings=j;
                     var pfp=settings.pfp;
                     
