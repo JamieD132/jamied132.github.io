@@ -1257,7 +1257,7 @@ var archivedcomments = [
 
 
 fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.json()).then(result=>{
-        function load_comments(){
+        async function load_comments(){
         let text = ``;
         let id = 0;
         comments.forEach((com)=>{
@@ -1266,7 +1266,7 @@ fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.j
             <li class="top-level-reply">
             <div id="comments-`+id+`" class="comment" data-comment-id="`+id+`">
             <div class="actions-wrap"></div>
-            <a href="/users/`+com.username+`" id="comment-user" data-comment-user="`+com.username+`"><img class="avatar" src="/data/users/`+com.username+`/avatar.png" width="45" height="45"></a>
+            <a href="/users/`+com.username+`" id="comment-user" data-comment-user="`+com.username+`"><img class="avatar" src="`${return await get_pfp(com.username)}`" width="45" height="45"></a>
             <div class="info">
                 <div class="name">
                 <a href="/users/`+com.username+`">`+com.username+`</a>
