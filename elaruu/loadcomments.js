@@ -1277,6 +1277,7 @@ fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.j
         for(const com of comments){
             id ++;
             const pfp = pfps[comments.indexOf(com)];
+            console.log(pfp);
             text+= `
             <li class="top-level-reply">
             <div id="comments-`+id+`" class="comment" data-comment-id="`+id+`">
