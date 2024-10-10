@@ -1276,13 +1276,13 @@ fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.j
             
         for(const com of comments){
             id ++;
-            const pfp = pfps[comments.indexOf(com)];
+            const pfp = pfps[comments.indexOf(com)]["pfp"] || '/elaruu/img/defaultpfp.png';
             console.log(pfp);
             text+= `
             <li class="top-level-reply">
             <div id="comments-`+id+`" class="comment" data-comment-id="`+id+`">
             <div class="actions-wrap"></div>
-            <a href="/users/`+com.username+`" id="comment-user" data-comment-user="`+com.username+`"><img class="avatar" src="`+pfp.pfp || '/elaruu/img/defaultpfp.png'+`" width="45" height="45"></a>
+            <a href="/users/`+com.username+`" id="comment-user" data-comment-user="`+com.username+`"><img class="avatar" src="`+pfp+`" width="45" height="45"></a>
             <div class="info">
                 <div class="name">
                 <a href="/users/`+com.username+`">`+com.username+`</a>
@@ -1307,7 +1307,7 @@ fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.j
                 <li class="`+(rid == com.replies.length ? rid > 3 ? com.replies.length == 4 ? "reply lastvisible last": "reply truncated last" : "reply last" :  rid > 3 ? rid == 4 ? "reply lastvisible" : "reply truncated" : "reply")+`">
                 <div id="comments-`+id+`" class="comment" data-comment-id="`+id+`">
                 <div class="actions-wrap"></div>
-                <a href="/users/`+rep.username+`" id="comment-user" data-comment-user="`+rep.username+`"><img class="avatar" src="`+pfp.pfp || '/elaruu/img/defaultpfp.png'+`" width="45" height="45"></a>
+                <a href="/users/`+rep.username+`" id="comment-user" data-comment-user="`+rep.username+`"><img class="avatar" src="`+pfp+`" width="45" height="45"></a>
                 <div class="info">
                     <div class="name">
                     <a href="/users/`+rep.username+`">`+rep.username+`</a>
