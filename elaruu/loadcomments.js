@@ -1252,7 +1252,15 @@ var archivedcomments = [
     */
 
 
-
+async function get_pfp(user){
+    var pfp = await fetch('https://api.jamied132.workers.dev/users/'+user+'/pfp').json()
+    if(pfp.error){
+        return '/elaruu/img/defaultpfp.png'
+    }else{
+        return pfp == 'default' ? '/elaruu/img/defaultpfp.png' : pfp
+    }
+    
+}
 
 
 
