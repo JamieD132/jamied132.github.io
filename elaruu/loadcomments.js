@@ -1,5 +1,5 @@
 var comments;
-
+var page = 1;
 async function get_pfp(user){
     var pfp = (await fetch('https://api.jamied132.workers.dev/users/'+user+'/pfp')).json()
     if(pfp.error){
@@ -10,11 +10,11 @@ async function get_pfp(user){
     
 }
 
-
-
-fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.json()).then(result=>{
+var prev_text=``;
+async function load_page(pg){
+fetch('https://api.jamied132.workers.dev/users/elaruu/comments?page='+pg).then(com=>com.json()).then(result=>{
         async function load_comments(){
-        let text = ``;
+        let text = prev_text;
         let id = 0;
         
 
@@ -80,7 +80,13 @@ fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.j
         text+=`<div class="button grey" style="position: relative; left: 47%;" data-control="load-more"><span>Load more</span></div>`
         document.querySelector(".comments").innerHTML = text;
 
-
+        document.querySelector(".button.grey").addEventListener("click",()={
+            document.querySelector(".button.grey").remove()
+            page++;
+            prev_text = document.querySelector(".comments").innerHTML;
+            await load_page(page);
+            
+        });
 
         document.querySelectorAll(".more-replies").forEach((el)=>{
             el.addEventListener("click",()=>{
@@ -95,10 +101,12 @@ fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.j
     }
     var comments= result.comments;
     
-    setTimeout(load_comments,3000)
+    load_comments();
 
     
 });
+}
+load_page(1);
 fetch('https://api.jamied132.workers.dev/users/elaruu/pfp').then(res=>res.json()).then(j=>{
                         var pfp = j.pfp;
                         
