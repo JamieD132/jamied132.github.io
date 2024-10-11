@@ -80,7 +80,7 @@ fetch('https://api.jamied132.workers.dev/users/elaruu/comments?page='+pg).then(c
         text+=`<div class="button grey" style="position: relative; left: 47%;" data-control="load-more"><span>Load more</span></div>`
         document.querySelector(".comments").innerHTML = text;
 
-        document.querySelector(".button.grey").addEventListener("click",()=>{
+        document.querySelectorAll(".button.grey")[1].addEventListener("click",()=>{
             document.querySelector(".button.grey").remove()
             page++;
             prev_text = document.querySelector(".comments").innerHTML;
