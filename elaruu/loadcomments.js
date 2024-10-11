@@ -94,12 +94,7 @@ fetch('https://api.jamied132.workers.dev/users/elaruu/comments').then(com=>com.j
         });
     }
     var comments= result.comments;
-    console.log('success');
-        comments.forEach(com=>{
-        archivedcomments.unshift(com);
-    });
-    comments = archivedcomments;
-    console.log(comments);
+    
     setTimeout(load_comments,3000)
 
     
