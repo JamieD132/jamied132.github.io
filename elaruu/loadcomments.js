@@ -84,7 +84,7 @@ fetch('https://api.jamied132.workers.dev/users/elaruu/comments?page='+pg).then(c
             document.querySelector(".button.grey").remove()
             page++;
             prev_text = document.querySelector(".comments").innerHTML;
-            await load_page(page);
+            load_page(page);
             
         });
 
