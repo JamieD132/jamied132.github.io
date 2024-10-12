@@ -81,7 +81,7 @@ fetch('https://api.jamied132.workers.dev/users/elaruu/comments?page='+pg).then(c
         document.querySelector(".comments").innerHTML = text;
 
         document.querySelectorAll(".button.grey")[1].addEventListener("click",()=>{
-            document.querySelector(".button.grey").remove()
+            document.querySelectorAll(".button.grey")[1].remove()
             page++;
             prev_text = document.querySelector(".comments").innerHTML;
             load_page(page);
