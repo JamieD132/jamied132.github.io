@@ -98,7 +98,7 @@ fetch('https://api.jamied132.workers.dev/users/elaruu/comments?page='+pg).then(c
                 el.remove();
             });
         });
-        fetch("https://api.jamied132.workers.dev/users/elaruu/comments?page="+page+1).then(r=>r.json()).then(j=>{
+        fetch("https://api.jamied132.workers.dev/users/elaruu/comments?page="+String(parseInt(page)+1)).then(r=>r.json()).then(j=>{
             if(j.comments.length==0){
                 document.querySelectorAll(".button.grey")[1].remove()
             }
