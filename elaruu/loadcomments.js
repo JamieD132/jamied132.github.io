@@ -9,12 +9,10 @@ async function get_pfp(user){
     }
     
 }
-var dropi;
 document.querySelectorAll(".dropdown").forEach((elem)=>{
     elem.addEventListener("click",(e)=>{
-        return e.target.classList.contains("open") ? document.querySelectorAll(".dropdown")[dropi].classList.remove("open") : document.querySelectorAll(".dropdown")[dropi].classList.add("open");
+        return this.classList.contains("open") ? this.classList.remove("open") : this.classList.add("open");
     });
-    dropi++;
 });
 var prev_text=``;
 async function load_page(pg){
