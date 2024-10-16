@@ -11,7 +11,7 @@ async function get_pfp(user){
 }
 var i;
 document.querySelectorAll(".dropdown").forEach((elem)=>{
-    elem.addEventListner("click",(e)=>{
+    elem.addEventListener("click",(e)=>{
         return e.target.classList.includes("open") ? document.querySelectorAll(".dropdown")[i].classList.remove("open") : document.querySelectorAll(".dropdown")[i].classList.add("open");
         i++;
     });
