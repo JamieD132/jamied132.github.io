@@ -10,9 +10,11 @@ async function get_pfp(user){
     
 }
 var i;
-document.querySelectorAll(".dropdown").addEventListner((e)=>{
-    return e.target.classList.includes("open") ? document.querySelectorAll(".dropdown")[i].classList.remove("open") : document.querySelectorAll(".dropdown")[i].classList.add("open");
-    i++;
+document.querySelectorAll(".dropdown").forEach((elem)=>{
+    elem.addEventListner("click",(e)=>{
+        return e.target.classList.includes("open") ? document.querySelectorAll(".dropdown")[i].classList.remove("open") : document.querySelectorAll(".dropdown")[i].classList.add("open");
+        i++;
+    });
 });
 var prev_text=``;
 async function load_page(pg){
