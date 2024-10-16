@@ -9,12 +9,12 @@ async function get_pfp(user){
     }
     
 }
-var i;
+var dropi;
 document.querySelectorAll(".dropdown").forEach((elem)=>{
     elem.addEventListener("click",(e)=>{
-        i++;
-        return e.target.classList.contains("open") ? document.querySelectorAll(".dropdown")[i].classList.remove("open") : document.querySelectorAll(".dropdown")[i].classList.add("open");
+        return e.target.classList.contains("open") ? document.querySelectorAll(".dropdown")[dropi].classList.remove("open") : document.querySelectorAll(".dropdown")[dropi].classList.add("open");
     });
+    dropi++;
 });
 var prev_text=``;
 async function load_page(pg){
