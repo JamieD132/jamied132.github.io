@@ -11,7 +11,7 @@ async function get_pfp(user){
 }
 document.querySelectorAll(".dropdown").forEach((elem)=>{
     elem.addEventListener("click",(e)=>{
-        return this.classList.contains("open") ? this.classList.remove("open") : this.classList.add("open");
+        return e.target.classList.contains("open") ? e.target.classList.remove("open") : e.target.classList.add("open");
     });
 });
 var prev_text=``;
