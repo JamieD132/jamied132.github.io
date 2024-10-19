@@ -9,9 +9,10 @@ async function get_pfp(user){
     }
     
 }
-document.querySelectorAll(".dropdown-toggle").forEach((elem)=>{
+document.querySelectorAll(".dropdown-toggle > *").forEach((elem)=>{
     elem.addEventListener("click",(e)=>{
-        return e.target.parentelement.classList.contains("open") ? e.target.parentelement.classList.remove("open") : e.target.parentelement.classList.add("open");
+        console.log(e.target,e.target.parentelement.parentelement.classList)
+        return e.target.parentelement.parentelement.classList.contains("open") ? e.target.parentelement.parentelement.classList.remove("open") : e.target.parentelement.parentelement.classList.add("open");
     });
 });
 var prev_text=``;
@@ -38,7 +39,7 @@ fetch('https://api.jamied132.workers.dev/users/elaruu/comments?page='+pg).then(c
                 </div>
                 <div class="content">`+com.content.replace(/@([a-zA-Z0-9_-]+)/g, '<a href="/users/$1">@$1</a>').replace(/https:\/\/jamied132.is-a.dev([a-zA-Z0-9_-]+)/g, '<a href="/$1">https://jamied132.is-a.dev$1</a>')+`</div>
                 <div>
-                <span class="time" title="${com.date ? new Date(com.date).toLocaleDateString() : 'This is not a comment by a real user. It was archived from the original elaruu.'}">${com.date ? moment.unix(com.date/1000).fromNow() : 'archived comment'}</span>
+                <span class="time" title="${com.date ? new Date(com.date).toLocaleString() : 'This is not a comment by a real user. It was archived from the original elaruu.'}">${com.date ? moment.unix(com.date/1000).fromNow() : 'archived comment'}</span>
                 <a class="reply" style="display: none;" href="#null">
                     <span class="reply" title="reply">reply</span>
                 </a>
@@ -63,7 +64,7 @@ fetch('https://api.jamied132.workers.dev/users/elaruu/comments?page='+pg).then(c
                     </div>
                     <div class="content">`+rep.content.replace(/@([a-zA-Z0-9_-]+)/g, '<a href="/users/$1">@$1</a>')+`</div>
                     <div>
-                    <span class="time" title="${rep.date ? new Date(rep.date).toLocaleDateString() : 'This is not a comment by a real user. It was archived from the original elaruu.'}">${rep.date ? moment.unix(rep.date/1000).fromNow() : 'archived comment'}</span>
+                    <span class="time" title="${rep.date ? new Date(rep.date).toLocaleString() : 'This is not a comment by a real user. It was archived from the original elaruu.'}">${rep.date ? moment.unix(rep.date/1000).fromNow() : 'archived comment'}</span>
                     <a class="reply" style="display: none;" href="#null">
                         <span class="reply" title="reply">reply</span>
                     </a>
