@@ -15,6 +15,7 @@ document.querySelectorAll(".dropdown-toggle").forEach((elem)=>{
     });
 });
 document.querySelector("#login").addEventListener("submit",(e)=>{
+    e.preventDefault();
     console.log(e);
 });
 var prev_text=``;
