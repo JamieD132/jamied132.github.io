@@ -9,12 +9,11 @@ async function get_pfp(user){
     }
     
 }
-document.querySelectorAll(".dropdown-toggle > *").forEach((elem)=>{
-    elem.addEventListener("click",(e)=>{
-        console.log(e.target,e.target.parentelement.parentelement.classList)
-        return e.target.parentelement.parentelement.classList.contains("open") ? e.target.parentelement.parentelement.classList.remove("open") : e.target.parentelement.parentelement.classList.add("open");
-    });
+document.querySelector(".dropdown-toggle > *").addEventListener("click",(e)=>{
+    console.log(document.querySelector(".dropdown-toggle > *"),document.querySelector(".dropdown-toggle > *").parentelement.parentelement.classList)
+    return document.querySelector(".dropdown-toggle > *").parentelement.parentelement.classList.contains("open") ? document.querySelector(".dropdown-toggle > *").parentelement.parentelement.classList.remove("open") : document.querySelector(".dropdown-toggle > *").parentelement.parentelement.classList.add("open");
 });
+
 var prev_text=``;
 async function load_page(pg){
 fetch('https://api.jamied132.workers.dev/users/elaruu/comments?page='+pg).then(com=>com.json()).then(result=>{
