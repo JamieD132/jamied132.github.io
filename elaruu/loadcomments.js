@@ -14,7 +14,9 @@ document.querySelectorAll(".dropdown-toggle").forEach((elem)=>{
         return elem.parentElement.classList.contains("open") ? elem.parentElement.classList.remove("open") : elem.parentElement.classList.add("open");
     });
 });
-
+document.querySelector("#login").addEventListener("submit",(e)=>{
+    console.log(e);
+});
 var prev_text=``;
 async function load_page(pg){
 fetch('https://api.jamied132.workers.dev/users/elaruu/comments?page='+pg).then(com=>com.json()).then(result=>{
