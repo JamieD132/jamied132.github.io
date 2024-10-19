@@ -9,11 +9,7 @@ async function get_pfp(user){
     }
     
 }
-document.querySelectorAll(".dropdown-toggle").forEach((elem)=>{
-    elem.addEventListener("click",(e)=>{
-        return elem.parentElement.classList.contains("open") ? elem.parentElement.classList.remove("open") : elem.parentElement.classList.add("open");
-    });
-});
+
 var prev_text=``;
 async function load_page(pg){
 fetch('https://api.jamied132.workers.dev/users/elaruu/comments?page='+pg).then(com=>com.json()).then(result=>{
@@ -156,6 +152,11 @@ if(sessionStorage.getItem('session')){
                     
                 })
             }
+            document.querySelectorAll(".dropdown-toggle").forEach((elem)=>{
+                elem.addEventListener("click",(e)=>{
+                    return elem.parentElement.classList.contains("open") ? elem.parentElement.classList.remove("open") : elem.parentElement.classList.add("open");
+                });
+            });
         })
     }
 }
