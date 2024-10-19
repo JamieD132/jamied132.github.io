@@ -9,6 +9,11 @@ async function get_pfp(user){
     }
     
 }
+document.querySelectorAll(".dropdown-toggle").forEach((elem)=>{
+    elem.addEventListener("click",(e)=>{
+        return elem.parentElement.classList.contains("open") ? elem.parentElement.classList.remove("open") : elem.parentElement.classList.add("open");
+    });
+});
 
 var prev_text=``;
 async function load_page(pg){
