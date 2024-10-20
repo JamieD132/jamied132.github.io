@@ -18,7 +18,7 @@ document.querySelector("#login").addEventListener("submit",(e)=>{
     e.preventDefault();
     var username = document.querySelector("#login_dropdown_username");
     var password = document.querySelector("#login_dropdown_username + .wide.password");
-    fetch("https://api.jamied132.workers.dev/auth/signin",{method:"POST",body:{username:username,password:"password"}}).then(r=>r.json()).then(j=>{
+    fetch("https://api.jamied132.workers.dev/auth/signin",{method:"POST",body:JSON.stringify({username:username,password:"password"})}).then(r=>r.json()).then(j=>{
         if(!j.error){
             sessionStorage.setItem('session',atob(JSON.stringify({username:username,password:password})));
             window.location.reload();
