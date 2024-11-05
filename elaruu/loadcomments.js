@@ -24,8 +24,12 @@ document.querySelector("#login").addEventListener("submit",(e)=>{
             sessionStorage.setItem('session',btoa(JSON.stringify({username:username,password:password})));
             window.location.reload();
         }
-    })}catch(e){
+    }).catch(e=>{
         document.querySelector("#topnav ul.account-nav .sign-in .error").innerHTML = "incorrect username or password.";
+        document.querySelector("#topnav ul.account-nav .sign-in .error").style.display = "block";
+    })
+    }catch(e){
+        document.querySelector("#topnav ul.account-nav .sign-in .error").innerHTML = "an unknown error occured. <a href='/contact'>help</a>";
         document.querySelector("#topnav ul.account-nav .sign-in .error").style.display = "block";
     }
 });
