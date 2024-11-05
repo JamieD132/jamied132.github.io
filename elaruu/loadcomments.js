@@ -18,12 +18,16 @@ document.querySelector("#login").addEventListener("submit",(e)=>{
     e.preventDefault();
     var username = document.querySelector("#login_dropdown_username").value;
     var password = document.querySelector(".wide.password").value;
+    try{
     fetch("https://api.jamied132.workers.dev/auth/signin",{method:"POST",headers:{'Authorization':btoa(JSON.stringify({username:username,password:password}))}}).then(r=>r.json()).then(j=>{
         if(!j.error){
             sessionStorage.setItem('session',btoa(JSON.stringify({username:username,password:password})));
             window.location.reload();
         }
-    })
+    })}catch(e){
+        document.querySelector("#topnav ul.account-nav .sign-in .error").innerHTML = "incorrect username or password.";
+        document.querySelector("#topnav ul.account-nav .sign-in .error").style.display = "block";
+    }
 });
 var prev_text=``;
 async function load_page(pg){
