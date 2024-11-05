@@ -20,9 +20,9 @@ document.querySelector("#login").addEventListener("submit",(e)=>{
     var password = document.querySelector(".wide.password").value;
     try{
     fetch("https://api.jamied132.workers.dev/auth/signin",{method:"POST",headers:{'Authorization':btoa(JSON.stringify({username:username,password:password}))}}).then(r=>{
-        if (!response.ok) {
-            console.error("Error:", response.status, response.statusText);
-            response.json().then(errorMessage => {
+        if (!r.ok) {
+            console.error("Error:", r.status, r.statusText);
+            r.json().then(errorMessage => {
               console.error("Error message:", errorMessage.message);
               document.querySelector("#topnav ul.account-nav .sign-in .error").innerHTML = errorMessage.message;
               document.querySelector("#topnav ul.account-nav .sign-in .error").style.display = "block";
