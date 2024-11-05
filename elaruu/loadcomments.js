@@ -1,7 +1,7 @@
 var comments;
 var page = 1;
 async function get_pfp(user){
-    var pfp = (await fetch('https://api.jamied132.workers.dev/users/'+user+'/pfp')).json()
+    var pfp = (await fetch('https://api.jamied132.is-a.dev/users/'+user+'/pfp')).json()
     if(pfp.error){
         return '/elaruu/img/defaultpfp.png'
     }else{
@@ -19,7 +19,7 @@ document.querySelector("#login").addEventListener("submit",(e)=>{
     var username = document.querySelector("#login_dropdown_username").value;
     var password = document.querySelector(".wide.password").value;
     try{
-    fetch("https://api.jamied132.workers.dev/auth/signin",{method:"POST",headers:{'Authorization':btoa(JSON.stringify({username:username,password:password}))}}).then(r=>{
+    fetch("https://api.jamied132.is-a.dev/auth/signin",{method:"POST",headers:{'Authorization':btoa(JSON.stringify({username:username,password:password}))}}).then(r=>{
         if (!r.ok) {
             console.error("Error:", r.status, r.statusText);
             r.json().then(errorMessage => {
@@ -47,7 +47,7 @@ document.querySelector("#login").addEventListener("submit",(e)=>{
 });
 var prev_text=``;
 async function load_page(pg){
-fetch('https://api.jamied132.workers.dev/users/elaruu/comments?page='+pg).then(com=>com.json()).then(result=>{
+fetch('https://api.jamied132.is-a.dev/users/elaruu/comments?page='+pg).then(com=>com.json()).then(result=>{
         async function load_comments(){
         let text = prev_text;
         let id = 0;
@@ -133,7 +133,7 @@ fetch('https://api.jamied132.workers.dev/users/elaruu/comments?page='+pg).then(c
                 el.remove();
             });
         });
-        fetch("https://api.jamied132.workers.dev/users/elaruu/comments?page="+String(parseInt(page)+1)).then(r=>r.json()).then(j=>{
+        fetch("https://api.jamied132.is-a.dev/users/elaruu/comments?page="+String(parseInt(page)+1)).then(r=>r.json()).then(j=>{
             if(j.comments.length==0){
                 document.querySelectorAll(".button.grey")[1].remove()
             }
@@ -147,7 +147,7 @@ fetch('https://api.jamied132.workers.dev/users/elaruu/comments?page='+pg).then(c
 });
 }
 load_page(1);
-fetch('https://api.jamied132.workers.dev/users/elaruu/pfp').then(res=>res.json()).then(j=>{
+fetch('https://api.jamied132.is-a.dev/users/elaruu/pfp').then(res=>res.json()).then(j=>{
                         var pfp = j.pfp;
                         
                         document.querySelectorAll("#profileimage").forEach(img=>{
@@ -165,12 +165,12 @@ var signedin = false;
 if(sessionStorage.getItem('session')){
     var session = JSON.parse(atob(sessionStorage.getItem('session')));
     if(session.username && session.password){
-        fetch('https://api.jamied132.workers.dev/auth/signin',{method:'POST',headers:{'Authorization':btoa(JSON.stringify(session))}}).then(res=>res.json()).then(j=>{
+        fetch('https://api.jamied132.is-a.dev/auth/signin',{method:'POST',headers:{'Authorization':btoa(JSON.stringify(session))}}).then(res=>res.json()).then(j=>{
             if(!j.error){
                 signedin=true;
                 document.querySelector("#actall").innerHTML=document.querySelector("#signedintemp").innerHTML;
                 var settings;
-                fetch('https://api.jamied132.workers.dev/users/'+session.username.toLowerCase()+'/pfp').then(res=>res.json()).then(j=>{
+                fetch('https://api.jamied132.is-a.dev/users/'+session.username.toLowerCase()+'/pfp').then(res=>res.json()).then(j=>{
                     settings=j;
                     var pfp=settings.pfp;
                     
