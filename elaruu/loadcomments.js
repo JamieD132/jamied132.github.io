@@ -19,14 +19,26 @@ document.querySelector("#login").addEventListener("submit",(e)=>{
     var username = document.querySelector("#login_dropdown_username").value;
     var password = document.querySelector(".wide.password").value;
     try{
-    fetch("https://api.jamied132.workers.dev/auth/signin",{method:"POST",headers:{'Authorization':btoa(JSON.stringify({username:username,password:password}))}}).then(r=>r.json()).then(j=>{
+    fetch("https://api.jamied132.workers.dev/auth/signin",{method:"POST",headers:{'Authorization':btoa(JSON.stringify({username:username,password:password}))}}).then(r=>{
+        if (!response.ok) {
+            console.error("Error:", response.status, response.statusText);
+            response.json().then(errorMessage => {
+              console.error("Error message:", errorMessage.message);
+              document.querySelector("#topnav ul.account-nav .sign-in .error").innerHTML = errorMessage.message;
+              document.querySelector("#topnav ul.account-nav .sign-in .error").style.display = "block";
+            }).catch(error => {
+              document.querySelector("#topnav ul.account-nav .sign-in .error").innerHTML = "an unknown error occured. <a href='/contact'>help</a>";
+              document.querySelector("#topnav ul.account-nav .sign-in .error").style.display = "block";
+              console.error("Failed to extract error message:", error);
+            });
+            return Promise.reject(response); // Reject the promise to signal an error
+        }
+        return r.json()
+    }).then(j=>{
         if(!j.error){
             sessionStorage.setItem('session',btoa(JSON.stringify({username:username,password:password})));
             window.location.reload();
         }
-    }).catch(e=>{
-        document.querySelector("#topnav ul.account-nav .sign-in .error").innerHTML = "incorrect username or password.";
-        document.querySelector("#topnav ul.account-nav .sign-in .error").style.display = "block";
     })
     }catch(e){
         document.querySelector("#topnav ul.account-nav .sign-in .error").innerHTML = "an unknown error occured. <a href='/contact'>help</a>";
