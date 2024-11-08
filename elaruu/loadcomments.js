@@ -168,35 +168,34 @@ var signedin = false;
 var userinfo;
 if(localStorage.getItem('session')){
     var session = localStorage.getItem('session');
-    if(session){
-        fetch('https://api.jamied132.is-a.dev/auth/determine',{method:'POST',headers:{'Authorization':session}}).then(res=>res.json()).then(j=>{
-            if(!j.error){
-                userinfo = j;
-                signedin=true;
-                document.querySelector("#actall").innerHTML=document.querySelector("#signedintemp").innerHTML;
-                var settings;
-                fetch('https://api.jamied132.is-a.dev/users/'+userinfo.username.toLowerCase()+'/pfp').then(res=>res.json()).then(j=>{
-                    settings=j;
-                    var pfp=settings.pfp;
-                    
-                    document.querySelectorAll("#myuserimage").forEach(img=>{
-                        img.setAttribute('src',pfp == 'default' ? '/elaruu/img/defaultpfp.png' : pfp);
-                    });
-                    
-                    document.querySelectorAll("#myusername").forEach(p=>{
-                        p.innerText=userinfo.username;
-                    });
-                    document.querySelectorAll("#myprofileurl").forEach(a=>{
-                        a.setAttribute('href','/users/'+userinfo.username)
-                    });
-                    
-                })
-            }
-            document.querySelectorAll(".dropdown-toggle").forEach((elem)=>{
-                elem.addEventListener("click",(e)=>{
-                    return elem.parentElement.classList.contains("open") ? elem.parentElement.classList.remove("open") : elem.parentElement.classList.add("open");
+    fetch('https://api.jamied132.is-a.dev/auth/determine',{method:'POST',headers:{'Authorization':session}}).then(res=>res.json()).then(j=>{
+        if(!j.error){
+            userinfo = j;
+            signedin=true;
+            document.querySelector("#actall").innerHTML=document.querySelector("#signedintemp").innerHTML;
+            var settings;
+            fetch('https://api.jamied132.is-a.dev/users/'+userinfo.username.toLowerCase()+'/pfp').then(res=>res.json()).then(j=>{
+                settings=j;
+                var pfp=settings.pfp;
+                
+                document.querySelectorAll("#myuserimage").forEach(img=>{
+                    img.setAttribute('src',pfp == 'default' ? '/elaruu/img/defaultpfp.png' : pfp);
                 });
+                
+                document.querySelectorAll("#myusername").forEach(p=>{
+                    p.innerText=userinfo.username;
+                });
+                document.querySelectorAll("#myprofileurl").forEach(a=>{
+                    a.setAttribute('href','/users/'+userinfo.username)
+                });
+                
+            })
+        }
+        document.querySelectorAll(".dropdown-toggle").forEach((elem)=>{
+            elem.addEventListener("click",(e)=>{
+                return elem.parentElement.classList.contains("open") ? elem.parentElement.classList.remove("open") : elem.parentElement.classList.add("open");
             });
-        })
-    }
+        });
+    })
+    
 }
