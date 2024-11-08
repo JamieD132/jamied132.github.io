@@ -37,7 +37,7 @@ document.querySelector("#login").addEventListener("submit",(e)=>{
     }).then(j=>{
         if(!j.error){
             fetch("https://api.jamied132.is-a.dev/auth/connect",{method:"POST",headers:{'Authorization':btoa(JSON.stringify({username:username,password:password}))}}).then(r=>r.json()).then(j=>{
-                sessionStorage.setItem('session',j.code || null);
+                localStorage.setItem('session',j.code || null);
                 window.location.reload();
             })
             
@@ -165,15 +165,17 @@ fetch('https://api.jamied132.is-a.dev/users/elaruu/pfp').then(res=>res.json()).t
                         });
                     })
 var signedin = false;
-if(sessionStorage.getItem('session')){
-    var session = JSON.parse(atob(sessionStorage.getItem('session')));
+var userinfo;
+if(localStorage.getItem('session')){
+    var session = localStorage.getItem('session');
     if(session.username && session.password){
-        fetch('https://api.jamied132.is-a.dev/auth/signin',{method:'POST',headers:{'Authorization':btoa(JSON.stringify(session))}}).then(res=>res.json()).then(j=>{
+        fetch('https://api.jamied132.is-a.dev/auth/determine',{method:'POST',headers:{'Authorization':session}}).then(res=>res.json()).then(j=>{
             if(!j.error){
+                userinfo = j;
                 signedin=true;
                 document.querySelector("#actall").innerHTML=document.querySelector("#signedintemp").innerHTML;
                 var settings;
-                fetch('https://api.jamied132.is-a.dev/users/'+session.username.toLowerCase()+'/pfp').then(res=>res.json()).then(j=>{
+                fetch('https://api.jamied132.is-a.dev/users/'+userinfo.username.toLowerCase()+'/pfp').then(res=>res.json()).then(j=>{
                     settings=j;
                     var pfp=settings.pfp;
                     
@@ -182,10 +184,10 @@ if(sessionStorage.getItem('session')){
                     });
                     
                     document.querySelectorAll("#myusername").forEach(p=>{
-                        p.innerText=session.username;
+                        p.innerText=userinfo.username;
                     });
                     document.querySelectorAll("#myprofileurl").forEach(a=>{
-                        a.setAttribute('href','/users/'+session.username)
+                        a.setAttribute('href','/users/'+userinfo.username)
                     });
                     
                 })
@@ -198,12 +200,3 @@ if(sessionStorage.getItem('session')){
         })
     }
 }
-
-
-
-
-
-    
-    const text = "@everyone follow @mike.marc now pls lmao";
-const replacedText = text.replace(/@([a-zA-Z0-9_-]+)/g, '<a href="/users/$1">@$1</a>');
-console.log(replacedText); 
