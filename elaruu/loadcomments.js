@@ -168,7 +168,7 @@ var signedin = false;
 var userinfo;
 if(localStorage.getItem('session')){
     var session = localStorage.getItem('session');
-    if(session.username && session.password){
+    if(session){
         fetch('https://api.jamied132.is-a.dev/auth/determine',{method:'POST',headers:{'Authorization':session}}).then(res=>res.json()).then(j=>{
             if(!j.error){
                 userinfo = j;
