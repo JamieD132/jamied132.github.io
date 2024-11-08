@@ -36,8 +36,11 @@ document.querySelector("#login").addEventListener("submit",(e)=>{
         return r.json()
     }).then(j=>{
         if(!j.error){
-            sessionStorage.setItem('session',btoa(JSON.stringify({username:username,password:password})));
-            window.location.reload();
+            fetch("https://api.jamied132.is-a.dev/auth/connect",{method:"POST",headers:{'Authorization':btoa(JSON.stringify({username:username,password:password}))}}).then(r=>r.json()).then(j=>{
+                sessionStorage.setItem('session',j.code || null);
+                window.location.reload();
+            })
+            
         }
     })
     }catch(e){
