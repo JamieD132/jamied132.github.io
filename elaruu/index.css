@@ -233,7 +233,7 @@ body>#pagewrapper {
 }
 
 .ajax-loader {
-    background-image: url(../images/ajax-loader.gif);
+    background-image: url(/elaruu/loading.gif);
     background-position: center center;
     background-repeat: no-repeat;
     width: 40px;
@@ -2817,7 +2817,7 @@ body.admin #explore-bar [data-content="view"] {
 }
 
 #comments .posting {
-    background: url(../images/ajax-loader.gif) #fff no-repeat center center;
+    background: url(/elaruu/loading.gif) #fff no-repeat center center;
     border: 0;
     cursor: default
 }
