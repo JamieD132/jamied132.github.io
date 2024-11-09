@@ -128,7 +128,7 @@ fetch('https://api.jamied132.is-a.dev/users/elaruu/comments?page='+pg).then(com=
                 <div class="name">
                 <a href="/users/`+com.user.username+`">`+com.user.username+`</a>
                 </div>
-                <div class="content">`+com.content.replace(/@([a-zA-Z0-9_-]+)/g, '<a href="/users/$1">@$1</a>').replace(/https:\/\/jamied132.is-a.dev([a-zA-Z0-9_-]+)/g, '<a href="/$1">https://jamied132.is-a.dev$1</a>').replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")+`</div>
+                <div class="content">`+com.content.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replace(/@([a-zA-Z0-9_-]+)/g, '<a href="/users/$1">@$1</a>').replace(/https:\/\/jamied132.is-a.dev([a-zA-Z0-9_-]+)/g, '<a href="/$1">https://jamied132.is-a.dev$1</a>')+`</div>
                 <div>
                 <span class="time" title="${com.date ? new Date(com.date).toLocaleString() : 'This is not a comment by a real user. It was archived from the original elaruu.'}">${com.date ? moment.unix(com.date/1000).fromNow() : 'archived comment'}</span>
                 <a class="reply" style="display: none;" href="#null">
@@ -153,7 +153,7 @@ fetch('https://api.jamied132.is-a.dev/users/elaruu/comments?page='+pg).then(com=
                     <div class="name">
                     <a href="/users/`+rep.user.username+`">`+rep.user.username+`</a>
                     </div>
-                    <div class="content">`+rep.content.replace(/@([a-zA-Z0-9_-]+)/g, '<a href="/users/$1">@$1</a>').replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")+`</div>
+                    <div class="content">`+rep.content.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replace(/@([a-zA-Z0-9_-]+)/g, '<a href="/users/$1">@$1</a>')+`</div>
                     <div>
                     <span class="time" title="${rep.date ? new Date(rep.date).toLocaleString() : 'This is not a comment by a real user. It was archived from the original elaruu.'}">${rep.date ? moment.unix(rep.date/1000).fromNow() : 'archived comment'}</span>
                     <a class="reply" style="display: none;" href="#null">
