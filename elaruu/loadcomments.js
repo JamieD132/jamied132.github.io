@@ -64,17 +64,17 @@ document.querySelector(".control-group .button a").addEventListener("click",(e)=
             if(textarea.parentElement.classList.contains("error")){
                 textarea.parentElement.classList.remove("error");
             }
-            if(textarea.textContent.length < 1){
+            if(textarea.textLength < 1){
                 textarea.parentElement.classList.add("error");
                 textarea.parentElement.querySelector("#comment-alert .text").innerHTML = 'You can\'t post a blank comment!';
                 busy = false;
-            }else if(textarea.textContent.length > 500){
+            }else if(textarea.textLength > 500){
                 textarea.parentElement.classList.add("error");
                 textarea.parentElement.querySelector("#comment-alert .text").innerHTML = 'You\'re comment is too long!';
                 busy = false;
             }else{
                 e.target.parentElement.classList.add("posting");
-                fetch("https://api.jamied132.is-a.dev/users/elaruu/comment",{method:'POST',headers:{'Authorization':session},body:JSON.stringify({'content':textarea.innerHTML})}).then(r=>{
+                fetch("https://api.jamied132.is-a.dev/users/elaruu/comment",{method:'POST',headers:{'Authorization':session},body:JSON.stringify({'content':textarea.value})}).then(r=>{
                      if (!r.ok) {
                         console.error("Error posting comment:", r.status, r.statusText);
                         r.json().then(errorMessage => {
