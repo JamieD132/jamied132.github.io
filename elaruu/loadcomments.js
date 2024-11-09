@@ -1,5 +1,6 @@
 var comments;
 var page = 1;
+var busy = false;
 async function get_pfp(user){
     var pfp = (await fetch('https://api.jamied132.is-a.dev/users/'+user+'/pfp')).json()
     if(pfp.error){
@@ -56,10 +57,48 @@ document.querySelector("#main-post-form textarea").addEventListener("focus",(e)=
 });
 document.querySelector(".control-group .button a").addEventListener("click",(e)=>{
     e.preventDefault();
-    if(signedin){
-        
-    }else{
-        alert('You are not signed in!');
+    if(!busy){
+        busy = true;
+        if(signedin){
+            var textarea = document.querySelector("#main-post-form textarea");
+            if(textarea.textContext.length < 1){
+                textarea.parentElement.classList.add("error");
+                textarea.parentElement.querySelector("#comment-alert .text").innerHTML = 'You can't post a blank comment!';
+            }else if(textarea.textContext.length > 500){
+                textarea.parentElement.classList.add("error");
+                textarea.parentElement.querySelector("#comment-alert .text").innerHTML = 'You're comment is too long!'
+            }else{
+                e.target.parentElement.classList.add("posting");
+                fetch("https://api.jamied132.is-a.dev/users/elaruu/comment",{method:'POST',headers:{'Authorization':session},body:JSON.stringify({'content':textarea.innerHTML})}).then(r=>{
+                     if (!r.ok) {
+                        console.error("Error posting comment:", r.status, r.statusText);
+                        r.json().then(errorMessage => {
+                          console.error("Error message:", errorMessage.message);
+                          textarea.parentElement.querySelector("#comment-alert .text").innerHTML = errorMessage.message;
+                          textarea.parentElement.classList.add("error");
+                        }).catch(error => {
+                          textarea.parentElement.querySelector("#comment-alert .text").innerHTML = "an unknown error occured. <a href='/contact'>help</a>";
+                          textarea.parentElement.classList.add("error");
+                          console.error("Failed to extract error message:", error);
+                        });
+                        e.target.parentElement.classList.remove("posting");
+                        busy = false;
+                        return Promise.reject(response); // Reject the promise to signal an error
+                    }
+                    return r.json()
+                }).then(j=>{
+                    if(!j.error){
+                        textarea.innerHTML = '';
+                        e.target.parentElement.classList.remove("posting");
+                        busy = false;
+                    }
+                });
+            }
+            
+        }else{
+            alert('You are not signed in!');
+            busy = false;
+        }
     }
 });
 var prev_text=``;
