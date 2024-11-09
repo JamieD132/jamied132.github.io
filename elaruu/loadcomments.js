@@ -61,7 +61,7 @@ document.querySelector(".control-group .button a").addEventListener("click",(e)=
         busy = true;
         if(signedin){
             var textarea = document.querySelector("#main-post-form textarea");
-            if(textarea.parentElement.classList.includes("error")){
+            if(textarea.parentElement.classList.contains("error")){
                 textarea.parentElement.classList.remove("error");
             }
             if(textarea.textContent.length < 1){
