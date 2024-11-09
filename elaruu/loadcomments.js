@@ -48,6 +48,12 @@ document.querySelector("#login").addEventListener("submit",(e)=>{
         document.querySelector("#topnav ul.account-nav .sign-in .error").style.display = "block";
     }
 });
+document.querySelector("#main-post-form textarea").addEventListener("focus",(e)=>{
+    if(!signedin){
+        alert('You are not signed in!');
+        e.target.blur();
+    }
+});
 var prev_text=``;
 async function load_page(pg){
 fetch('https://api.jamied132.is-a.dev/users/elaruu/comments?page='+pg).then(com=>com.json()).then(result=>{
@@ -166,8 +172,9 @@ fetch('https://api.jamied132.is-a.dev/users/elaruu/pfp').then(res=>res.json()).t
                     })
 var signedin = false;
 var userinfo;
+var session;
 if(localStorage.getItem('session')){
-    var session = localStorage.getItem('session');
+    session = localStorage.getItem('session');
     fetch('https://api.jamied132.is-a.dev/auth/determine',{method:'POST',headers:{'Authorization':session}}).then(res=>res.json()).then(j=>{
         if(!j.error){
             userinfo = j;
