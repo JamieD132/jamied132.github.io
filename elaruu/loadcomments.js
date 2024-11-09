@@ -132,7 +132,7 @@ fetch('https://api.jamied132.is-a.dev/users/elaruu/comments?page='+pg).then(com=
                 <div>
                 <span class="time" title="${com.date ? new Date(com.date).toLocaleString() : 'This is not a comment by a real user. It was archived from the original elaruu.'}">${com.date ? moment.unix(com.date/1000).fromNow() : 'archived comment'}</span>
                 <a class="reply" style="${signedin ? 'display: inline;' : 'display: none;'}" href="#null">
-                    <span class="reply" title="reply">reply</span>
+                    <span>reply</span>
                 </a>
                 </div>
                 <div data-content="reply-form"></div>
@@ -156,8 +156,8 @@ fetch('https://api.jamied132.is-a.dev/users/elaruu/comments?page='+pg).then(com=
                     <div class="content">`+rep.content.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replace(/@([a-zA-Z0-9_-]+)/g, '<a href="/users/$1">@$1</a>')+`</div>
                     <div>
                     <span class="time" title="${rep.date ? new Date(rep.date).toLocaleString() : 'This is not a comment by a real user. It was archived from the original elaruu.'}">${rep.date ? moment.unix(rep.date/1000).fromNow() : 'archived comment'}</span>
-                    <a class="reply" style="display: none;" href="#null">
-                        <span class="reply" title="reply">reply</span>
+                    <a class="reply" style="${signedin ? 'display: inline;' : 'display: none;'}" href="#null">
+                        <span>reply</span>
                     </a>
                     </div>
                     <div data-content="reply-form"></div>
