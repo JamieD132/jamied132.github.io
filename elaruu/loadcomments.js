@@ -54,6 +54,14 @@ document.querySelector("#main-post-form textarea").addEventListener("focus",(e)=
         e.target.blur();
     }
 });
+document.querySelector(".control-group .button a").addEventListener("click",(e)=>{
+    e.preventDefault();
+    if(signedin){
+        
+    }else{
+        alert('You are not signed in!');
+    }
+});
 var prev_text=``;
 async function load_page(pg){
 fetch('https://api.jamied132.is-a.dev/users/elaruu/comments?page='+pg).then(com=>com.json()).then(result=>{
