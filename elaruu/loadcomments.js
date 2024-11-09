@@ -61,10 +61,10 @@ document.querySelector(".control-group .button a").addEventListener("click",(e)=
         busy = true;
         if(signedin){
             var textarea = document.querySelector("#main-post-form textarea");
-            if(textarea.textContext.length < 1){
+            if(textarea.textContent.length < 1){
                 textarea.parentElement.classList.add("error");
                 textarea.parentElement.querySelector("#comment-alert .text").innerHTML = 'You can\'t post a blank comment!';
-            }else if(textarea.textContext.length > 500){
+            }else if(textarea.textContent.length > 500){
                 textarea.parentElement.classList.add("error");
                 textarea.parentElement.querySelector("#comment-alert .text").innerHTML = 'You\'re comment is too long!'
             }else{
