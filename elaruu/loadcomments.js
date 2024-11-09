@@ -63,10 +63,10 @@ document.querySelector(".control-group .button a").addEventListener("click",(e)=
             var textarea = document.querySelector("#main-post-form textarea");
             if(textarea.textContext.length < 1){
                 textarea.parentElement.classList.add("error");
-                textarea.parentElement.querySelector("#comment-alert .text").innerHTML = 'You can't post a blank comment!';
+                textarea.parentElement.querySelector("#comment-alert .text").innerHTML = 'You can\'t post a blank comment!';
             }else if(textarea.textContext.length > 500){
                 textarea.parentElement.classList.add("error");
-                textarea.parentElement.querySelector("#comment-alert .text").innerHTML = 'You're comment is too long!'
+                textarea.parentElement.querySelector("#comment-alert .text").innerHTML = 'You\'re comment is too long!'
             }else{
                 e.target.parentElement.classList.add("posting");
                 fetch("https://api.jamied132.is-a.dev/users/elaruu/comment",{method:'POST',headers:{'Authorization':session},body:JSON.stringify({'content':textarea.innerHTML})}).then(r=>{
