@@ -10,6 +10,21 @@ async function get_pfp(user){
     }
     
 }
+function create_reply_form(elem){
+    `<form>
+    <div class="control-group tooltip right">
+      <textarea name="content"></textarea>
+      
+      <span class="hovertext error" data-control="error" data-content="comment-error"><span class="arrow"></span><span class="text"></span></span>
+      <span class="small-text">You have <span id="chars-left-356758501">500</span> characters left.</span>
+    </div>
+    <div class="control-group">
+        <div class="button small" data-parent-thread="356647194" data-commentee-id="143125847" data-control="post"><a href="#null">Post</a></div>
+        <div class="button small grey" data-control="cancel"><a href="#null">Cancel</a></div>
+      <span class="notification"></span>
+    </div>
+  </form>`
+}
 document.querySelectorAll(".dropdown-toggle").forEach((elem)=>{
     elem.addEventListener("click",(e)=>{
         return elem.parentElement.classList.contains("open") ? elem.parentElement.classList.remove("open") : elem.parentElement.classList.add("open");
@@ -251,6 +266,9 @@ if(localStorage.getItem('session')){
             })
             document.querySelectorAll(".reply").forEach(a=>{
                 a.style.display='inline';
+                a.addEventListener("click",function(e){
+                    add_reply_form(e.target);
+                });
             });
         }
         document.querySelectorAll(".dropdown-toggle").forEach((elem)=>{
