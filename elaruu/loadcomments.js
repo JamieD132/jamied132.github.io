@@ -1,3 +1,5 @@
+//update
+//script compatable with backend v3 and v4
 var comments;
 var page = 1;
 var busy = false;
