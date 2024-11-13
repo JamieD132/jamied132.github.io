@@ -150,7 +150,7 @@ fetch('https://api.jamied132.is-a.dev/users/elaruu/comments?page='+pg).then(com=
                     <span>reply</span>
                 </a>
                 </div>
-                <div data-content="reply-form"></div>
+                <div data-content="reply-form" id="reply_form"></div>
             </div>
             </div>
             <ul class="replies" data-thread="347700843">
@@ -175,7 +175,7 @@ fetch('https://api.jamied132.is-a.dev/users/elaruu/comments?page='+pg).then(com=
                         <span>reply</span>
                     </a>
                     </div>
-                    <div data-content="reply-form"></div>
+                    <div data-content="reply-form" id="reply_form"></div>
                 </div>
                 </div>
                 </li>
