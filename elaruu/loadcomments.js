@@ -11,15 +11,15 @@ async function get_pfp(user){
     
 }
 function create_reply_form(elem){
-    `<form>
+    elem.parentElement.parentElement.querySelector("#reply_form").innerHTML=`<form>
     <div class="control-group tooltip right">
       <textarea name="content"></textarea>
       
       <span class="hovertext error" data-control="error" data-content="comment-error"><span class="arrow"></span><span class="text"></span></span>
-      <span class="small-text">You have <span id="chars-left-356758501">500</span> characters left.</span>
+      <span class="small-text">You have <span id="chars-left-id">500</span> characters left.</span>
     </div>
     <div class="control-group">
-        <div class="button small" data-parent-thread="356647194" data-commentee-id="143125847" data-control="post"><a href="#null">Post</a></div>
+        <div class="button small" data-parent-thread="id" data-commentee-id="id" data-control="post"><a href="#null">Post</a></div>
         <div class="button small grey" data-control="cancel"><a href="#null">Cancel</a></div>
       <span class="notification"></span>
     </div>
