@@ -269,6 +269,7 @@ if(localStorage.getItem('session')){
             document.querySelectorAll(".reply").forEach(a=>{
                 a.style.display='inline';
                 a.addEventListener("click",function(e){
+                    e.preventDefault();
                     add_reply_form(e.target);
                 });
             });
