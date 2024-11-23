@@ -52,3 +52,11 @@ document.querySelector("#login").addEventListener("submit",(e)=>{
         document.querySelector("#topnav ul.account-nav .sign-in .error").style.display = "block";
     }
 });
+document.querySelectorAll(".reply").forEach(a=>{
+    a.style.display='inline';
+    a.addEventListener("click",function(e){
+        e.preventDefault();
+        add_reply_form(e.target);
+    });
+});
+
