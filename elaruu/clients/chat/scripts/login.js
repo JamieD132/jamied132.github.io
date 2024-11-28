@@ -7,7 +7,7 @@
 //_____
 //current migration status:
 //   session storage    -->    local storage   -->   document cookies
-//                             ^^^^^^^^^^^^^
+//                                                   ^^^^^^^^^^^^^^^^
 /*Description
 This script is used within the navigation bar and is returned from topnav(sess)
 it defines the signedin variable
@@ -68,5 +68,6 @@ if(document.querySelector(".reply")){
 if(document.querySelector("#logout")){
     document.querySelector("#logout").addEventListener("click",()=>{
         document.cookie="session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        window.location.reload();
     });
 }
