@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown 'til Meower is gone!!</title>
+    <style>
+        body{
+            height:80vh;
+            width:100vw;
+            overflow:hidden;
+            background-color: rgb(0, 0, 45);
+            margin-top:20vh;
+        }
+        h1,h2,h3{
+            color:white;
+            font-weight: bold;
+            width:100%;
+            text-align: center;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+        div.loadingshell{
+            width: 80%;
+            margin:10%;
+            border-radius:10px;
+            border: 3px solid white;
+            background-color: transparent;
+            padding:3px;
+        }
+        
+        div.loadingbar{
+            width: var(--percent);
+            background-color: white;
+            content:'';
+            border-radius:4px;
+            text-align: center;
+            color:rgb(0, 0, 45);
+        }
+        canvas{
+            position: absolute;
+            top:0;
+        }
+    </style>
+</head>
+<body>
+    <h3>Just</h3>
+    <h1>...</h1>
+    <h2>until Meower is gone forever!!</h2>
+    <div class="loadingshell">
+        <div class="loadingbar">90%</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.x/dist/index.umd.js"></script>
+
+    <script>
+    const container = document.querySelector('body')
+    const fireworks = new Fireworks.default(container, {
+        autoresize: false,
+        opacity: 1,
+        acceleration: 1,
+        friction: 0.97,
+        gravity: 1.5,
+        particles: 50,
+        traceLength: 3,
+        traceSpeed: 10,
+        explosion: 5,
+        intensity: 30,
+        flickering: 50,
+        lineStyle: 'round',
+        hue: {
+            min: 0,
+            max: 360
+        },
+        delay: {
+            min: 30,
+            max: 60
+        },
+        rocketsPoint: {
+            min: 50,
+            max: 50
+        },
+        lineWidth: {
+            explosion: {
+            min: 1,
+            max: 3
+            },
+            trace: {
+            min: 1,
+            max: 2
+            }
+        },
+        brightness: {
+            min: 50,
+            max: 80
+        },
+        decay: {
+            min: 0.015,
+            max: 0.03
+        },
+        mouse: {
+            click: false,
+            move: false,
+            max: 1
+        }
+    })
+    fireworks.start()
+    
+        
+    function convertSecondsToTime(seconds) {
+        const secondsInYear = 31536000;
+        const secondsInMonth = 2628000;
+        const secondsInDay = 86400;
+        const secondsInHour = 3600;
+        const secondsInMinute = 60;
+        let years = Math.floor(seconds / secondsInYear);
+        let remainingSeconds = seconds % secondsInYear;
+        
+        let months = Math.floor(remainingSeconds / secondsInMonth);
+        remainingSeconds %= secondsInMonth;
+        let days = Math.floor(remainingSeconds / secondsInDay);
+        remainingSeconds %= secondsInDay;
+        
+        let hours = Math.floor(remainingSeconds / secondsInHour);
+        remainingSeconds %= secondsInHour;
+        
+        let minutes = Math.floor(remainingSeconds / secondsInMinute);
+        let finalSeconds = remainingSeconds % secondsInMinute;
+        return {
+            years,
+            months,
+            days,
+            hours,
+            minutes,
+            seconds: finalSeconds
+        };
+    }
+    let timezoneOffset = new Date().getTimezoneOffset();
+
+    // Create a Date object for December 1st, 2024, 11:00:00 UTC
+
+
+    setInterval(update,10);
+    
+    function update() {
+        let date1 = new Date();
+        let date2 = new Date(2024, 11, 1, 0, 0, 0);
+        let date3 = new Date(2020, 7, 4, 13, 6, 38);
+        
+
+
+        // Adjust the target date by the user's timezone offset (in milliseconds)
+        date2.setTime(date2.getTime() - timezoneOffset * 60 *1000);
+        let total = date2 - date3;
+        let elapsed = date1 - date3;
+        let percent = ((elapsed / total) * 100).toFixed(7);
+        document.body.style.setProperty('percent',`${percent}%`);
+        document.querySelector('.loadingbar').innerText=`${percent}%`;
+        let res = convertSecondsToTime((date2-date1)/1000);
+        let set = /*res.years + " Years, " + res.months + " Months, " + */res.days + " Days, " + res.hours + " Hours, " + res.minutes + " Minutes, " + Math.round(res.seconds) + " Seconds";
+        document.getElementsByTagName("h1")[0].innerHTML = set;
+    }
+
+        
+    
+    </script>
+</body>
+</html>
