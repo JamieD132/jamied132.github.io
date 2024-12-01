@@ -126,6 +126,12 @@
         
         let minutes = Math.floor(remainingSeconds / secondsInMinute);
         let finalSeconds = remainingSeconds % secondsInMinute;
+        years = years <0 ? years + 1 : years;
+        months = months <0 ? months + 1 : months;
+        days = days <0 ? days + 1 : days;
+        hours = hours <0 ? hours + 1 : hours;
+        minutes = minutes <0 ? minutes + 1 : minutes;
+        finalSeconds = finalSeconds <0 ? finalSeconds + 1 : finalSeconds;
         return {
             years,
             months,
@@ -136,20 +142,11 @@
         };
     }
     let timezoneOffset = new Date().getTimezoneOffset();
-
-    // Create a Date object for December 1st, 2024, 11:00:00 UTC
-
-
     setInterval(update,10);
-    
     function update() {
         let date1 = new Date();
         let date2 = new Date(2024, 11, 1, 0, 0, 0);
         let date3 = new Date(2020, 7, 4, 13, 6, 38);
-        
-
-
-        // Adjust the target date by the user's timezone offset (in milliseconds)
         date2.setTime(date2.getTime() - timezoneOffset * 60 *1000);
         let total = date2 - date3;
         let elapsed = date1 - date3;
@@ -161,8 +158,6 @@
         document.getElementsByTagName("h1")[0].innerHTML = set;
     }
 
-        
-    
     </script>
 </body>
 </html>
