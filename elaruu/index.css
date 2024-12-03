@@ -2804,7 +2804,14 @@ body.admin #explore-bar [data-content="view"] {
 #comments .comment .info .time {
     color: #999
 }
-
+#comments .comment .info .like-button{
+    margin-left:10px;
+    cursor:pointer;
+}
+#comments .comment .info .like-text{
+    margin-left:5px;
+    cursor: pointer;
+}
 #comments .comment .info .reply {
     margin-left: 10px;
     cursor: pointer
