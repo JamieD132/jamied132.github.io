@@ -7,7 +7,7 @@
 //_____
 //current migration status:
 //   session storage    -->    local storage   -->   document cookies
-//                              ^^^^^^^^^^^
+//                                                   ^^^^^^^^^^^^^^^^
 var comments;
 var page = 1;
 var busy = false;
@@ -107,7 +107,7 @@ fetch('https://api.jamied132.is-a.dev/users/'+profileusername+'/comments?page='+
             id ++;
             text+= `
             <li class="top-level-reply">
-            <div id="comments-`+id+`" class="comment" data-comment-id="`+id+`">
+            <div id="comment-`+com.id+`" class="comment" data-comment-id="`+id+`">
             <div class="actions-wrap"></div>
             <a href="/users/`+com.user.username+`" id="comment-user" data-comment-user="`+com.user.username+`"><img class="avatar" src="`+com.user.pfp+`" width="45" height="45"></a>
             <div class="info">
@@ -117,7 +117,7 @@ fetch('https://api.jamied132.is-a.dev/users/'+profileusername+'/comments?page='+
                 <div class="content">`+com.content.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replace(/@([a-zA-Z0-9_-]+)/g, '<a href="/users/$1">@$1</a>').replace(/https:\/\/jamied132.is-a.dev([a-zA-Z0-9_-]+)/g, '<a href="/$1">https://jamied132.is-a.dev$1</a>')+`</div>
                 <div>
                 <span class="time" title="${com.date ? new Date(com.date).toLocaleString() : 'This is not a comment by a real user. It was archived from the original elaruu.'}">${com.date ? moment.unix(com.date/1000).fromNow() : 'archived comment'}</span>
-                <span class="like-button" style="color:${com.liked ? 'red' : 'black'};">❤</span>
+                <span class="like-button" id="like-${com.id}" style="color:${com.liked ? 'red' : 'black'};">❤</span>
                 <span class="like-text">`+com.likes+`</span>
                 <a class="reply" style="${signedin ? 'display: inline;' : 'display: none;'}" href="#null">
                     <span>reply</span>
@@ -180,6 +180,19 @@ fetch('https://api.jamied132.is-a.dev/users/'+profileusername+'/comments?page='+
                     el.classList.remove("truncated");
                 });
                 el.remove();
+            });
+        });
+        document.querySelectorAll(".like-button").forEach(el)=>{
+            el.addEventListener("click",(e)=>{
+                e.target.style.color=='red'?e.target.style.color='black':e.target.style.color='red';
+                e.target.style.color=='red'?e.target.parentElement.querySelector(".like-text").innerHTML=parseInt(e.target.innerHTML)+1:e.target.parentElement.querySelector(".like-text").innerHTML=parseInt(e.target.innerHTML)-1;
+                fetch("https://api.jamied132.is-a.dev/comments/"+e.target.getAttribute("id").split("like-")[1]+"/like",{
+                    method:'POST',
+                    headers:{'Authorization':session}
+                }).then(r=>r.json()).then(j=>{
+                    j.liked?e.target.style.color='red':e.target.style.color='black';
+                    e.target.target.parentElement.querySelector(".like-text").innerHTML=j.likes;
+                });
             });
         });
         fetch("https://api.jamied132.is-a.dev/users/"+profileusername+"/comments?page="+String(parseInt(page)+1)).then(r=>r.json()).then(j=>{
