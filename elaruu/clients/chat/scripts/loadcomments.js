@@ -185,7 +185,7 @@ fetch('https://api.jamied132.is-a.dev/users/'+profileusername+'/comments?page='+
         document.querySelectorAll(".like-button").forEach((el)=>{
             el.addEventListener("click",(e)=>{
                 e.target.style.color=='red'?e.target.style.color='black':e.target.style.color='red';
-                e.target.style.color=='red'?e.target.parentElement.querySelector(".like-text").innerHTML=parseInt(e.target.innerHTML)+1:e.target.parentElement.querySelector(".like-text").innerHTML=parseInt(e.target.innerHTML)-1;
+                e.target.style.color=='red'?e.target.parentElement.querySelector(".like-text").innerHTML=parseInt(e.target.parentElement.querySelector(".like-text").innerHTML)+1:e.target.parentElement.querySelector(".like-text").innerHTML=parseInt(e.target.parentElement.querySelector(".like-text").innerHTML)-1;
                 fetch("https://api.jamied132.is-a.dev/comments/"+e.target.getAttribute("id").split("like-")[1]+"/like",{
                     method:'POST',
                     headers:{'Authorization':session}
