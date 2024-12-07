@@ -150,23 +150,23 @@ p {
     margin: 0 0 10px 0
 }
 
-tbody {
+#comments .info .content tbody {
     border: 1px solid;
 }
 
-th {
+#comments .info .content th {
     margin: 5px;
     padding: 5px;
     border: 1px solid;
 }
 
-td {
+#comments .info .content td {
     margin: 5px;
     padding: 5px;
     border: 1px solid;
 }
 
-code {
+#comments .info .content code {
     background-color: black;
     padding: 5px;
     color: white;
@@ -174,11 +174,11 @@ code {
     border-radius: 5px;
 }
 
-pre code {
+#comments .info .content pre code {
     display: block;
 }
 
-#comments .content li {
+#comments .info .content li {
     border: none;
 }
 
