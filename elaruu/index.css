@@ -150,6 +150,47 @@ p {
     margin: 0 0 10px 0
 }
 
+tbody {
+    border: 1px solid;
+}
+
+th {
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid;
+}
+
+td {
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid;
+}
+
+code {
+    background-color: black;
+    padding: 5px;
+    color: white;
+    text-shadow: none;
+    border-radius: 5px;
+}
+
+pre code {
+    display: block;
+}
+
+#comments .content li {
+    border: none;
+}
+
+#comments .info .content ul {
+    margin: 0 0 1em 2em;
+    list-style-type: disc;
+}
+
+#comments .info .content ul li {
+    border: none;
+}
+
 .orange-text {
     color: #faa51f
 }
