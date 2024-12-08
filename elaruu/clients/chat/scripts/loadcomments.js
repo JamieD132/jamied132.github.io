@@ -1,4 +1,4 @@
-//loader v5.5.0
+//loader v5.5.2
 //compatable with backend >= v3.0.0
 //compatable with client 2 (chat.jamied132.is-a.dev) using backend 4.1.0
 //variables defined in response from client 2:
@@ -73,7 +73,7 @@ document.querySelector(".control-group .button a").addEventListener("click",(e)=
                         });
                         e.target.parentElement.classList.remove("posting");
                         busy = false;
-                        return Promise.reject(response); // Reject the promise to signal an error
+                        return Promise.reject(response);
                     }
                     return r.json()
                 }).then(j=>{
@@ -113,7 +113,7 @@ fetch('https://api.jamied132.is-a.dev/users/'+profileusername+'/comments?page='+
                 <div class="name">
                 <a href="/users/`+com.user.username+`">`+com.user.username+`</a>
                 </div>
-                <div class="content">`+marked.parse(com.content.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replace(/@([a-zA-Z0-9_-]+)/g, '<a href="/users/$1">@$1</a>').replace(/https:\/\/jamied132.is-a.dev([a-zA-Z0-9_-]+)/g, '<a href="/$1">https://jamied132.is-a.dev$1</a>'))+`</div>
+                <div class="content">`+marked.parse(com.content.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replace(/@([a-zA-Z0-9_-]+)/g, '<a href="/users/$1">@$1</a>').replace(/https:\/\/jamied132.is-a.dev([a-zA-Z0-9_-]+)/g, '<a href="/$1">https://jamied132.is-a.dev$1</a>'),{breaks:true})+`</div>
                 <div>
                 <span class="time" title="${com.date ? new Date(com.date).toLocaleString() : 'This is not a comment by a real user. It was archived from the original elaruu.'}">${com.date ? moment.unix(com.date/1000).fromNow() : 'archived comment'}</span>
                 <span class="like-button" id="like-${com.id}" style="color:${com.liked ? 'red' : 'black'};">❤</span>
@@ -140,7 +140,7 @@ fetch('https://api.jamied132.is-a.dev/users/'+profileusername+'/comments?page='+
                     <div class="name">
                     <a href="/users/`+rep.user.username+`">`+rep.user.username+`</a>
                     </div>
-                    <div class="content">`+marked.parse(rep.content.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replace(/@([a-zA-Z0-9_-]+)/g, '<a href="/users/$1">@$1</a>'))+`</div>
+                    <div class="content">`+marked.parse(rep.content.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replace(/@([a-zA-Z0-9_-]+)/g, '<a href="/users/$1">@$1</a>'),{breaks:true})+`</div>
                     <div>
                     <span class="time" title="${rep.date ? new Date(rep.date).toLocaleString() : 'This is not a comment by a real user. It was archived from the original elaruu.'}">${rep.date ? moment.unix(rep.date/1000).fromNow() : 'archived comment'}</span>
                     <a class="reply" style="${signedin ? 'display: inline;' : 'display: none;'}" href="#null">
