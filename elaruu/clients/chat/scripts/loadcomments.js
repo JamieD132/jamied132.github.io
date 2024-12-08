@@ -7,6 +7,7 @@
 //updates:
 // - ability to like posts
 // - markdown!
+//.
 var comments;
 var page = 1;
 var busy = false;
