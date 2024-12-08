@@ -150,46 +150,7 @@ p {
     margin: 0 0 10px 0
 }
 
-#comments .info .content tbody {
-    border: 1px solid;
-}
 
-#comments .info .content th {
-    margin: 5px;
-    padding: 5px;
-    border: 1px solid;
-}
-
-#comments .info .content td {
-    margin: 5px;
-    padding: 5px;
-    border: 1px solid;
-}
-
-#comments .info .content code {
-    background-color: black;
-    padding: 5px;
-    color: white;
-    text-shadow: none;
-    border-radius: 5px;
-}
-
-#comments .info .content pre code {
-    display: block;
-}
-
-#comments .info .content li {
-    border: none;
-}
-
-#comments .info .content ul {
-    margin: 0 0 1em 2em;
-    list-style-type: disc;
-}
-
-#comments .info .content ul li {
-    border: none;
-}
 
 .orange-text {
     color: #faa51f
@@ -2840,6 +2801,74 @@ body.admin #explore-bar [data-content="view"] {
 #comments .comment .info .content {
     margin-bottom: 5px;
     overflow: hidden
+}
+
+#comments .info .content tbody {
+    border: 1px solid;
+}
+
+#comments .info .content th {
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid;
+}
+
+#comments .info .content td {
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid;
+}
+
+#comments .info .content code {
+    background-color: black;
+    padding: 5px;
+    color: white;
+    text-shadow: none;
+    border-radius: 5px;
+}
+
+#comments .info .content pre code {
+    display: block;
+}
+
+#comments .info .content li {
+    border: none;
+}
+
+#comments .info .content ul {
+    margin: 0 0 1em 2em;
+    list-style-type: disc;
+}
+
+#comments .info .content ul li {
+    border: none;
+}
+
+#comments .info .content ul li:has(p input[type=checkbox]) {
+    list-style-type:none;
+    margin-left:-18px;
+}
+#comments .info .content ul li p input[type=checkbox]{
+    margin-right:2px;
+}
+#comments .info .content h1{
+    margin-bottom:0;
+    font-size:28pt;
+}
+#comments .info .content h2{
+    font-size:23pt;
+}
+#comments .info .content h3{
+    font-size:19pt;
+}
+#comments .info .content h4{
+    font-size:17pt;
+}
+#comments .info .content h5{
+    font-size:15pt;
+}
+#comments .info .content h6{
+    font-size:12pt;
 }
 
 #comments .comment .info .time {
