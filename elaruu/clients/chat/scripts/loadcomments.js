@@ -7,7 +7,23 @@
 //updates:
 // - ability to like posts
 // - markdown!
-//.
+//.1
+
+const lexer = new marked.Lexer();
+lexer.rules.inline.superscript = /\^([^ ]+)\^/g;
+lexer.rules.inline.subscript = /~([^ ]+)~/g;
+const renderer = new marked.Renderer();
+renderer.superscript = (text) => {
+  return `<sup>${text}</sup>`;
+};
+renderer.subscript = (text) => {
+  return `<sub>${text}</sub>`;
+};
+marked.setOptions({
+  lexer: lexer,
+  renderer: renderer
+});
+
 var comments;
 var page = 1;
 var busy = false;
