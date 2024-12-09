@@ -7,7 +7,7 @@
 //updates:
 // - ability to like posts
 // - markdown!
-//.4
+//.5
 
 const lexer = new marked.Lexer();
 lexer.tokenizer.rules.inline.superscript = /\^([^ ]+)\^/g;
@@ -18,6 +18,9 @@ renderer.superscript = (text) => {
 };
 renderer.subscript = (text) => {
   return `<sub>${text}</sub>`;
+};
+renderer.image = function(href, title, text) {
+  return '';
 };
 marked.setOptions({
   lexer: lexer,
