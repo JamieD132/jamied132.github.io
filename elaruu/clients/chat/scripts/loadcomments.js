@@ -7,7 +7,7 @@
 //updates:
 // - ability to like posts
 // - markdown!
-//.5
+//..5
 
 const lexer = new marked.Lexer();
 lexer.tokenizer.rules.inline.superscript = /\^([^ ]+)\^/g;
