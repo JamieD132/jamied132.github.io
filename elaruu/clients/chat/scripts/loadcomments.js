@@ -10,8 +10,8 @@
 //.1
 
 const lexer = new marked.Lexer();
-lexer.rules.inline.superscript = /\^([^ ]+)\^/g;
-lexer.rules.inline.subscript = /~([^ ]+)~/g;
+lexer.tokenizer.rules.inline.superscript = /\^([^ ]+)\^/g;
+lexer.tokenizer.rules.inline.subscript = /~([^ ]+)~/g;
 const renderer = new marked.Renderer();
 renderer.superscript = (text) => {
   return `<sup>${text}</sup>`;
