@@ -7,7 +7,7 @@
 //updates:
 // - ability to like posts
 // - markdown!
-//..6
+//..6.1
 
 const lexer = new marked.Lexer();
 lexer.tokenizer.rules.inline.superscript = /\^([^ ]+)\^/g;
@@ -215,7 +215,7 @@ fetch('https://api.jamied132.is-a.dev/users/'+profileusername+'/comments?page='+
             });
         });
         document.querySelectorAll(".reply span").forEach((el)=>{
-            el.addEventListener("click",(e)=>{create_reply_form(e)};
+            el.addEventListener("click",(e)=>{create_reply_form(e)});
         });
         fetch("https://api.jamied132.is-a.dev/users/"+profileusername+"/comments?page="+String(parseInt(page)+1)).then(r=>r.json()).then(j=>{
             if(j.comments.length==0){
