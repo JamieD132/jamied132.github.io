@@ -1,4 +1,4 @@
-//loader v5.5.2
+//loader v5.5.3
 //compatable with backend >= v3.0.0
 //compatable with client 2 (chat.jamied132.is-a.dev) using backend 4.1.0
 //variables defined in response from client 2:
@@ -7,7 +7,7 @@
 //updates:
 // - ability to like posts
 // - markdown!
-//..5
+//..6
 
 const lexer = new marked.Lexer();
 lexer.tokenizer.rules.inline.superscript = /\^([^ ]+)\^/g;
@@ -139,10 +139,10 @@ fetch('https://api.jamied132.is-a.dev/users/'+profileusername+'/comments?page='+
                 <span class="like-button" id="like-${com.id}" style="color:${com.liked ? 'red' : 'black'};">❤</span>
                 <span class="like-text">`+com.likes+`</span>
                 <a class="reply" style="${signedin ? 'display: inline;' : 'display: none;'}" href="#null">
-                    <span>reply</span>
+                    <span id="reply-button${com.id}">reply</span>
                 </a>
                 </div>
-                <div data-content="reply-form" id="reply_form"></div>
+                <div data-content="reply-form" id="reply-form"></div>
             </div>
             </div>
             <ul class="replies" data-thread="347700843">
@@ -213,6 +213,9 @@ fetch('https://api.jamied132.is-a.dev/users/'+profileusername+'/comments?page='+
                     e.target.target.parentElement.querySelector(".like-text").innerHTML=j.likes;
                 });
             });
+        });
+        document.querySelectorAll(".reply span").forEach((el)=>{
+            el.addEventListener("click",(e)=>{create_reply_form(e)};
         });
         fetch("https://api.jamied132.is-a.dev/users/"+profileusername+"/comments?page="+String(parseInt(page)+1)).then(r=>r.json()).then(j=>{
             if(j.comments.length==0){
