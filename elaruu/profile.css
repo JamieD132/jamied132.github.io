@@ -358,4 +358,50 @@
     right: 15px;
     top: 10px;
   }
+
+ul.likes {
+    list-style-type: none;
+    margin-left: 0;
+    margin-bottom:0;
+}
+.modal-body:has(ul.likes){
+    padding:0;
+    max-height:400px;
+    overflow:auto;
+}
+ul.likes li{
+    padding:7.5px 15px 7.5px 15px;
+    border-bottom:1px solid lightgrey;
+    height: 50px;
+    display:block;
+}
+ul.likes li:last-child{
+    border-bottom: none;
+    padding-bottom: 0;
+}
+ul.likes li .pfp{
+    float:left;
+    display:block;
+}
+ul.likes li .pfp img{
+    display:block;
+}
+ul.likes li .username{
+    padding:5px;
+    float:left;
+    display:block;
+    margin-top:auto;
+    margin-bottom:auto;
+}
+ul.likes li a {
+    color: #333;
+    font-weight:bold;
+}
+ul.likes li a:hover{
+    color:#855cd6;
+}
+ul.likes .buttons-right{
+    float:right;
+    display:block;
+}
   
