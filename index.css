@@ -134,7 +134,7 @@ h3{
     font-family: sans-serif;
     font-size: 100px;
     color: transparent;
-    width: 60vw;
+    width: fit-content;
     display: flex;
     margin: auto;
     text-align: center;
