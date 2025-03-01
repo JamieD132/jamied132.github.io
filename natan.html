@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Countdown 'til Natan can be allowed on Darflen!!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
     <style>
         body{
             height:80vh;
@@ -12,6 +15,8 @@
             overflow:hidden;
             background-color: rgb(249, 249, 249);
             margin-top:20vh;
+            margin-left: 0px;
+            margin-right:0px;
         }
         h1,h2,h3{
             font-weight: bold;
@@ -41,41 +46,50 @@
             position: absolute;
             top:0;
         }
-        ul#container {width: max-content;display: flex;margin-left: auto;margin-right: auto;}
+        ul#container {width: 100%;display: flex;margin-left: auto;margin-right: auto;}
 
-ul#container > li {
-    display: inline-block;
-    width: 100px;
-}
+        ul#container > li {
+            display: inline-block;
+            max-width: 100px;
+            width:10%;
+        }
 
-li>ul {
-    width: 100px;
-}
+        
 
-li li {
-    list-style: none;
-    text-align: center;
-    font-family: fantasy;
-    color: #585858;
-}
+        li li {
+            list-style: none;
+            text-align: center;
+            font-family: "Oswald", sans-serif;
+            font-weight: 700;
+            color: #585858;
+        }
 
-li li:first-child {
-    font-size: 50px;
-}
+        li li:first-child {
+            font-size: 50px;
+        }
 
-ul {
-    margin: 0px;
-    padding: 0px;
-}
+        ul {
+            margin: 0px;
+            padding: 0px;
+        }
 
-h3, h2 {
-    color: #585858;
-    font-family: monospace;
-    font-weight: 900;
-    font-size: 20px;
-    margin-top: 80px !important;
-    margin-bottom: 80px !important;
-}
+        h3, h2 {
+            color: #585858;
+            font-family: monospace;
+            font-weight: 900;
+            font-size: 20px;
+            margin-top: 80px !important;
+            margin-bottom: 80px !important;
+        }
+        @media screen and (max-width: 590px) {
+            ul#container > li:first-child {
+                display: none;
+            }
+            ul#container > li:last-child {
+                display: none;
+            }
+        }
+        
     </style>
 </head>
 <body>
@@ -190,12 +204,14 @@ h3, h2 {
         let res = convertSecondsToTime((date2-date1)/1000);
         //let set = /*res.years + " Years, " + res.months + " Months, " +*/ res.days + " Days, " + res.hours + " Hours, " + res.minutes + " Minutes, " + Math.round(res.seconds) + " Seconds";
         let set = `
+        <li style="margin-left:auto"></li>
         <li><ul><li>${res.years}</li><li>Years</li></ul></li>
         <li><ul><li>${res.months}</li><li>Months</li></ul></li>
         <li><ul><li>${res.days}</li><li>Days</li></ul></li>
         <li><ul><li>${res.hours}</li><li>Hours</li></ul></li>
         <li><ul><li>${res.minutes}</li><li>Minutes</li></ul></li>
         <li><ul><li>${Math.round(res.seconds)}</li><li>Seconds</li></ul></li>
+        <li style="margin-right:auto"></li>
         `;
         document.querySelector("ul#container").innerHTML = set;
     }
