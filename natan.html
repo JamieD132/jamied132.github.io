@@ -1,72 +1,205 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Countdown 'til Natan is allowed on Darflen</title>
+    <title>Countdown 'til Natan can be allowed on Darflen!!</title>
     <style>
-        html, body{
-            background-color: rgb(0, 0, 60);
-            color:white;
+        body{
+            height:80vh;
+            width:100vw;
+            overflow:hidden;
+            background-color: rgb(249, 249, 249);
+            margin-top:20vh;
+        }
+        h1,h2,h3{
             font-weight: bold;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            width:100%;
             text-align: center;
-            justify-content: center;
-            padding: auto 0;
-            user-select: none;
         }
-        h1{
-            margin-top: 30vh;
-            margin-bottom: 200px;
+        div.loadingshell{
+            width: 80%;
+            margin:10%;
+            border-radius:10px;
+            border: 3px solid white;
+            background-color: transparent;
+            padding:3px;
         }
+        
+        div.loadingbar{
+            width: var(--percent);
+            background-color: white;
+            content:'';
+            border-radius:4px;
+            text-align: center;
+            color:rgb(0, 0, 45);
+            font-family:Arial, Helvetica, sans-serif;
+            font-weight:bold;
+        }
+        canvas{
+            position: absolute;
+            top:0;
+        }
+        ul#container {width: max-content;display: flex;margin-left: auto;margin-right: auto;}
+
+ul#container > li {
+    display: inline-block;
+    width: 100px;
+}
+
+li>ul {
+    width: 100px;
+}
+
+li li {
+    list-style: none;
+    text-align: center;
+    font-family: fantasy;
+    color: #585858;
+}
+
+li li:first-child {
+    font-size: 50px;
+}
+
+ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+h3, h2 {
+    color: #585858;
+    font-family: monospace;
+    font-weight: 900;
+    font-size: 20px;
+    margin-top: 80px !important;
+    margin-bottom: 80px !important;
+}
     </style>
 </head>
 <body>
-    <h1>Countdown until Natan can be allowed on Darflen</h1>
-    <h2>loading...</h2>
-    <script>
-        
-        function convertSecondsToTime(seconds) {
-            const secondsInYear = 31536000;
-            const secondsInMonth = 2628000;
-            const secondsInDay = 86400;
-            const secondsInHour = 3600;
-            const secondsInMinute = 60;
-            let years = Math.floor(seconds / secondsInYear);
-            let remainingSeconds = seconds % secondsInYear;
-            
-            let months = Math.floor(remainingSeconds / secondsInMonth);
-            remainingSeconds %= secondsInMonth;
-            let days = Math.floor(remainingSeconds / secondsInDay);
-            remainingSeconds %= secondsInDay;
-            
-            let hours = Math.floor(remainingSeconds / secondsInHour);
-            remainingSeconds %= secondsInHour;
-            
-            let minutes = Math.floor(remainingSeconds / secondsInMinute);
-            let finalSeconds = remainingSeconds % secondsInMinute;
-            return {
-                years,
-                months,
-                days,
-                hours,
-                minutes,
-                seconds: finalSeconds
-            };
-        }
-        let date1 = new Date();
-        let date2 = new Date("2025-03-13T00:00:00");
-        let timeLeft = (date2 - date1) / 1000;
-        setInterval(update, 500);
-        function update() {
-            date1 = new Date();
-            timeLeft = (date2 - date1) / 1000;
-            let res = convertSecondsToTime(timeLeft);
-            let set = res.years + " Years, " + res.months + " Months, " + res.days + " Days, " + res.hours + " Hours, " + res.minutes + " Minutes, " + Math.round(res.seconds) + " Seconds";
-            document.getElementsByTagName("h2")[0].innerHTML = set;
-        }
+    <h3>Just</h3>
+    <ul id="container"></ul>
+    <h2>until Natan can be allowed on Darflen!!</h2>
+    <!--<div class="loadingshell">
+        <div class="loadingbar">90%</div>
+    </div>-->
+    <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.x/dist/index.umd.js"></script>
 
+    <script>
+    const container = document.querySelector('body')
+    const fireworks = new Fireworks.default(container, {
+        autoresize: false,
+        opacity: 1,
+        acceleration: 1,
+        friction: 0.97,
+        gravity: 1.5,
+        particles: 50,
+        traceLength: 3,
+        traceSpeed: 10,
+        explosion: 5,
+        intensity: 30,
+        flickering: 50,
+        lineStyle: 'round',
+        hue: {
+            min: 0,
+            max: 360
+        },
+        delay: {
+            min: 100,
+            max: 500
+        },
+        rocketsPoint: {
+            min: 50,
+            max: 50
+        },
+        lineWidth: {
+            explosion: {
+            min: 1,
+            max: 3
+            },
+            trace: {
+            min: 1,
+            max: 2
+            }
+        },
+        brightness: {
+            min: 50,
+            max: 80
+        },
+        decay: {
+            min: 0.015,
+            max: 0.03
+        },
+        mouse: {
+            click: false,
+            move: false,
+            max: 1
+        }
+    })
+    fireworks.start()
+    
         
+    function convertSecondsToTime(seconds) {
+        const secondsInYear = 31536000;
+        const secondsInMonth = 2628000;
+        const secondsInDay = 86400;
+        const secondsInHour = 3600;
+        const secondsInMinute = 60;
+        let years = Math.floor(seconds / secondsInYear);
+        let remainingSeconds = seconds % secondsInYear;
+        
+        let months = Math.floor(remainingSeconds / secondsInMonth);
+        remainingSeconds %= secondsInMonth;
+        let days = Math.floor(remainingSeconds / secondsInDay);
+        remainingSeconds %= secondsInDay;
+        
+        let hours = Math.floor(remainingSeconds / secondsInHour);
+        remainingSeconds %= secondsInHour;
+        
+        let minutes = Math.floor(remainingSeconds / secondsInMinute);
+        let finalSeconds = remainingSeconds % secondsInMinute;
+        years = years <0 ? years + 1 : years;
+        months = months <0 ? months + 1 : months;
+        days = days <0 ? days + 1 : days;
+        hours = hours <0 ? hours + 1 : hours;
+        minutes = minutes <0 ? minutes + 1 : minutes;
+        finalSeconds = finalSeconds <0 ? finalSeconds + 1 : finalSeconds;
+        return {
+            years,
+            months,
+            days,
+            hours,
+            minutes,
+            seconds: finalSeconds
+        };
+    }
+    let timezoneOffset = new Date().getTimezoneOffset();
+    var interval = setInterval(update,10);
+    function update() {
+        let date1 = new Date();
+        let date2 = new Date(2025, 2, 11, 0, 0, 0);
+        //let date3 = new Date(2020, 7, 4, 13, 6, 38);
+        date2.setTime(date2.getTime() - timezoneOffset * 60 *1000);
+        /*let total = date2 - date3;
+        let elapsed = date1 - date3;
+        let percent = ((elapsed / total) * 100).toFixed(7);
+        document.body.style.setProperty('percent',`${percent}%`);
+        document.querySelector('.loadingbar').innerText=`${percent}%`;*/
+        let res = convertSecondsToTime((date2-date1)/1000);
+        //let set = /*res.years + " Years, " + res.months + " Months, " +*/ res.days + " Days, " + res.hours + " Hours, " + res.minutes + " Minutes, " + Math.round(res.seconds) + " Seconds";
+        let set = `
+        <li><ul><li>${res.years}</li><li>Years</li></ul></li>
+        <li><ul><li>${res.months}</li><li>Months</li></ul></li>
+        <li><ul><li>${res.days}</li><li>Days</li></ul></li>
+        <li><ul><li>${res.hours}</li><li>Hours</li></ul></li>
+        <li><ul><li>${res.minutes}</li><li>Minutes</li></ul></li>
+        <li><ul><li>${Math.round(res.seconds)}</li><li>Seconds</li></ul></li>
+        `;
+        document.querySelector("ul#container").innerHTML = set;
+    }
+
     </script>
 </body>
 </html>
