@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,12 +55,15 @@
             width:100%;
         }
 
+        
+
         li li {
             list-style: none;
             text-align: center;
             font-family: "Oswald", sans-serif;
             font-weight: 700;
             color: #585858;
+            transition-duration: 2s;
         }
 
         li li:first-child {
@@ -87,6 +91,10 @@
                 display: none;
             }
         }
+        h1 {
+        font-family: oswald, sans-serif;
+        font-size: 100px;
+    }
         
     </style>
 </head>
@@ -149,8 +157,58 @@
             move: false,
             max: 1
         }
-    })
-    fireworks.start()
+    });
+    const bigfireworks = new Fireworks.default(container, {
+        autoresize: true,
+        opacity: 1,
+        acceleration: 1,
+        friction: 0.97,
+        gravity: 1.5,
+        particles: 200,
+        traceLength: 3,
+        traceSpeed: 20,
+        explosion: 10,
+        intensity: 50,
+        flickering: 70,
+        lineStyle: 'round',
+        hue: {
+            min: 0,
+            max: 360
+        },
+        delay: {
+            min: 0,
+            max: 100
+        },
+        rocketsPoint: {
+            min: 70,
+            max: 70
+        },
+        lineWidth: {
+            explosion: {
+            min: 3,
+            max: 5
+            },
+            trace: {
+            min: 1,
+            max: 2
+            }
+        },
+        brightness: {
+            min: 50,
+            max: 80
+        },
+        decay: {
+            min: 0.015,
+            max: 0.02
+        },
+        mouse: {
+            click: false,
+            move: false,
+            max: 1
+        }
+    });
+    fireworks.start();
+
     
         
     function convertSecondsToTime(seconds) {
@@ -188,10 +246,10 @@
         };
     }
     let timezoneOffset = new Date().getTimezoneOffset();
-    var interval = setInterval(update,10);
+    var interval = setInterval(update,500);
     function update() {
         let date1 = new Date();
-        let date2 = new Date(2025, 2, 11, 0, 0, 0);
+        let date2 = new Date(2025, 2, 10, 7, 6, 0);
         //let date3 = new Date(2020, 7, 4, 13, 6, 38);
         date2.setTime(date2.getTime() - timezoneOffset * 60 *1000);
         /*let total = date2 - date3;
@@ -201,17 +259,33 @@
         document.querySelector('.loadingbar').innerText=`${percent}%`;*/
         let res = convertSecondsToTime((date2-date1)/1000);
         //let set = /*res.years + " Years, " + res.months + " Months, " +*/ res.days + " Days, " + res.hours + " Hours, " + res.minutes + " Minutes, " + Math.round(res.seconds) + " Seconds";
+        var flash = false;
+        var tick = false;
+        if(res.years<1 && res.months<1 && res.days<1 && res.hours<1 && res.minutes<1 && res.seconds<1) {
+            document.querySelector("h3").remove();
+            document.querySelector("h2").remove();
+            document.querySelector("ul#container").remove();
+            document.body.innerHTML = "<h1>Happy Birthday Natan!!!!!</h1>";
+            fireworks.stop();
+            bigfireworks.start();
+            setTimeout(ending,10000);
+            clearInterval(interval);};
+        if (res.days<1 && res.hours<1 && res.minutes<5) {flash=true; tick=res.minutes>0?(Math.round(res.seconds)%2)==1?true:false:(Math.round(res.seconds*2)%2)==1?true:false;;};
         let set = `
         <li style="margin-left:auto"></li>
-        <li><ul><li>${res.years}</li><li>Years</li></ul></li>
-        <li><ul><li>${res.months}</li><li>Months</li></ul></li>
-        <li><ul><li>${res.days}</li><li>Days</li></ul></li>
-        <li><ul><li>${res.hours}</li><li>Hours</li></ul></li>
-        <li><ul><li>${res.minutes}</li><li>Minutes</li></ul></li>
-        <li><ul><li>${Math.round(res.seconds)}</li><li>Seconds</li></ul></li>
+        <li><ul><li${flash&&tick?' style="color:red"':''}>${res.years}</li><li${flash&&tick?' style="color:red"':''}>Years</li></ul></li>
+        <li><ul><li${flash&&tick?' style="color:red"':''}>${res.months}</li><li${flash&&tick?' style="color:red"':''}>Months</li></ul></li>
+        <li><ul><li${flash&&tick?' style="color:red"':''}>${res.days}</li><li${flash&&tick?' style="color:red"':''}>Days</li></ul></li>
+        <li><ul><li${flash&&tick?' style="color:red"':''}>${res.hours}</li><li${flash&&tick?' style="color:red"':''}>Hours</li></ul></li>
+        <li><ul><li${flash&&tick?' style="color:red"':''}>${res.minutes}</li><li${flash&&tick?' style="color:red"':''}>Minutes</li></ul></li>
+        <li><ul><li${flash&&tick?' style="color:red"':''}>${Math.round(res.seconds)}</li><li${flash&&tick?' style="color:red"':''}>Seconds</li></ul></li>
         <li style="margin-right:auto"></li>
         `;
         document.querySelector("ul#container").innerHTML = set;
+    }
+    function ending() {
+        bigfireworks.stop();
+        setTimeout(()=>document.body.innerHTML = "<h1>Natan is now allowed to join Darflen :)</h1>",1000);
     }
 
     </script>
