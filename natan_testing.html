@@ -1,0 +1,293 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown 'til Natan can be allowed on Darflen!!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <style>
+        body{
+            height:80vh;
+            width:100vw;
+            overflow:hidden;
+            background-color: rgb(249, 249, 249);
+            margin-top:20vh;
+            margin-left: 0px;
+            margin-right:0px;
+        }
+        h1,h2,h3{
+            font-weight: bold;
+            width:100%;
+            text-align: center;
+        }
+        div.loadingshell{
+            width: 80%;
+            margin:10%;
+            border-radius:10px;
+            border: 3px solid white;
+            background-color: transparent;
+            padding:3px;
+        }
+        
+        div.loadingbar{
+            width: var(--percent);
+            background-color: white;
+            content:'';
+            border-radius:4px;
+            text-align: center;
+            color:rgb(0, 0, 45);
+            font-family:Arial, Helvetica, sans-serif;
+            font-weight:bold;
+        }
+        canvas{
+            position: absolute;
+            top:0;
+        }
+        ul#container {width: 100%;display: flex;margin-left: auto;margin-right: auto;}
+
+        ul#container > li {
+            display: inline-block;
+            max-width: 100px;
+            width:100%;
+        }
+
+        
+
+        li li {
+            list-style: none;
+            text-align: center;
+            font-family: "Oswald", sans-serif;
+            font-weight: 700;
+            color: #585858;
+            transition-duration: 2s;
+        }
+
+        li li:first-child {
+            font-size: 50px;
+        }
+
+        ul {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        h3, h2 {
+            color: #585858;
+            font-family: monospace;
+            font-weight: 900;
+            font-size: 20px;
+            margin-top: 80px !important;
+            margin-bottom: 80px !important;
+        }
+        @media screen and (max-width: 590px) {
+            ul#container > li:first-child {
+                display: none;
+            }
+            ul#container > li:last-child {
+                display: none;
+            }
+        }
+        h1 {
+        font-family: oswald, sans-serif;
+        font-size: 100px;
+    }
+        
+    </style>
+</head>
+<body>
+    <h3>Just</h3>
+    <ul id="container"></ul>
+    <h2>until Natan can be allowed on Darflen!!</h2>
+    <!--<div class="loadingshell">
+        <div class="loadingbar">90%</div>
+    </div>-->
+    <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.x/dist/index.umd.js"></script>
+
+    <script>
+    const container = document.querySelector('body')
+    const fireworks = new Fireworks.default(container, {
+        autoresize: false,
+        opacity: 1,
+        acceleration: 1,
+        friction: 0.97,
+        gravity: 1.5,
+        particles: 50,
+        traceLength: 3,
+        traceSpeed: 10,
+        explosion: 5,
+        intensity: 30,
+        flickering: 50,
+        lineStyle: 'round',
+        hue: {
+            min: 0,
+            max: 360
+        },
+        delay: {
+            min: 100,
+            max: 500
+        },
+        rocketsPoint: {
+            min: 50,
+            max: 50
+        },
+        lineWidth: {
+            explosion: {
+            min: 1,
+            max: 3
+            },
+            trace: {
+            min: 1,
+            max: 2
+            }
+        },
+        brightness: {
+            min: 50,
+            max: 80
+        },
+        decay: {
+            min: 0.015,
+            max: 0.03
+        },
+        mouse: {
+            click: false,
+            move: false,
+            max: 1
+        }
+    });
+    const bigfireworks = new Fireworks.default(container, {
+        autoresize: true,
+        opacity: 1,
+        acceleration: 1,
+        friction: 0.97,
+        gravity: 1.5,
+        particles: 200,
+        traceLength: 3,
+        traceSpeed: 20,
+        explosion: 10,
+        intensity: 50,
+        flickering: 70,
+        lineStyle: 'round',
+        hue: {
+            min: 0,
+            max: 360
+        },
+        delay: {
+            min: 0,
+            max: 100
+        },
+        rocketsPoint: {
+            min: 70,
+            max: 70
+        },
+        lineWidth: {
+            explosion: {
+            min: 3,
+            max: 5
+            },
+            trace: {
+            min: 1,
+            max: 2
+            }
+        },
+        brightness: {
+            min: 50,
+            max: 80
+        },
+        decay: {
+            min: 0.015,
+            max: 0.02
+        },
+        mouse: {
+            click: false,
+            move: false,
+            max: 1
+        }
+    });
+    fireworks.start();
+
+    
+        
+    function convertSecondsToTime(seconds) {
+        const secondsInYear = 31536000;
+        const secondsInMonth = 2628000;
+        const secondsInDay = 86400;
+        const secondsInHour = 3600;
+        const secondsInMinute = 60;
+        let years = Math.floor(seconds / secondsInYear);
+        let remainingSeconds = seconds % secondsInYear;
+        
+        let months = Math.floor(remainingSeconds / secondsInMonth);
+        remainingSeconds %= secondsInMonth;
+        let days = Math.floor(remainingSeconds / secondsInDay);
+        remainingSeconds %= secondsInDay;
+        
+        let hours = Math.floor(remainingSeconds / secondsInHour);
+        remainingSeconds %= secondsInHour;
+        
+        let minutes = Math.floor(remainingSeconds / secondsInMinute);
+        let finalSeconds = remainingSeconds % secondsInMinute;
+        years = years <0 ? years + 1 : years;
+        months = months <0 ? months + 1 : months;
+        days = days <0 ? days + 1 : days;
+        hours = hours <0 ? hours + 1 : hours;
+        minutes = minutes <0 ? minutes + 1 : minutes;
+        finalSeconds = finalSeconds <0 ? finalSeconds + 1 : finalSeconds;
+        return {
+            years,
+            months,
+            days,
+            hours,
+            minutes,
+            seconds: finalSeconds
+        };
+    }
+    let timezoneOffset = new Date().getTimezoneOffset();
+    var interval = setInterval(update,500);
+    function update() {
+        let date1 = new Date();
+        let date2 = new Date(2025, 2, 10, 7, 6, 0);
+        //let date3 = new Date(2020, 7, 4, 13, 6, 38);
+        date2.setTime(date2.getTime() - timezoneOffset * 60 *1000);
+        /*let total = date2 - date3;
+        let elapsed = date1 - date3;
+        let percent = ((elapsed / total) * 100).toFixed(7);
+        document.body.style.setProperty('percent',`${percent}%`);
+        document.querySelector('.loadingbar').innerText=`${percent}%`;*/
+        let res = convertSecondsToTime((date2-date1)/1000);
+        //let set = /*res.years + " Years, " + res.months + " Months, " +*/ res.days + " Days, " + res.hours + " Hours, " + res.minutes + " Minutes, " + Math.round(res.seconds) + " Seconds";
+        var flash = false;
+        var tick = false;
+        if(res.years<1 && res.months<1 && res.days<1 && res.hours<1 && res.minutes<1 && res.seconds<1) {
+            document.querySelector("h3").remove();
+            document.querySelector("h2").remove();
+            document.querySelector("ul#container").remove();
+            document.body.innerHTML = "<h1>Happy Birthday Natan!!!!!</h1>";
+            fireworks.stop();
+            bigfireworks.start();
+            setTimeout(ending,10000);
+            clearInterval(interval);};
+        if (res.days<1 && res.hours<1 && res.minutes<5) {flash=true; tick=res.minutes>0?(Math.round(res.seconds)%2)==1?true:false:(Math.round(res.seconds*2)%2)==1?true:false;;};
+        let set = `
+        <li style="margin-left:auto"></li>
+        <li><ul><li${flash&&tick?' style="color:red"':''}>${res.years}</li><li${flash&&tick?' style="color:red"':''}>Years</li></ul></li>
+        <li><ul><li${flash&&tick?' style="color:red"':''}>${res.months}</li><li${flash&&tick?' style="color:red"':''}>Months</li></ul></li>
+        <li><ul><li${flash&&tick?' style="color:red"':''}>${res.days}</li><li${flash&&tick?' style="color:red"':''}>Days</li></ul></li>
+        <li><ul><li${flash&&tick?' style="color:red"':''}>${res.hours}</li><li${flash&&tick?' style="color:red"':''}>Hours</li></ul></li>
+        <li><ul><li${flash&&tick?' style="color:red"':''}>${res.minutes}</li><li${flash&&tick?' style="color:red"':''}>Minutes</li></ul></li>
+        <li><ul><li${flash&&tick?' style="color:red"':''}>${Math.round(res.seconds)}</li><li${flash&&tick?' style="color:red"':''}>Seconds</li></ul></li>
+        <li style="margin-right:auto"></li>
+        `;
+        document.querySelector("ul#container").innerHTML = set;
+    }
+    function ending() {
+        bigfireworks.stop();
+        setTimeout(()=>document.body.innerHTML = "<h1>Natan is now allowed to join Darflen :)</h1>",1000);
+    }
+
+    </script>
+</body>
+</html>
