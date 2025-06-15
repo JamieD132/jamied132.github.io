@@ -1,0 +1,26 @@
+<!doctype html>
+<head>
+  <title>Darflen Canvas Backups</title>
+</head>
+<body>
+  <h2>Saved backups</h2>
+  <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" crossorigin="anonymous" type="text/javascript"></script>
+  <script>
+    const socket = io("wss://api.darflen.com/canvas", {
+        path: "/ws/",
+        transports: ["websocket", "polling"],
+        withCredentials: true,
+    });
+    socket.on("connect", () => {
+        socket.emit("request_canvas");
+    });
+    grid_size = 128;
+    grid_data = new Array(grid_size*grid_size);
+    socket.on("update_bulk", (stuff) => {
+        for (const { x, y, data } of stuff) {
+            grid_data[y * grid_size + x] = data.color;
+        }
+        console.log("recieved");
+    });
+  </script>
+</body>
