@@ -1,12 +1,12 @@
 <!doctype html>
 <head>
-  <title>Darflen Canvas Backups</title>
+  <title>Darflen Canvas Archives</title>
 </head>
 <body>
   <h1>Darflen canvas archives</h1>
   <h2>Current canvas</h2>
   <canvas id="current_canvas" width="128" height="128"></canvas>
-  <button id="save_canvas" onclick="save()">Save current canvas</button>
+  <button id="save_canvas" onclick="save()" disabled>Loading...</button>
   <h2>Saved canvases</h2>
   <div id="saved_canvases"></div>
   <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" crossorigin="anonymous" type="text/javascript"></script>
@@ -19,6 +19,8 @@
     });
     socket.on("connect", () => {
         socket.emit("request_canvas");
+        document.querySelector('#save_canvas').innerHTML='Save Current Canvas';
+        document.querySelector('#save_canvas').setAttribute('disabled','false');
     });
     function draw(data){
       var canvas = document.querySelector('canvas');
@@ -51,12 +53,13 @@
       document.querySelector("#saved_canvases").innerHTML=imgs;
     });
     function save(){
+      document.querySelector('#save_canvas').innerHTML='Saving...';
+      document.querySelector('#save_canvas').setAttribute('disabled','true');
       fetch('https://api.jamied132.is-a.dev/saveCanvas',{
         method:'POST',
         body:document.querySelector('canvas').toDataURL()
       }).then(r=>{
-        document.querySelector('#save_canvas').innerHTML='saved';
-        document.querySelector('#save_canvas').setAttribute('disabled','true');
+        document.querySelector('#save_canvas').innerHTML='Saved';
       });
     }
   </script>
