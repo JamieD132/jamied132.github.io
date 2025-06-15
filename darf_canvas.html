@@ -21,7 +21,7 @@
     socket.on("connect", () => {
         socket.emit("request_canvas");
         document.querySelector('#save_canvas').innerHTML='Save Current Canvas';
-        document.querySelector('#save_canvas').setAttribute('disabled','');
+        document.querySelector('#save_canvas').removeAttribute('disabled');
     });
     function draw(data){
       var canvas = document.querySelector('canvas');
