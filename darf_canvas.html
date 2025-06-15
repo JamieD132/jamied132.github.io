@@ -3,8 +3,12 @@
   <title>Darflen Canvas Backups</title>
 </head>
 <body>
-  <h2>Current Canvas</h2>
+  <h1>Darflen canvas archives</h1>
+  <h2>Current canvas</h2>
   <canvas id="current_canvas" width="128" height="128"></canvas>
+  <button id="save_canvas" onclick="save()">Save current canvas</button>
+  <h2>Saved canvases</h2>
+  <div id="saved_canvases"></div>
   <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" crossorigin="anonymous" type="text/javascript"></script>
   <script>
     var hex = /^#(?:[0-9a-fA-F]{3}){1,2}$/;
@@ -34,6 +38,27 @@
         }
         draw(grid_data);
     });
+    fetch('https://api.jamied132.is-a.dev/getCanvas').then(r=>r.json).then(j=>{
+      var imgs = ``;
+      j.forEach(i=>{
+        imgs+=`
+        <div class="saved_canvas">
+          <img src="${i.canvas}">
+          <span>${(new Date(i.date)).toLocaleString()}</span>
+        </div>
+        `;
+      });
+      document.querySelector("#saved_canvases").innerHTML=imgs;
+    });
+    function save(){
+      fetch('https://api.jamied132.is-a.dev/saveCanvas',{
+        method:'POST',
+        body:document.querySelector('canvas').toDataURL();
+      }).then(r=>{
+        document.querySelector('save_canvas').innerHTML='saved';
+        document.querySelector('save_canvas').setAttribute('disabled','true');
+      });
+    }
   </script>
   <style>
     canvas,img{
