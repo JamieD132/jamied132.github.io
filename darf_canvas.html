@@ -4,7 +4,7 @@
 </head>
 <body>
   <h2>Saved backups</h2>
-  <canvas id="current_canvas" width="128" height="128">
+  <canvas id="current_canvas" width="128" height="128"></canvas>
   <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" crossorigin="anonymous" type="text/javascript"></script>
   <script>
     const socket = io("wss://api.darflen.com/canvas", {
@@ -21,7 +21,7 @@
       for(let y = 0; y< grid_size;y++){
         for(let x=0;x<grid_size;x++){
           ctx.fillStyle=data[y*grid_size+x];
-          ctx.drawRect(x,y,1,1);
+          ctx.fillRect(x,y,1,1);
         }
       }
     }
