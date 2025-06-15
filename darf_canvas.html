@@ -4,6 +4,7 @@
 </head>
 <body>
   <h2>Saved backups</h2>
+  <canvas id="current_canvas" width="128" height="128">
   <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" crossorigin="anonymous" type="text/javascript"></script>
   <script>
     const socket = io("wss://api.darflen.com/canvas", {
@@ -14,13 +15,23 @@
     socket.on("connect", () => {
         socket.emit("request_canvas");
     });
+    function draw(data){
+      var canvas = document.querySelector('canvas');
+      var ctx = canvas.getContext('2d');
+      for(let y = 0; y< grid_size;y++){
+        for(let x=0;x<grid_size;x++){
+          ctx.fillStyle=data[y*grid_size+x];
+          ctx.drawRect(x,y,1,1);
+        }
+      }
+    }
     grid_size = 128;
     grid_data = new Array(grid_size*grid_size);
     socket.on("update_bulk", (stuff) => {
         for (const { x, y, data } of stuff) {
             grid_data[y * grid_size + x] = data.color;
         }
-        console.log("recieved");
+        draw(grid_data);
     });
   </script>
 </body>
