@@ -55,8 +55,8 @@
         method:'POST',
         body:document.querySelector('canvas').toDataURL()
       }).then(r=>{
-        document.querySelector('save_canvas').innerHTML='saved';
-        document.querySelector('save_canvas').setAttribute('disabled','true');
+        document.querySelector('#save_canvas').innerHTML='saved';
+        document.querySelector('#save_canvas').setAttribute('disabled','true');
       });
     }
   </script>
