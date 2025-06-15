@@ -53,7 +53,7 @@
     function save(){
       fetch('https://api.jamied132.is-a.dev/saveCanvas',{
         method:'POST',
-        body:document.querySelector('canvas').toDataURL();
+        body:document.querySelector('canvas').toDataURL()
       }).then(r=>{
         document.querySelector('save_canvas').innerHTML='saved';
         document.querySelector('save_canvas').setAttribute('disabled','true');
