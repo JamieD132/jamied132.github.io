@@ -69,7 +69,7 @@
       }
     });
     function save(){
-      if(!document.querySelector("#save_canvas").hasAttribute("disabled"))return;
+      if(document.querySelector("#save_canvas").hasAttribute("disabled"))return;
       document.querySelector('#save_canvas').innerHTML='Saving...';
       document.querySelector('#save_canvas').setAttribute('disabled','true');
       fetch('https://api.jamied132.is-a.dev/saveCanvas',{
