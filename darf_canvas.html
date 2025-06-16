@@ -43,6 +43,7 @@
     });
     fetch('https://api.jamied132.is-a.dev/getCanvas').then(r=>r.json()).then(j=>{
       var imgs = ``;
+      var amount = j.length;
       j.forEach(i=>{
         imgs+=`
         <div class="saved_canvas">
@@ -52,6 +53,7 @@
         `;
       });
       document.querySelector("#saved_canvases").innerHTML=imgs;
+      document.querySelectorAll("h2")[1].innerHTML+=` (${amount})`;
     });
     function save(){
       document.querySelector('#save_canvas').innerHTML='Saving...';
