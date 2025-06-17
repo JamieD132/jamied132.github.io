@@ -7,7 +7,7 @@
   <h1>Darflen canvas archives</h1>
   <p>Darflen Canvas Archives is basically just wayback machine but for <a href="https://darflen.com/canvas">Darflen Canvas</a>. Please do not save a canvas if no change is made.</p>
   <h2>Current canvas</h2>
-  <canvas id="current_canvas" width="128" height="128"></canvas>
+  <canvas id="current_canvas" width="181" height="181"></canvas>
   <button id="save_canvas" onclick="save()" disabled>Loading...</button>
   <details>
     <summary>Canvas Stats</summary>
@@ -35,11 +35,7 @@
       var canvas = document.querySelector('canvas');
       var ctx = canvas.getContext('2d');
       var bigger = false;
-      if(data.length>16384){
-        grid_size=181;
-        document.querySelector("canvas").setAttribute("width","181");  
-        document.querySelector("canvas").setAttribute("height","181");                
-      };
+
       for(let y = 0; y< grid_size;y++){
         for(let x=0;x<grid_size;x++){
           ctx.fillStyle=hex.test(data[y*grid_size+x])?data[y*grid_size+x]:"#ffffff";
@@ -47,7 +43,7 @@
         }
       }
     }
-    grid_size = 128;
+    grid_size = 181;
     grid_data = new Array(grid_size*grid_size);
     socket.on("update_bulk", (stuff) => {
         fin++;
