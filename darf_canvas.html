@@ -62,7 +62,7 @@
         }
         var whitePixels = grid_size*grid_size-grid_data.filter(e=>(e.includes("#"))).length;
         document.querySelector("#pixels").innerHTML=whitePixels;
-        var percentage = (whitePixels/(grid_size*grid_size)).to_fixed(2);
+        var percentage = (whitePixels/(grid_size*grid_size)).toFixed(2);
         document.querySelector("#pixels").innerHTML=percentage;
         var grid_data2 = new Array(grid_data.length);
         for (let i = 0; i < grid_data.length; i++) {
@@ -82,7 +82,7 @@
         var top = sorted.slice(0, 10);
         var stats = ``;
         top.forEach(c=>{
-          stats+=`<li class="color" style="background-color:${c[0]}">${c[0]} (${c[1]} pixels ; ${(c[1]/(grid_size*grid_size)).to_fixed(2)}%)</li>`
+          stats+=`<li class="color" style="background-color:${c[0]}">${c[0]} (${c[1]} pixels ; ${(c[1]/(grid_size*grid_size)).toFixed(2)}%)</li>`
         });
         document.querySelector("#most_occuring").innerHTML=stats;
     });
