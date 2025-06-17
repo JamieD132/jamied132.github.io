@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GIF Generator</title>
+</head>
+<body>
+    <img id="gifOutput">
+    <script src="https://cdn.jsdelivr.net/npm/gif.js.optimized@1.0.1/dist/gif.min.js"></script>
+    <script>
+        async function createGifFromImages(imageDataUrls) {
+            if (!imageDataUrls || imageDataUrls.length === 0) {
+                throw new Error("Input array of image data URLs cannot be empty.");
+            }
+
+            const images = [];
+            let maxWidth = 0;
+            let maxHeight = 0;
+
+            // Load all images and determine the maximum dimensions
+            for (const dataUrl of imageDataUrls) {
+                const img = new Image();
+                await new Promise(resolve => {
+                    img.onload = () => {
+                        images.push(img);
+                        maxWidth = Math.max(maxWidth, img.width);
+                        maxHeight = Math.max(maxHeight, img.height);
+                        resolve();
+                    };
+                    img.src = dataUrl;
+                });
+            }
+
+            // Create a GIF instance from gif.js
+            // Note: gif.js requires you to add frames from a canvas, not directly from Image objects.
+            const gif = new GIF({
+                workers: 2, // Number of web workers to use for encoding (can speed up)
+                quality: 10, // Image quality (lower is faster but worse quality)
+                width: maxWidth,
+                height: maxHeight,
+                transparent: '#FFFFFF', // Or any color you want to treat as transparent. For your case, leaving it might be fine, but often needed if source images have background.
+                                        // Or, if you use a transparent canvas, then 'rgba(0,0,0,0)' if you draw onto a transparent background.
+                workerScript: 'https://cdn.jsdelivr.net/npm/gif.js@1.0.0/dist/gif.worker.js' // Worker script is essential
+            });
+
+            // Create a canvas for drawing each frame
+            const canvas = document.createElement('canvas');
+            canvas.width = maxWidth;
+            canvas.height = maxHeight;
+            const ctx = canvas.getContext('2d');
+
+            for (const img of images) {
+                ctx.clearRect(0, 0, maxWidth, maxHeight); // Clear the canvas
+                ctx.drawImage(img, 0, 0); // Draw image at top-left
+                gif.addFrame(canvas, { copy: true, delay: 500 }); // Add canvas content as frame
+            }
+
+            return new Promise((resolve, reject) => {
+                gif.on('finished', function(blob) {
+                    const gifDataUrl = URL.createObjectURL(blob);
+                    resolve(gifDataUrl);
+                });
+                gif.on('error', function(err) {
+                    reject(err);
+                });
+                gif.render();
+            });
+        }
+
+        // Example Usage (assuming you have image data URLs)
+// You would replace these with your actual image data URLs
+async function runExample() {
+  // Create some dummy image data URLs for demonstration
+  // In a real scenario, you'd get these from user input, file uploads, etc.
+  const dummyImageDataUrl1 = await createImageDataUrl(100, 100, 'red');
+  const dummyImageDataUrl2 = await createImageDataUrl(150, 80, 'blue');
+  const dummyImageDataUrl3 = await createImageDataUrl(80, 120, 'green');
+
+  try {
+    const gifDataUrl = await createGifFromImages([
+      dummyImageDataUrl1,
+      dummyImageDataUrl2,
+      dummyImageDataUrl3
+    ]);
+    console.log("Generated GIF Data URL:", gifDataUrl);
+
+    // You can display the GIF in an image tag:
+    const imgElement = document.createElement('img');
+    imgElement.src = gifDataUrl;
+    document.body.appendChild(imgElement);
+
+  } catch (error) {
+    console.error("Error generating GIF:", error);
+  }
+}
+
+// Helper function to create a dummy image data URL (for testing)
+function createImageDataUrl(width, height, color) {
+  return new Promise(resolve => {
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = color;
+    ctx.fillRect(0, 0, width, height);
+    resolve(canvas.toDataURL());
+  });
+}
+    </script>
+</body>
+</html>
