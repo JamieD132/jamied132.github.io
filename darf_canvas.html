@@ -88,7 +88,7 @@
         });
         document.querySelector("#most_occuring").innerHTML=stats;
     });
-    fetch('https://api.jamied132.is-a.dev/getCanvas').then(r=>r.json()).then(j=>{
+    fetch('https://api.jamied132.is-a.dev/getCanvas').then(r=>r.json()).then(async j=>{
       fin++;
       var imgs = ``;
       var amount = j.length;
