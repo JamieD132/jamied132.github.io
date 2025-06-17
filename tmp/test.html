@@ -39,7 +39,7 @@
                 height: maxHeight,
                 transparent: '#FFFFFF', // Or any color you want to treat as transparent. For your case, leaving it might be fine, but often needed if source images have background.
                                         // Or, if you use a transparent canvas, then 'rgba(0,0,0,0)' if you draw onto a transparent background.
-                workerScript: 'https://cdn.jsdelivr.net/npm/gif.js@1.0.0/dist/gif.worker.js' // Worker script is essential
+                workerScript: 'gif.worker.js' // Worker script is essential
             });
 
             // Create a canvas for drawing each frame
