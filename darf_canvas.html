@@ -3,6 +3,7 @@
   <title>Darflen Canvas Archives</title>
 </head>
 <body>
+    <script src="/gif.js"></script>
   <h1>Darflen canvas archives</h1>
   <p>Darflen Canvas Archives is basically just wayback machine but for <a href="https://darflen.com/canvas">Darflen Canvas</a>. Please do not save a canvas if no change is made.</p>
   <h2>Current canvas</h2>
@@ -16,6 +17,7 @@
     </ol>
   </details>
   <h2>Saved canvases</h2>
+  <img id="gif">
   <div id="saved_canvases"></div>
   <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" crossorigin="anonymous" type="text/javascript"></script>
   <script>
@@ -100,7 +102,8 @@
       });
       document.querySelector("#saved_canvases").innerHTML=imgs;
       document.querySelectorAll("h2")[1].innerHTML+=` (${amount})`;
-      
+      var gif = await createGifFromImages(j.map(i=>i.canvas).reverse());
+      document.querySelector("#gif").src=gif;
       if(!fin==2)return;
       if(j[0]["canvas"] == document.querySelector("canvas").toDataURL()){
           document.querySelector('#save_canvas').innerHTML='No changes since last saved canvas.';
@@ -118,6 +121,51 @@
         document.querySelector('#save_canvas').innerHTML='Saved';
       });
     }
+    async function createGifFromImages(imageDataUrls) {
+            const images = [];
+            let maxWidth = 0;
+            let maxHeight = 0;
+            for (const dataUrl of imageDataUrls) {
+                const img = new Image();
+                await new Promise(resolve => {
+                    img.onload = () => {
+                        images.push(img);
+                        maxWidth = Math.max(maxWidth, img.width);
+                        maxHeight = Math.max(maxHeight, img.height);
+                        resolve();
+                    };
+                    img.src = dataUrl;
+                });
+            }
+            const gif = new GIF({
+                workers: 2, 
+                quality: 10, 
+                width: maxWidth,
+                height: maxHeight,
+                transparent: '#FFFFFF', 
+                workerScript: '/gif.worker.js'
+            });
+            const canvas = document.createElement('canvas');
+            canvas.width = maxWidth;
+            canvas.height = maxHeight;
+            const ctx = canvas.getContext('2d');
+            for (const img of images) {
+                ctx.clearRect(0, 0, maxWidth, maxHeight);
+                ctx.drawImage(img, 0, 0);
+                gif.addFrame(canvas, { copy: true, delay: 100 });
+            }
+            return new Promise((resolve, reject) => {
+                gif.on('finished', function(blob) {
+                    const gifDataUrl = URL.createObjectURL(blob);
+                    resolve(gifDataUrl);
+                });
+                gif.on('error', function(err) {
+                    reject(err);
+                });
+                gif.render();
+            });
+        }
+    
   </script>
   <style>
     canvas,img{
