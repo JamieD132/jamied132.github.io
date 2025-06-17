@@ -8,6 +8,13 @@
   <h2>Current canvas</h2>
   <canvas id="current_canvas" width="128" height="128"></canvas>
   <button id="save_canvas" onclick="save()" disabled>Loading...</button>
+  <details>
+    <summary>Canvas Stats</summary>
+    <p>The current canvas is <span id="white"></span>% white (<span id="pixels"></span> pixels)</p>
+    <p>10 most occurring colors:</p>
+    <ul id="most_occuring">
+    </ul>
+  </details>
   <h2>Saved canvases</h2>
   <div id="saved_canvases"></div>
   <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" crossorigin="anonymous" type="text/javascript"></script>
@@ -53,6 +60,31 @@
             document.querySelector('#save_canvas').innerHTML='No changes since last saved canvas.';
             document.querySelector('#save_canvas').setAttribute('disabled','true');
         }
+        var whitePixels = grid_size*grid_size-grid_data.filter(e=>(e.includes("#"))).length;
+        document.querySelector("#pixels").innerHTML=whitePixels;
+        var percentage = whitePixels/(grid_size*grid_size);
+        document.querySelector("#pixels").percentage;
+        var grid_data2 = new Array(grid_data.length);
+        for (let i = 0; i < grid_data.length; i++) {
+            var value = grid_data[i];
+            if (typeof value !== 'string' || !value.startsWith("#")) {
+              grid_data2[i] = "#ffffff";
+            } else {
+              grid_data2[i] = value;
+            }
+        }
+        var freq = new Map();
+        for (const item of grid_data2) {
+          freq.set(item, (freq.get(item) || 0) + 1);
+        }
+        var sorted = Array.from(freq.entries());
+        sorted.sort((a, b) => b[1] - a[1]);
+        var top = sorted.slice(0, 10);
+        var stats = ``;
+        top.forEach(c=>{
+          stats+=`<li class="color" style=="background-color:${c[0]}">${c[0]} (${c[1]} pixels ; ${c[1]/(grid_size*grid_size)}%)</li>`
+        });
+        document.querySelector("#most_occuring").innerHTML=stats;
     });
     fetch('https://api.jamied132.is-a.dev/getCanvas').then(r=>r.json()).then(j=>{
       fin++;
@@ -62,12 +94,13 @@
         imgs+=`
         <div class="saved_canvas">
           <img src="${i.canvas}">
-          <span>${(new Date(i.date)).toLocaleString()}</span>
+          <span class="date">${(new Date(i.date)).toLocaleString()}</span>
         </div>
         `;
       });
       document.querySelector("#saved_canvases").innerHTML=imgs;
       document.querySelectorAll("h2")[1].innerHTML+=` (${amount})`;
+      
       if(!fin==2)return;
       if(j[0]["canvas"] == document.querySelector("canvas").toDataURL()){
           document.querySelector('#save_canvas').innerHTML='No changes since last saved canvas.';
@@ -103,7 +136,7 @@
     margin: 5px;
 }
 
-span {
+.date {
     font-weight: bold;
     font-size: 14px;
     text-align: center;
