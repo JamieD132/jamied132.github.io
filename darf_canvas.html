@@ -10,7 +10,7 @@
   <button id="save_canvas" onclick="save()" disabled>Loading...</button>
   <details>
     <summary>Canvas Stats</summary>
-    <p>The current canvas is <span id="white"></span>% white (<span id="pixels"></span> pixels)</p>
+    <p>The current canvas is <span id="white"></span>% unchanged (<span id="pixels"></span> pixels)</p>
     <p>10 most occurring colors:</p>
     <ul id="most_occuring">
     </ul>
@@ -63,7 +63,7 @@
         var whitePixels = grid_size*grid_size-grid_data.filter(e=>(e.includes("#"))).length;
         document.querySelector("#pixels").innerHTML=whitePixels;
         var percentage = ((whitePixels/(grid_size*grid_size))*100).toFixed(2);
-        document.querySelector("#pixels").innerHTML=percentage;
+        document.querySelector("#white").innerHTML=percentage;
         var grid_data2 = new Array(grid_data.length);
         for (let i = 0; i < grid_data.length; i++) {
             var value = grid_data[i];
