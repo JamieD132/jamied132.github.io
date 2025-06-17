@@ -25,6 +25,12 @@
     function draw(data){
       var canvas = document.querySelector('canvas');
       var ctx = canvas.getContext('2d');
+      var bigger = false;
+      if(data.length>16384){
+        grid_size=181;
+        document.querySelector("canvas").setAttribute("width","181");  
+        document.querySelector("canvas").setAttribute("height","181");                
+      };
       for(let y = 0; y< grid_size;y++){
         for(let x=0;x<grid_size;x++){
           ctx.fillStyle=hex.test(data[y*grid_size+x])?data[y*grid_size+x]:"#ffffff";
