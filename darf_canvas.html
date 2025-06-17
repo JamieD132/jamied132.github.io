@@ -82,7 +82,7 @@
         var top = sorted.slice(0, 10);
         var stats = ``;
         top.forEach(c=>{
-          stats+=`<li class="color" style="background-color:${c[0]}">${c[0]} (${c[1]} pixels ; ${((c[1]/(grid_size*grid_size))*100).toFixed(2)}%)</li>`
+          stats+=`<li class="color" style="background-color:${c[0]}"><span>${c[0]} (${c[1]} pixels ; ${((c[1]/(grid_size*grid_size))*100).toFixed(2)}%)</span></li>`
         });
         document.querySelector("#most_occuring").innerHTML=stats;
     });
@@ -153,6 +153,11 @@ canvas#current_canvas {
 
 button#save_canvas {
     display: block;
+}
+li.color{
+  padding:2px;
+  border-radius:0 0 5px 5px;
+  margin:1px;
 }
   </style>
 </body>
