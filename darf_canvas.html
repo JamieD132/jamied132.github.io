@@ -17,7 +17,9 @@
     </ol>
   </details>
   <h2>Saved canvases</h2>
-  <img id="gif">
+  <div id="contain">
+    <img id="gif">
+  </div>
   <div id="saved_canvases"></div>
   <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" crossorigin="anonymous" type="text/javascript"></script>
   <script>
@@ -110,9 +112,9 @@
       //var gif = await createGifFromImages(j.map(i=>i.canvas).reverse());
       //document.querySelector("#gif").src=gif;
       dataurls= j.map(i=>i.canvas).reverse();
-      document.querySelector("#gif").setAttribute("width",grid_size);
-      document.querySelector("#gif").setAttribute("height",grid_size);
-      document.querySelector("#gif").style.border="1px solid black";
+      document.querySelector("#contain").style.width=grid_size+"px";
+      document.querySelector("#contain").style.height=grid_size+"px";
+      document.querySelector("#contain").style.border="1px solid black";
       setInterval(()=>{
         document.querySelector("#gif").src=dataurls[cur];
         cur++;
