@@ -47,7 +47,13 @@
     grid_data = new Array(grid_size*grid_size);
     socket.on("update_bulk", (stuff) => {
         fin++;
-        grid_size = Math.sqrt(stuff.length)
+        console.log(stuff);
+        var max = 0;
+        stuff.forEach(e=>{
+          if(e.x>max)max=e.x;
+          if(e.y>max)max=e.y;
+        });
+      grid_size=max;
         for (const { x, y, data } of stuff) {
             grid_data[y * grid_size + x] = data.color;
         }
