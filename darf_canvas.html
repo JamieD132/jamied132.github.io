@@ -47,6 +47,7 @@
     grid_data = new Array(grid_size*grid_size);
     socket.on("update_bulk", (stuff) => {
         fin++;
+        grid_size = Math.sqrt(stuff.length)
         for (const { x, y, data } of stuff) {
             grid_data[y * grid_size + x] = data.color;
         }
@@ -84,6 +85,8 @@
         });
         document.querySelector("#most_occuring").innerHTML=stats;
     });
+    var dataurls;
+    var cur = 0;
     fetch('https://api.jamied132.is-a.dev/getCanvas').then(r=>r.json()).then(async j=>{
       fin++;
       var imgs = ``;
@@ -98,8 +101,13 @@
       });
       document.querySelector("#saved_canvases").innerHTML=imgs;
       document.querySelectorAll("h2")[1].innerHTML+=` (${amount})`;
-      var gif = await createGifFromImages(j.map(i=>i.canvas).reverse());
-      document.querySelector("#gif").src=gif;
+      //var gif = await createGifFromImages(j.map(i=>i.canvas).reverse());
+      //document.querySelector("#gif").src=gif;
+      dataurls= j.map(i=>i.canvas).reverse();
+      setInterval(()=>{
+        document.querySelector("#gif").src=dataurls[cur];
+        cur++;
+      },100);
       if(!fin==2)return;
       if(j[0]["canvas"] == document.querySelector("canvas").toDataURL()){
           document.querySelector('#save_canvas').innerHTML='No changes since last saved canvas.';
