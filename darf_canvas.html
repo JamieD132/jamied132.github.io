@@ -104,9 +104,13 @@
       //var gif = await createGifFromImages(j.map(i=>i.canvas).reverse());
       //document.querySelector("#gif").src=gif;
       dataurls= j.map(i=>i.canvas).reverse();
+      document.querySelector("#gif").setAttribute("width",grid_size);
+      document.querySelector("#gif").setAttribute("height",grid_size);
+      document.querySelector("#gif").style.border="1px solid black";
       setInterval(()=>{
         document.querySelector("#gif").src=dataurls[cur];
         cur++;
+        if(cur>dataurls.length-1)cur=0;
       },100);
       if(!fin==2)return;
       if(j[0]["canvas"] == document.querySelector("canvas").toDataURL()){
