@@ -53,7 +53,7 @@
             draw(grid_data);
               var canvas = document.querySelector("canvas");
               var label = document.querySelector("span");
-            label.innerHTML=="Hover...";
+              label.innerHTML=="Hover...";
               var relativeX=relativeY=0;
               canvas.addEventListener('mousemove', function(e) {
                 var rect = canvas.getBoundingClientRect();
@@ -98,11 +98,12 @@ p {
     margin-bottom: 50px;
 }
     span span {
-    display: inline !important;
+    display: inline-block !important;
     position: static !important;
     background: none !important;
     border: none !important;
     padding: 0 !important;
+    width: initial !important;
 }
   </style>
 </body>
