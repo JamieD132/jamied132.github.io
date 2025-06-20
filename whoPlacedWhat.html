@@ -39,7 +39,7 @@
             grid_data[y * grid_size + x] = data.color;
           users[y*grid_size+x]=data.user;
         }
-        draw(grid_data);
+        
         var idLookup = {};
         var completed = 0;
         var userids = [...new Set(users)];
@@ -48,6 +48,7 @@
             idLookup[u]=[j.profile.display_name || 'unknown user',j.profile.username || 'unknown'];
             completed++;
             if(completed<userids.length)return;
+            draw(grid_data);
               var canvas = document.querySelector("canvas");
               var label = document.querySelector("span");
               var relativeX=relativeY=0;
