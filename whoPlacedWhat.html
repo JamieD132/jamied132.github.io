@@ -45,7 +45,7 @@
         var userids = [...new Set(users)];
         userids.forEach(u=>{
           fetch(`https://api.darflen.com/users/$${u}`).then(r=>r.json()).then(j=>{
-            idLookup[u]=[j.profile.display_name,j.profile.username];
+            idLookup[u]=[j.profile.display_name || 'unknown user',j.profile.username || 'unknown'];
             completed++;
             if(completed<userids.length)return;
               var canvas = document.querySelector("canvas");
