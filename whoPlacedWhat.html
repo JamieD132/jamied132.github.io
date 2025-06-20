@@ -41,6 +41,18 @@
         }
         draw(grid_data);
     });
+    var canvas = document.querySelector("canvas");
+    var relativeX=relativeY=0;
+    canvas.addEventListener('mousemove', function(e) {
+      var rect = canvas.getBoundingClientRect();
+      relativeX = Math.floor((e.clientX - rect.left)/4);
+      relativeY = Math.floor((e.clientY - rect.top)/4);
+      console.log(`Relative X: ${relativeX}, Relative Y: ${relativeY}`);
+    });
+    canvas.addEventListener('mouseleave', function() {
+      relativeX = 0;
+      relativeY = 0;
+    });
   </script>
   <style>
     body{
