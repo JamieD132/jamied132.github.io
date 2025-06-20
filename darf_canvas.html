@@ -16,6 +16,12 @@
     <ol id="most_occuring">
     </ol>
   </details>
+  <details>
+    <summary>Leaderboard</summary>
+    <ol id="leaderboard">
+      
+    </ol>
+  </details>
   <h2>Saved canvases</h2>
   <details>
     <summary>Timelapse</summary>
@@ -67,6 +73,7 @@
         for (const { x, y, data } of stuff) {
             grid_data[y * grid_size + x] = data.color;
         }
+      var usernames = stuff.map(e=>e.data.user);
         draw(grid_data);
         document.querySelector('#save_canvas').innerHTML='Save Current Canvas';
         document.querySelector('#save_canvas').removeAttribute('disabled');
@@ -88,18 +95,26 @@
               grid_data2[i] = value;
             }
         }
-        var freq = new Map();
-        for (const item of grid_data2) {
-          freq.set(item, (freq.get(item) || 0) + 1);
-        }
-        var sorted = Array.from(freq.entries());
-        sorted.sort((a, b) => b[1] - a[1]);
-        var top = sorted.slice(0, 10);
+        var top = top10(grid_data2);
+      var topUsers = top10(usernames);
         var stats = ``;
         top.forEach(c=>{
           stats+=`<li class="color" style="background-color:${c[0]}"><span>${c[0]} (${c[1]} pixels ; ${((c[1]/(grid_size*grid_size))*100).toFixed(2)}%)</span></li>`
         });
         document.querySelector("#most_occuring").innerHTML=stats;
+      var completed =0;
+      var names = [];
+        topUsers.forEach(u=>{
+          fetch('https://api.darflen.com/users/$'+u[0]).then(r=>r.json()).then(t=>{
+            names.push([t.profile.display_name || 'unknown user',u[1]]);
+            if(names.length<10)return;
+            var leaderboard=``;
+            names.forEach(n=>{
+              leaderboard+=`<li>${n[0]} (${n[1]} pixels ; ${((n[1]/(grid_size*grid_size))*100).toFixed(2)}%)</li>`;
+            });
+            document.querySelector("#leaderboard").innerHTML=leaderboard;
+          });
+        });
     });
     var dataurls;
     var cur = 0;
@@ -189,6 +204,16 @@
                 gif.render();
             });
         }
+    function top10(array){
+      var freq = new Map();
+        for (const item of array) {
+          freq.set(item, (freq.get(item) || 0) + 1);
+        }
+        var sorted = Array.from(freq.entries());
+        sorted.sort((a, b) => b[1] - a[1]);
+        var top = sorted.slice(0, 10);
+      return top;
+    }
     
   </script>
   <style>
