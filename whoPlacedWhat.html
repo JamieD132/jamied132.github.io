@@ -45,7 +45,8 @@
         var userids = [...new Set(users)];
         userids.forEach(u=>{
           fetch(`https://api.darflen.com/users/$${u}`).then(r=>r.json()).then(j=>{
-            idLookup[u]=[j.profile.display_name || 'unknown user',j.profile.username || 'unknown'];
+            if(!j.code=="success") idLookup[u]=['unknown user','unknown'];
+            else idLookup[u]=[j.profile.display_name || 'unknown user',j.profile.username || 'unknown'];
             completed++;
             if(completed<userids.length)return;
             draw(grid_data);
