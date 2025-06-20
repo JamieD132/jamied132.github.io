@@ -110,7 +110,7 @@
             if(names.length<10)return;
             var leaderboard=``;
             names.forEach(n=>{
-              leaderboard+=`<li><span><b>${n[0]}</b> <span>(@${n[2]})</span></span><span> (${n[1]} pixels ; ${((n[1]/(grid_size*grid_size))*100).toFixed(2)}%)</span></li>`;
+              leaderboard+=`<li><span><span><b>${n[0]}</b></span> <span>(@${n[2]})</span></span> <span>(${n[1]} pixels ; ${((n[1]/(grid_size*grid_size))*100).toFixed(2)}%)</span></li>`;
             });
             document.querySelector("#leaderboard").innerHTML=leaderboard;
           });
