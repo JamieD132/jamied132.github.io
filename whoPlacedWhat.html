@@ -1,0 +1,58 @@
+<!doctype html>
+<head>
+  <title>who placed what pixel</title>
+</head>
+<body>
+  <h1>Who placed what pixel?</h1>
+  <p>Hover over a pixel on the canvas to see which user placed that pixel. <a href="/darf_canvas">Return to Canvas Archives</a></p>
+  <span>Loading</span>
+  <canvas width="362" height="362"></canvas>
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" crossorigin="anonymous" type="text/javascript"></script>
+  <script>
+    <script>
+    var hex = /^#(?:[0-9a-fA-F]{3}){1,2}$/;
+    const socket = io("wss://api.darflen.com/canvas", {
+        path: "/ws/",
+        transports: ["websocket", "polling"],
+        withCredentials: true,
+    });
+    socket.on("connect", () => {
+        socket.emit("request_canvas");
+    });
+    function draw(data){
+      var canvas = document.querySelector('canvas');
+      var ctx = canvas.getContext('2d');
+      var bigger = false;
+
+      for(let y = 0; y< grid_size;y++){
+        for(let x=0;x<grid_size;x++){
+          ctx.fillStyle=hex.test(data[y*grid_size+x])?data[y*grid_size+x]:"#ffffff";
+          ctx.fillRect(x*2,y*2,2,2);
+        }
+      }
+    }
+    grid_size = 181;
+    grid_data = new Array(grid_size*grid_size);
+    var users = [];
+    socket.on("update_bulk", (stuff) => {
+        fin++;
+        console.log(stuff);
+        var max = 0;
+        stuff.forEach(e=>{
+          if(e.x>max)max=e.x;
+          if(e.y>max)max=e.y;
+        });
+      
+      if(stuff.length>32761 || max>181){
+        grid_size=256;
+        document.querySelector("canvas").width=256;
+        document.querySelector("canvas").height=256;
+      }
+        for (const { x, y, data } of stuff) {
+            grid_data[y * grid_size + x] = data.color;
+          users[y*grid_size+x]=data.user;
+        }
+        draw(grid_data);
+    });
+  </script>
+</body>
