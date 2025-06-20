@@ -34,19 +34,7 @@
     grid_data = new Array(grid_size*grid_size);
     var users = [];
     socket.on("update_bulk", (stuff) => {
-        fin++;
         console.log(stuff);
-        var max = 0;
-        stuff.forEach(e=>{
-          if(e.x>max)max=e.x;
-          if(e.y>max)max=e.y;
-        });
-      
-      if(stuff.length>32761 || max>181){
-        grid_size=256;
-        document.querySelector("canvas").width=256;
-        document.querySelector("canvas").height=256;
-      }
         for (const { x, y, data } of stuff) {
             grid_data[y * grid_size + x] = data.color;
           users[y*grid_size+x]=data.user;
