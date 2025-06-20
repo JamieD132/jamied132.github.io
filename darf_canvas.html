@@ -108,6 +108,7 @@
           fetch('https://api.darflen.com/users/$'+u[0]).then(r=>r.json()).then(t=>{
             names.push([t.profile.display_name || 'unknown user',u[1],t.profile.username]);
             if(names.length<10)return;
+            names.sort((a, b) => b[1] - a[1]);
             var leaderboard=``;
             names.forEach(n=>{
               leaderboard+=`<li><span><span><b>${n[0]}</b></span> <span>(@${n[2]})</span></span> <span>(${n[1]} pixels ; ${((n[1]/(grid_size*grid_size))*100).toFixed(2)}%)</span></li>`;
