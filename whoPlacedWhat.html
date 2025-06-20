@@ -53,12 +53,13 @@
             draw(grid_data);
               var canvas = document.querySelector("canvas");
               var label = document.querySelector("span");
+            label.innerHTML=="Hover...";
               var relativeX=relativeY=0;
               canvas.addEventListener('mousemove', function(e) {
                 var rect = canvas.getBoundingClientRect();
                 relativeX = Math.floor((e.clientX - rect.left)/4);
                 relativeY = Math.floor((e.clientY - rect.top)/4);
-                label.innerHTML = `(${relativeX},${relativeY}) = <span>${idLookup[users[relativeY*grid_size+relativeX]][0]}</span> (@${idLookup[users[relativeY*grid_size+relativeX]][1]})`;
+                label.innerHTML = `<span>(${relativeX},${relativeY}) =</span> <span>${idLookup[users[relativeY*grid_size+relativeX]][0]}</span> <span>(@${idLookup[users[relativeY*grid_size+relativeX]][1]})</span>`;
               });
               canvas.addEventListener('mouseleave', function() {
                 relativeX = 0;
@@ -95,6 +96,13 @@
 
 p {
     margin-bottom: 50px;
+}
+    span span {
+    display: inline !important;
+    position: static !important;
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
 }
   </style>
 </body>
