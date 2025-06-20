@@ -40,19 +40,33 @@
           users[y*grid_size+x]=data.user;
         }
         draw(grid_data);
+        var idLookup = {};
+        var completed = 0;
+        var userids = [...new Set(users)];
+        userids.forEach(u=>{
+          fetch(`https://api.darflen.com/users/$${u}`).then(r=>r.json()).then(j=>{
+            idLookup[u]=[j.profile.display_name,j.profile.username];
+            completed++;
+            if(completed<userids.length)return;
+              var canvas = document.querySelector("canvas");
+              var label = document.querySelector("span");
+              var relativeX=relativeY=0;
+              canvas.addEventListener('mousemove', function(e) {
+                var rect = canvas.getBoundingClientRect();
+                relativeX = Math.floor((e.clientX - rect.left)/4);
+                relativeY = Math.floor((e.clientY - rect.top)/4);
+                label.innerHTML = `(${relativeX},${relativeY}) = <span>${idLookup[users[relativeY*grid_size+relativeX]][0]}</span> (@${idLookup[users[relativeY*grid_size+relativeX]][1]})`;
+              });
+              canvas.addEventListener('mouseleave', function() {
+                relativeX = 0;
+                relativeY = 0;
+                label.innerHTML = "Hover...";
+              });
+            });
+          });
+        
     });
-    var canvas = document.querySelector("canvas");
-    var relativeX=relativeY=0;
-    canvas.addEventListener('mousemove', function(e) {
-      var rect = canvas.getBoundingClientRect();
-      relativeX = Math.floor((e.clientX - rect.left)/4);
-      relativeY = Math.floor((e.clientY - rect.top)/4);
-      console.log(`Relative X: ${relativeX}, Relative Y: ${relativeY}`);
-    });
-    canvas.addEventListener('mouseleave', function() {
-      relativeX = 0;
-      relativeY = 0;
-    });
+    
   </script>
   <style>
     body{
@@ -65,7 +79,7 @@
     display: block;
     position: fixed;
     top: 110px;
-    width: 150px;
+    min-width: 150px;
     text-align: center;
     background-color: #ffffffee;
     padding: 5px;
