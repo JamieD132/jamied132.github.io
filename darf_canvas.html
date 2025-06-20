@@ -106,11 +106,11 @@
       var names = [];
         topUsers.forEach(u=>{
           fetch('https://api.darflen.com/users/$'+u[0]).then(r=>r.json()).then(t=>{
-            names.push([t.profile.display_name || 'unknown user',u[1]]);
+            names.push([t.profile.display_name || 'unknown user',u[1],t.profile.username]);
             if(names.length<10)return;
             var leaderboard=``;
             names.forEach(n=>{
-              leaderboard+=`<li>${n[0]} (${n[1]} pixels ; ${((n[1]/(grid_size*grid_size))*100).toFixed(2)}%)</li>`;
+              leaderboard+=`<li><span>${n[0]} (@${n[2]})</span><span> (${n[1]} pixels ; ${((n[1]/(grid_size*grid_size))*100).toFixed(2)}%)</span></li>`;
             });
             document.querySelector("#leaderboard").innerHTML=leaderboard;
           });
