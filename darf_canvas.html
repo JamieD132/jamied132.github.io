@@ -107,7 +107,8 @@
       var names = [];
         topUsers.forEach(u=>{
           fetch('https://api.darflen.com/users/$'+u[0]).then(r=>r.json()).then(t=>{
-            names.push([t.profile.display_name || 'unknown user',u[1],t.profile.username]);
+            if(t.code=="fail")names.push(["Deleted user",u[1],"deleted"]);
+            else names.push([t.profile.display_name || 'unknown user',u[1],t.profile.username]);
             if(names.length<10)return;
             names.sort((a, b) => b[1] - a[1]);
             var leaderboard=``;
