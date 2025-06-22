@@ -78,7 +78,7 @@
         draw(grid_data);
         document.querySelector('#save_canvas').innerHTML='Save Current Canvas';
         document.querySelector('#save_canvas').removeAttribute('disabled');
-        if(!fin==2)return;
+        if(fin!=2)return;
         if(document.querySelectorAll("img")[1].getAttribute("src") == document.querySelector("canvas").toDataURL()){
             document.querySelector('#save_canvas').innerHTML='No changes since last saved canvas.';
             document.querySelector('#save_canvas').setAttribute('disabled','true');
@@ -146,7 +146,7 @@
         cur++;
         if(cur>dataurls.length-1)cur=0;
       },100);
-      if(!fin==2)return;
+      if(fin!=2)return;
       if(j[0]["canvas"] == document.querySelector("canvas").toDataURL()){
           document.querySelector('#save_canvas').innerHTML='No changes since last saved canvas.';
           document.querySelector('#save_canvas').setAttribute('disabled','true');
