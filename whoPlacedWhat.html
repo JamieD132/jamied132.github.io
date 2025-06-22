@@ -46,8 +46,9 @@
       var delay = 0;
         userids.forEach(async u=>{
           delay+=500;
+          var me = delay;
           await new Promise(resolve => setTimeout(resolve, delay));
-                    document.querySelector("span").innerHTML="loading "+delay/500+"/"+userids.length;
+                    document.querySelector("span").innerHTML="loading "+me/500+"/"+userids.length;
 
           fetch(`https://api.darflen.com/users/$${u}`).then(r=>r.status==502||r.status==404?console.log("ok"):r.json()).then(j=>{
             console.log(j.code);
