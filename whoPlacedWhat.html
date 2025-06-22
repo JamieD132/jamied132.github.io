@@ -43,7 +43,7 @@
         var idLookup = {};
         var completed = 0;
         var userids = [...new Set(users)];
-        userids.forEach(u=>{
+        userids.forEach(async u=>{
           fetch(`https://api.darflen.com/users/$${u}`).then(r=>r.status==502||r.status==404?console.log("ok"):r.json()).then(j=>{
             console.log(j.code);
             if(j.code=="fail") idLookup[u]=['unknown user','unknown'];
@@ -67,6 +67,7 @@
                 label.innerHTML = "Hover...";
               });
             });
+            await new Promise(resolve => setTimeout(resolve, 150))
           });
         
     });
