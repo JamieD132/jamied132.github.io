@@ -1,0 +1,2528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darflen API Documentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem !important;
+        }
+        h1 {
+            font-size: 1.5rem !important;
+            font-weight: 700 !important;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #1a202c;
+        }
+        h2 {
+            font-size: 1.25rem !important;
+            font-weight: 600 !important;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+        }
+        h3 {
+            font-size: 1.75rem; /* Increased size */
+            font-weight: 500;
+            margin-top: 1.5rem;
+            color: #34495e;
+        }
+        .endpoint-card {
+            background-color: #f9fafb;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1.25rem;
+            margin-bottom: 1.25rem;
+        }
+        .method-tag {
+            display: inline-block;
+            padding: 0.3rem 0.6rem;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-right: 0.5rem;
+        }
+        .method-get { background-color: #d1fae5; color: #065f46; } /* green-100, green-800 */
+        .method-post { background-color: #fee2e2; color: #991b1b; } /* red-100, red-800 */
+        .method-websocket { background-color: #e0f2fe; color: #0c4a6e; } /* lightblue-100, lightblue-800 */
+
+        pre {
+            background-color: #2d3748; /* gray-800 */
+            color: #e2e8f0; /* gray-200 */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            margin-top: 0.75rem;
+        }
+        code {
+            font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+        }
+        .param-list {
+            margin-top: 0.5rem;
+            margin-left: 1.25rem;
+            list-style-type: disc;
+        }
+        .param-list li {
+            margin-bottom: 0.25rem;
+        }
+        .param-name {
+            font-weight: 600;
+            color: #2c5282; /* blue-800 */
+        }
+        .param-type {
+            color: #6b7280; /* gray-500 */
+            font-style: italic;
+        }
+        .note {
+            background-color: #fffbeb; /* yellow-100 */
+            border-left: 4px solid #f59e0b; /* yellow-500 */
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0.5rem;
+            color: #78350f; /* yellow-900 */
+        }
+        .important-note {
+            background-color: #fef2f2; /* red-100 */
+            border-left: 4px solid #ef4444; /* red-500 */
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0.5rem;
+            color: #991b1b; /* red-800 */
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container">
+        <h1>Darflen API Documentation</h1>
+
+        <p class="text-gray-700 mb-6">
+            This documentation provides information about all API endpoints found in Darflen's source code.
+            If there are any missing endpoints or incorrect information, please let me know.
+        </p>
+
+        <div class="important-note">
+            <strong>Note on Request Body Format:</strong>
+            The server expects the body of all requests as <strong>formdata (<code>multipart/form-data</code>)</strong>.
+            Also note that if there are any fields in a request that end in <code>[]</code>, you can provide multiple of that field.
+        </div>
+
+        <div class="note">
+            <strong>Authentication:</strong>
+            All API requests that require authentication need a token obtained from the login endpoint. This token must be provided as a Bearer token in the <code>Authorization</code> header, e.g., <code>Authorization: Bearer YOUR_AUTH_TOKEN</code>.
+            Additionally, for POST requests, a CSRF token (retrieved from the <code>/data</code> endpoint or implicitly handled by session cookies) is expected to be sent as a form field named <code>csrf_token</code>.
+        </div>
+
+        <h2>General Endpoints</h2>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/activity</code>
+            <h3>Record User is Online</h3>
+            <p>Sends a ping to the server to indicate active user presence, used for tracking online users.</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token for request validation.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success"
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/search/autocomplete?q=query</code>
+            <h3>Search Autocomplete</h3>
+            <p>Provides autocomplete suggestions based on the search query.</p>
+            <h4>Query Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">q</span>: <span class="param-type">string</span> - The search query string.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "results": [
+        "search suggestion 1",
+        "suggestion 2",
+        "suggestion 3",
+        "suggestion 4",
+        "suggestion 5"
+    ]
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/search?q=query&p=x</code>
+            <h3>Perform Search</h3>
+            <p>Executes a search for posts based on the query.</p>
+            <h4>Query Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">q</span>: <span class="param-type">string</span> - The search query string.</li>
+                <li><span class="param-name">p</span>: <span class="param-type">number</span> - The page number for pagination (e.g., 0 for the first page).</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "results": [
+        { ... post 1 ... },
+        etc...
+    ]
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/search/render?q=query&p=x</code>
+            <h3>Render Search Results</h3>
+            <p>Retrieves rendered HTML for search results, suitable for direct insertion into the DOM.</p>
+            <h4>Query Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">q</span>: <span class="param-type">string</span> - The search query string.</li>
+                <li><span class="param-name">p</span>: <span class="param-type">number</span> - The page number for pagination.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "rendered": "&lt;div class=\"search-result\"&gt;...&lt;/div&gt;&l
+
+        <h2>Authentication & User Endpoints</h2>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/auth/login</code>
+            <h3>User Login</h3>
+            <p>Authenticates a user and provides an authentication token for subsequent requests.</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">email</span>: <span class="param-type">string</span> - The user's email address.</li>
+                <li><span class="param-name">password</span>: <span class="param-type">string</span> - The user's password.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "token": "YOUR_AUTH_TOKEN_HERE",
+    "user_id": "user123"
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/auth/register</code>
+            <h3>User Registration</h3>
+            <p>Registers a new user account.</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">email</span>: <span class="param-type">string</span> - The user's email address.</li>
+                <li><span class="param-name">username</span>: <span class="param-type">string</span> - The desired username.</li>
+                <li><span class="param-name">password</span>: <span class="param-type">string</span> - The user's password.</li>
+                <li><span class="param-name">day</span>: <span class="param-type">number</span> - Birth day.</li>
+                <li><span class="param-name">month</span>: <span class="param-type">number</span> - Birth month.</li>
+                <li><span class="param-name">year</span>: <span class="param-type">number</span> - Birth year.</li>
+                <li><span class="param-name">referral*</span>: <span class="param-type">string</span> - Optional referral code.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "token": "NEWLY_GENERATED_AUTH_TOKEN",
+    "user_id": "newUser456"
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/auth/logout</code>
+            <h3>Logout Current Session</h3>
+            <p>Logs out the current authenticated session.</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Logged out successfully."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/auth/logout/device</code>
+            <h3>Logout Specific Device Session</h3>
+            <p>Logs out a specific device session associated with the user's account.</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">token</span>: <span class="param-type">string</span> - The session token to invalidate.</li>
+                <li><span class="param-name">password</span>: <span class="param-type">string</span> - User's current password for verification.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Device logged out."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/auth/logout/devices</code>
+            <h3>Logout All Device Sessions</h3>
+            <p>Logs out the user from all active device sessions.</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "All devices logged out."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/auth/username/change</code>
+            <h3>Change Username</h3>
+            <p>Allows a logged-in user to change their username.</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">username</span>: <span class="param-type">string</span> - The new desired username.</li>
+                <li><span class="param-name">password</span>: <span class="param-type">string</span> - The user's current password for verification.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Username changed successfully."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/auth/password/change</code>
+            <h3>Change Password</h3>
+            <p>Allows a logged-in user to change their password.</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">old_password</span>: <span class="param-type">string</span> - The user's current password.</li>
+                <li><span class="param-name">password</span>: <span class="param-type">string</span> - The new desired password.</li>
+                <li><span class="param-name">confirm_password</span>: <span class="param-type">string</span> - Confirmation of the new password.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Password changed successfully."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/auth/email/change</code>
+            <h3>Change Email</h3>
+            <p>Allows a logged-in user to change their email address.</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">email</span>: <span class="param-type">string</span> - The new desired email address.</li>
+                <li><span class="param-name">password</span>: <span class="param-type">string</span> - The user's current password for verification.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Email changed successfully."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/auth/email/verify</code>
+            <h3>Verify Email</h3>
+            <p>Initiates or completes the email verification process.</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+                <li><span class="param-name">verification_code*</span>: <span class="param-type">string</span> - The verification code received (if completing verification).</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Verification email sent." // or "Email verified successfully."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/auth/password/forgot/start</code>
+            <h3>Initiate Forgot Password</h3>
+            <p>Sends a password reset link or code to the user's email.</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">email</span>: <span class="param-type">string</span> - The user's email address.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Password reset instructions sent to your email."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/auth/tokens/TOKEN_ID/discard</code>
+            <h3>Discard Authentication Token</h3>
+            <p>Invalidates a specific authentication token, effectively logging out that session.</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">TOKEN_ID</span>: <span class="param-type">string</span> - The ID of the token to discard.</li>
+            </ul>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">password</span>: <span class="param-type">string</span> - User's current password for verification.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Token discarded."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/users/USERNAME</code>
+            <h3>Get User Profile</h3>
+            <p>Retrieves detailed profile information for a specific user.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">USERNAME</span>: <span class="param-type">string</span> - The username of the target user.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "user": {
+        "id": "user123",
+        "username": "exampleUser",
+        "display_name": "Example User",
+        "profile_picture": "https://static.darflen.com/uploads/user_profile/user123.jpg",
+        "banner": "https://static.darflen.com/uploads/user_banner/user123.jpg",
+        "bio": "This is an example user bio.",
+        "location": "Earth",
+        "website": "https://example.com",
+        "followers_count": 123,
+        "following_count": 45,
+        "posts_count": 50,
+        "is_followed": true,
+        "is_blocked": false,
+        "joined_date": "2023-01-15T10:00:00Z"
+    }
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/users/USERNAME/followers</code>
+            <h3>Get User Followers</h3>
+            <p>Retrieves a list of users who are following the specified user.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">USERNAME</span>: <span class="param-type">string</span> - The username of the target user.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "followers": [
+        { "id": "follower1", "username": "FollowerOne", "profile_picture": "url" },
+        { "id": "follower2", "username": "FollowerTwo", "profile_picture": "url" }
+    ],
+    "has_more": false
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/users/USERNAME/following</code>
+            <h3>Get User Following</h3>
+            <p>Retrieves a list of users that the specified user is following.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">USERNAME</span>: <span class="param-type">string</span> - The username of the target user.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "following": [
+        { "id": "followed1", "username": "FollowedOne", "profile_picture": "url" },
+        { "id": "followed2", "username": "FollowedTwo", "profile_picture": "url" }
+    ],
+    "has_more": true
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/users/USERNAME/posts</code>
+            <h3>Get User Posts</h3>
+            <p>Retrieves a list of posts created by the specified user.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">USERNAME</span>: <span class="param-type">string</span> - The username of the target user.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "posts": [
+        { "id": "post1", "content": "My first post!", "loves": 10, "comments": 2 },
+        { "id": "post2", "content": "Another thought.", "loves": 5, "comments": 1 }
+    ],
+    "has_more": true
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/users/USERNAME/communities</code>
+            <h3>Get User Communities</h3>
+            <p>Retrieves a list of communities the specified user is a member of.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">USERNAME</span>: <span class="param-type">string</span> - The username of the target user.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "communities": [
+        { "id": "comm1", "name": "Gaming Community", "icon": "url" },
+        { "id": "comm2", "name": "Art Lovers", "icon": "url" }
+    ],
+    "has_more": false
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/users/USERNAME/loves</code>
+            <h3>Get User Loves</h3>
+            <p>Retrieves a list of content (posts, comments, replies) that the specified user has "loved".</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">USERNAME</span>: <span class="param-type">string</span> - The username of the target user.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "loves": [
+        { "type": "post", "id": "post123", "content_snippet": "..." },
+        { "type": "comment", "id": "comment456", "content_snippet": "..." }
+    ],
+    "has_more": true
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/users/USERNAME/follow</code>
+            <h3>Follow/Unfollow User</h3>
+            <p>Toggles the follow status for a specified user.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">USERNAME</span>: <span class="param-type">string</span> - The username of the user to follow/unfollow.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "status": "followed" // or "unfollowed"
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/users/USERNAME/block</code>
+            <h3>Block/Unblock User</h3>
+            <p>Toggles the block status for a specified user.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">USERNAME</span>: <span class="param-type">string</span> - The username of the user to block/unblock.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "status": "blocked" // or "unblocked"
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/users/USER_ID/report</code>
+            <h3>Report User</h3>
+            <p>Submits a report against a specified user.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">USER_ID</span>: <span class="param-type">string</span> - The ID of the user being reported.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">textarea</span>: <span class="param-type">string</span> - A detailed description of the report.</li>
+                <li><span class="param-name">reason</span>: <span class="param-type">string</span> - The reason for reporting (e.g., "spam", "hate_speech").</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "User reported successfully."
+}</code></pre>
+        </div>
+
+        <h2>Post Endpoints</h2>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/posts/create</code>
+            <h3>Create Post</h3>
+            <p>Creates a new post on the platform. Can include text, files, and poll options.</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">textarea</span>: <span class="param-type">string</span> - The main text content of the post.</li>
+                <li><span class="param-name">audience</span>: <span class="param-type">string</span> - Defines who can see the post (e.g., "public", "followers", "private").</li>
+                <li><span class="param-name">files[]*</span>: <span class="param-type">binary file data</span> - Multiple file uploads (e.g., images, videos).</li>
+                <li><span class="param-name">options[]*</span>: <span class="param-type">string</span> - Multiple options for a poll. Order matters.</li>
+                <li><span class="param-name">group*</span>: <span class="param-type">string</span> - The ID of the community/group to post to.</li>
+                <li><span class="param-name">time*</span>: <span class="param-type">number</span> - For polls, the duration in days the poll will be active.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "post_id": "newPost123",
+    "post_url": "https://darflen.com/posts/newPost123",
+    "message": "Post created successfully."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/posts/POST_ID/render</code>
+            <h3>Render Post</h3>
+            <p>Retrieves the rendered HTML content of a specific post.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">POST_ID</span>: <span class="param-type">string</span> - The ID of the post.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "rendered": "&lt;div class=\"post-card\"&gt;...&lt;/div&gt;"
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/posts/POST_ID</code>
+            <h3>Get Post Details</h3>
+            <p>Retrieves detailed information about a specific post.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">POST_ID</span>: <span class="param-type">string</span> - The ID of the post.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "post": {
+        "id": "post123",
+        "author": { "id": "user1", "username": "Alice" },
+        "content": "This is a sample post.",
+        "media": ["url_to_image.jpg"],
+        "loves_count": 50,
+        "comments_count": 10,
+        "reposts_count": 5,
+        "is_loved": true,
+        "is_reposted": false,
+        "created_at": "2024-07-25T14:30:00Z",
+        "audience": "public",
+        "community_id": "community1"
+    }
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/posts/POST_ID/edit</code>
+            <h3>Edit Post</h3>
+            <p>Modifies the content and/or media of an existing post.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">POST_ID</span>: <span class="param-type">string</span> - The ID of the post to edit.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">textarea</span>: <span class="param-type">string</span> - The updated text content of the post.</li>
+                <li><span class="param-name">audience</span>: <span class="param-type">string</span> - The updated audience setting.</li>
+                <li><span class="param-name">files[]*</span>: <span class="param-type">binary file data</span> - New or updated file uploads.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Post updated successfully."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/posts/POST_ID/repost</code>
+            <h3>Repost Content</h3>
+            <p>Reposts a specific post, optionally adding text, files, or associating with a group.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">POST_ID</span>: <span class="param-type">string</span> - The ID of the post to repost.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">textarea*</span>: <span class="param-type">string</span> - Optional text content for the repost.</li>
+                <li><span class="param-name">audience</span>: <span class="param-type">string</span> - Audience for the repost.</li>
+                <li><span class="param-name">files[]*</span>: <span class="param-type">binary file data</span> - Optional file uploads for the repost.</li>
+                <li><span class="param-name">group*</span>: <span class="param-type">string</span> - Optional ID of the community/group to repost to.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "repost_id": "newRepost789",
+    "message": "Post reposted successfully."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/posts/POST_ID/report</code>
+            <h3>Report Post</h3>
+            <p>Submits a report against a specified post.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">POST_ID</span>: <span class="param-type">string</span> - The ID of the post being reported.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">textarea</span>: <span class="param-type">string</span> - A detailed description of the report.</li>
+                <li><span class="param-name">reason</span>: <span class="param-type">string</span> - The reason for reporting (e.g., "spam", "hate_speech").</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Post reported successfully."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/posts/POST_ID/love</code>
+            <h3>Love/Unlove Post</h3>
+            <p>Toggles the "love" (like) status for a specified post.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">POST_ID</span>: <span class="param-type">string</span> - The ID of the post.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "status": "loved" // or "unloved"
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/posts/POST_ID/pin</code>
+            <h3>Pin/Unpin Post</h3>
+            <p>Toggles the pinned status of a post within a community or user profile.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">POST_ID</span>: <span class="param-type">string</span> - The ID of the post to pin/unpin.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "status": "pinned" // or "unpinned"
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/posts/POST_ID/delete</code>
+            <h3>Delete Post</h3>
+            <p>Deletes a specified post.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">POST_ID</span>: <span class="param-type">string</span> - The ID of the post to delete.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Post deleted successfully."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/posts/POST_ID/reposts</code>
+            <h3>Get Post Reposts</h3>
+            <p>Retrieves a list of reposts associated with a specific post.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">POST_ID</span>: <span class="param-type">string</span> - The ID of the post.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "reposts": [
+        { "id": "repost1", "original_post_id": "POST_ID", "reposter": "userA" },
+        { "id": "repost2", "original_post_id": "POST_ID", "reposter": "userB" }
+    ],
+    "has_more": false
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/posts/POST_ID/comments</code>
+            <h3>Get Post Comments</h3>
+            <p>Retrieves a list of comments for a specific post.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">POST_ID</span>: <span class="param-type">string</span> - The ID of the post.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "comments": [
+        { "id": "comment1", "content": "Great post!", "author": "userC" },
+        { "id": "comment2", "content": "I agree.", "author": "userD" }
+    ],
+    "has_more": true
+}</code></pre>
+        </div>
+
+        <h2>Comment Endpoints</h2>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/posts/POST_ID/comment</code>
+            <h3>Create Comment on Post</h3>
+            <p>Adds a new comment to a specified post.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">POST_ID</span>: <span class="param-type">string</span> - The ID of the post to comment on.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">textarea</span>: <span class="param-type">string</span> - The text content of the comment.</li>
+                <li><span class="param-name">files[]*</span>: <span class="param-type">binary file data</span> - Optional file uploads for the comment.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "comment_id": "newComment456",
+    "message": "Comment added successfully."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/comments/COMMENT_ID/render</code>
+            <h3>Render Comment</h3>
+            <p>Retrieves the rendered HTML content of a specific comment.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">COMMENT_ID</span>: <span class="param-type">string</span> - The ID of the comment.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "rendered": "&lt;div class=\"comment-item\"&gt;...&lt;/div&gt;"
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/comments/COMMENT_ID</code>
+            <h3>Get Comment Details</h3>
+            <p>Retrieves detailed information about a specific comment.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">COMMENT_ID</span>: <span class="param-type">string</span> - The ID of the comment.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "comment": {
+        "id": "comment456",
+        "post_id": "post123",
+        "author": { "id": "userE", "username": "Commenter" },
+        "content": "This is a comment.",
+        "loves_count": 15,
+        "replies_count": 3,
+        "is_loved": false,
+        "created_at": "2024-07-25T14:35:00Z"
+    }
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/comments/COMMENT_ID/edit</code>
+            <h3>Edit Comment</h3>
+            <p>Modifies the content and/or media of an existing comment.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">COMMENT_ID</span>: <span class="param-type">string</span> - The ID of the comment to edit.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">textarea</span>: <span class="param-type">string</span> - The updated text content of the comment.</li>
+                <li><span class="param-name">files[]*</span>: <span class="param-type">binary file data</span> - New or updated file uploads.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Comment updated successfully."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/comments/COMMENT_ID/report</code>
+            <h3>Report Comment</h3>
+            <p>Submits a report against a specified comment.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">COMMENT_ID</span>: <span class="param-type">string</span> - The ID of the comment being reported.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">textarea</span>: <span class="param-type">string</span> - A detailed description of the report.</li>
+                <li><span class="param-name">reason</span>: <span class="param-type">string</span> - The reason for reporting.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Comment reported successfully."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/comments/COMMENT_ID/love</code>
+            <h3>Love/Unlove Comment</h3>
+            <p>Toggles the "love" (like) status for a specified comment.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">COMMENT_ID</span>: <span class="param-type">string</span> - The ID of the comment.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "status": "loved" // or "unloved"
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/comments/COMMENT_ID/delete</code>
+            <h3>Delete Comment</h3>
+            <p>Deletes a specified comment.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">COMMENT_ID</span>: <span class="param-type">string</span> - The ID of the comment to delete.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Comment deleted successfully."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/comments/COMMENT_ID/replies</code>
+            <h3>Get Comment Replies</h3>
+            <p>Retrieves a list of replies for a specific comment.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">COMMENT_ID</span>: <span class="param-type">string</span> - The ID of the comment.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "replies": [
+        { "id": "reply1", "content": "Good point!", "author": "userF" },
+        { "id": "reply2", "content": "Thanks!", "author": "userE" }
+    ],
+    "has_more": false
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/comments/COMMENT_ID/reply</code>
+            <h3>Create Reply to Comment</h3>
+            <p>Adds a new reply to a specified comment.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">COMMENT_ID</span>: <span class="param-type">string</span> - The ID of the comment to reply to.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">textarea</span>: <span class="param-type">string</span> - The text content of the reply.</li>
+                <li><span class="param-name">files[]*</span>: <span class="param-type">binary file data</span> - Optional file uploads for the reply.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "reply_id": "newReply789",
+    "message": "Reply added successfully."
+}</code></pre>
+        </div>
+
+        <h2>Reply Endpoints</h2>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/replies/REPLY_ID/render</code>
+            <h3>Render Reply</h3>
+            <p>Retrieves the rendered HTML content of a specific reply.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">REPLY_ID</span>: <span class="param-type">string</span> - The ID of the reply.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "rendered": "&lt;div class=\"reply-item\"&gt;...&lt;/div&gt;"
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/replies/REPLY_ID</code>
+            <h3>Get Reply Details</h3>
+            <p>Retrieves detailed information about a specific reply.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">REPLY_ID</span>: <span class="param-type">string</span> - The ID of the reply.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "reply": {
+        "id": "reply789",
+        "comment_id": "comment456",
+        "author": { "id": "userG", "username": "Replier" },
+        "content": "This is a reply.",
+        "loves_count": 5,
+        "is_loved": true,
+        "created_at": "2024-07-25T14:40:00Z"
+    }
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/replies/REPLY_ID/edit</code>
+            <h3>Edit Reply</h3>
+            <p>Modifies the content and/or media of an existing reply.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">REPLY_ID</span>: <span class="param-type">string</span> - The ID of the reply to edit.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">textarea</span>: <span class="param-type">string</span> - The updated text content of the reply.</li>
+                <li><span class="param-name">files[]*</span>: <span class="param-type">binary file data</span> - New or updated file uploads.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Reply updated successfully."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/replies/REPLY_ID/report</code>
+            <h3>Report Reply</h3>
+            <p>Submits a report against a specified reply.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">REPLY_ID</span>: <span class="param-type">string</span> - The ID of the reply being reported.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">textarea</span>: <span class="param-type">string</span> - A detailed description of the report.</li>
+                <li><span class="param-name">reason</span>: <span class="param-type">string</span> - The reason for reporting.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Reply reported successfully."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/replies/REPLY_ID/love</code>
+            <h3>Love/Unlove Reply</h3>
+            <p>Toggles the "love" (like) status for a specified reply.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">REPLY_ID</span>: <span class="param-type">string</span> - The ID of the reply.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "status": "loved" // or "unloved"
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/replies/REPLY_ID/delete</code>
+            <h3>Delete Reply</h3>
+            <p>Deletes a specified reply.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">REPLY_ID</span>: <span class="param-type">string</span> - The ID of the reply to delete.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Reply deleted successfully."
+}</code></pre>
+        </div>
+
+        <h2>Community Endpoints</h2>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/communities/create</code>
+            <h3>Create Community</h3>
+            <p>Creates a new community on the platform.</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">name</span>: <span class="param-type">string</span> - The unique name for the community (e.g., "tech-enthusiasts").</li>
+                <li><span class="param-name">display-name</span>: <span class="param-type">string</span> - The display name of the community (e.g., "Tech Enthusiasts").</li>
+                <li><span class="param-name">textarea</span>: <span class="param-type">string</span> - A description of the community.</li>
+                <li><span class="param-name">audience</span>: <span class="param-type">string</span> - The visibility setting for the community (e.g., "public", "private").</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "community_id": "newCommunity123",
+    "community_url": "https://darflen.com/communities/newCommunity123",
+    "message": "Community created successfully."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/communities/COMMUNITY</code>
+            <h3>Get Community Profile</h3>
+            <p>Retrieves detailed profile information for a specific community.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">COMMUNITY</span>: <span class="param-type">string</span> - The unique name or ID of the community.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "community": {
+        "id": "community123",
+        "name": "tech-enthusiasts",
+        "display_name": "Tech Enthusiasts",
+        "description": "A place for tech discussions.",
+        "icon": "https://static.darflen.com/uploads/community_icon/comm123.png",
+        "banner": "https://static.darflen.com/uploads/community_banner/comm123.jpg",
+        "members_count": 1500,
+        "posts_count": 500,
+        "is_member": true,
+        "audience": "public",
+        "created_at": "2023-03-01T09:00:00Z"
+    }
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/communities/COMMUNITY/posts</code>
+            <h3>Get Community Posts</h3>
+            <p>Retrieves a list of posts published within a specific community.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">COMMUNITY</span>: <span class="param-type">string</span> - The unique name or ID of the community.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "posts": [
+        { "id": "postA", "content": "Latest tech news...", "author": "userX" },
+        { "id": "postB", "content": "Discussion on AI...", "author": "userY" }
+    ],
+    "has_more": true
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/communities/COMMUNITY/loves</code>
+            <h3>Get Community Loves</h3>
+            <p>Retrieves a list of content that has been "loved" within a specific community.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">COMMUNITY</span>: <span class="param-type">string</span> - The unique name or ID of the community.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "loves": [
+        { "type": "post", "id": "post123", "content_snippet": "Loved post in community." },
+        { "type": "comment", "id": "comment456", "content_snippet": "Loved comment in community." }
+    ],
+    "has_more": false
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/communities/COMMUNITY/members</code>
+            <h3>Get Community Members</h3>
+            <p>Retrieves a list of members of a specific community.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">COMMUNITY</span>: <span class="param-type">string</span> - The unique name or ID of the community.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "members": [
+        { "id": "user1", "username": "Alice", "role": "admin" },
+        { "id": "user2", "username": "Bob", "role": "member" }
+    ],
+    "has_more": true
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/communities/COMMUNITY/join</code>
+            <h3>Join/Leave Community</h3>
+            <p>Toggles the membership status for the specified community.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">COMMUNITY</span>: <span class="param-type">string</span> - The unique name or ID of the community.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "status": "joined" // or "left"
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/communities/COMMUNITY/report</code>
+            <h3>Report Community</h3>
+            <p>Submits a report against a specified community.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">COMMUNITY</span>: <span class="param-type">string</span> - The unique name or ID of the community being reported.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">textarea</span>: <span class="param-type">string</span> - A detailed description of the report.</li>
+                <li><span class="param-name">reason</span>: <span class="param-type">string</span> - The reason for reporting.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Community reported successfully."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/communities/COMMUNITY/settings/customization</code>
+            <h3>Update Community Customization Settings</h3>
+            <p>Updates the icon, banner, description, and display name of a community.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">COMMUNITY</span>: <span class="param-type">string</span> - The unique name or ID of the community.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">icon*</span>: <span class="param-type">binary file data</span> - New community icon.</li>
+                <li><span class="param-name">banner*</span>: <span class="param-type">binary file data</span> - New community banner image.</li>
+                <li><span class="param-name">description*</span>: <span class="param-type">string</span> - Updated community description.</li>
+                <li><span class="param-name">display-name*</span>: <span class="param-type">string</span> - Updated community display name.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Community settings updated."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/communities/COMMUNITY/settings/members/USER/role</code>
+            <h3>Update Community Member Role</h3>
+            <p>Changes the role of a specific member within a community (e.g., from member to admin).</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">COMMUNITY</span>: <span class="param-type">string</span> - The unique name or ID of the community.</li>
+                <li><span class="param-name">USER</span>: <span class="param-type">string</span> - The username or ID of the member whose role is being changed.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">role</span>: <span class="param-type">string</span> - The new role for the user (e.g., "member", "moderator", "admin").</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Member role updated."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/communities/COMMUNITY/settings/visiblility</code>
+            <h3>Update Community Visibility</h3>
+            <p>Changes the visibility setting of a community (e.g., public or private).</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">COMMUNITY</span>: <span class="param-type">string</span> - The unique name or ID of the community.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">visibility</span>: <span class="param-type">string</span> - The new visibility status (e.g., "public", "private").</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Community visibility updated."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/communities/COMMUNITY/settings/members/USER/kick</code>
+            <h3>Kick Community Member</h3>
+            <p>Removes a user from the community.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">COMMUNITY</span>: <span class="param-type">string</span> - The unique name or ID of the community.</li>
+                <li><span class="param-name">USER</span>: <span class="param-type">string</span> - The username or ID of the member to kick.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">password</span>: <span class="param-type">string</span> - Moderator's password for verification.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Member kicked from community."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/communities/COMMUNITY/settings/members/USER/ban</code>
+            <h3>Ban Community Member</h3>
+            <p>Bans a user from the community, preventing them from rejoining.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">COMMUNITY</span>: <span class="param-type">string</span> - The unique name or ID of the community.</li>
+                <li><span class="param-name">USER</span>: <span class="param-type">string</span> - The username or ID of the member to ban.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">password</span>: <span class="param-type">string</span> - Moderator's password for verification.</li>
+                <li><span class="param-name">reason</span>: <span class="param-type">string</span> - The reason for the ban.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Member banned from community."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/communities/COMMUNITY/settings/members/USER/unban</code>
+            <h3>Unban Community Member</h3>
+            <p>Unbans a user from the community, allowing them to rejoin.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">COMMUNITY</span>: <span class="param-type">string</span> - The unique name or ID of the community.</li>
+                <li><span class="param-name">USER</span>: <span class="param-type">string</span> - The username or ID of the member to unban.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">password</span>: <span class="param-type">string</span> - Moderator's password for verification.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Member unbanned from community."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/communities/COMMUNITY/settings/pinned</code>
+            <h3>Set Pinned Post in Community</h3>
+            <p>Sets a specific post as the pinned post for the community.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">COMMUNITY</span>: <span class="param-type">string</span> - The unique name or ID of the community.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">pinned-post</span>: <span class="param-type">string</span> - The ID of the post to pin.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Post pinned successfully."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/communities/COMMUNITY/settings/invite</code>
+            <h3>Invite User to Community</h3>
+            <p>Sends an invitation to a user to join the community.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">COMMUNITY</span>: <span class="param-type">string</span> - The unique name or ID of the community.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">username</span>: <span class="param-type">string</span> - The username of the user to invite.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Invitation sent."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/communities/COMMUNITY/settings/transfer</code>
+            <h3>Transfer Community Ownership</h3>
+            <p>Transfers the ownership of the community to another user.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">COMMUNITY</span>: <span class="param-type">string</span> - The unique name or ID of the community.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">username</span>: <span class="param-type">string</span> - The username of the new owner.</li>
+                <li><span class="param-name">password</span>: <span class="param-type">string</span> - Current owner's password for verification.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Community ownership transferred."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/communities/COMMUNITY/settings/links</code>
+            <h3>Update Community External Links</h3>
+            <p>Updates external links associated with a specific community.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">COMMUNITY</span>: <span class="param-type">string</span> - The unique name or ID of the community.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">title[]*</span>: <span class="param-type">string</span> - Multiple titles for external links.</li>
+                <li><span class="param-name">link[]*</span>: <span class="param-type">string</span> - Multiple URLs for external links.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Community links updated."
+}</code></pre>
+        </div>
+
+        <h2>Explore & Feed Endpoints</h2>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/explore/recent/render/PAGE</code>
+            <h3>Render Recent Explore Content</h3>
+            <p>Retrieves rendered HTML for recent content in the explore section, paginated.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">PAGE</span>: <span class="param-type">number</span> - The page number for pagination.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "rendered": "&lt;div class=\"explore-item\"&gt;...&lt;/div&gt;&lt;div class=\"explore-item\"&gt;...&lt;/div&gt;",
+    "nothing": false
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/explore/recent/get/PAGE</code>
+            <h3>Get Recent Explore Content Data</h3>
+            <p>Retrieves structured JSON data for recent content in the explore section, paginated.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">PAGE</span>: <span class="param-type">number</span> - The page number for pagination.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "content": [
+        { "id": "post1", "type": "post", "title": "Recent Post Title 1", "author": "userA", "preview": "..." },
+        { "id": "comm1", "type": "community", "name": "New Community Name", "description": "...", "icon": "url" }
+    ],
+    "has_more": true
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/explore/trending/render/PAGE</code>
+            <h3>Render Trending Explore Content</h3>
+            <p>Retrieves rendered HTML for trending content in the explore section, paginated.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">PAGE</span>: <span class="param-type">number</span> - The page number for pagination.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "rendered": "&lt;div class=\"explore-item\"&gt;...&lt;/div&gt;&lt;div class=\"explore-item\"&gt;...&lt;/div&gt;",
+    "nothing": false
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/explore/trending/get/PAGE</code>
+            <h3>Get Trending Explore Content Data</h3>
+            <p>Retrieves structured JSON data for trending content in the explore section, paginated.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">PAGE</span>: <span class="param-type">number</span> - The page number for pagination.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "content": [
+        { "id": "post2", "type": "post", "title": "Trending Post Title 1", "author": "userB", "loves": 100 },
+        { "id": "comm2", "type": "community", "name": "Active Community", "members": 5000 }
+    ],
+    "has_more": true
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/explore/loved/render/PAGE</code>
+            <h3>Render Loved Explore Content</h3>
+            <p>Retrieves rendered HTML for most loved content in the explore section, paginated.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">PAGE</span>: <span class="param-type">number</span> - The page number for pagination.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "rendered": "&lt;div class=\"explore-item\"&gt;...&lt;/div&gt;&lt;div class=\"explore-item\"&gt;...&lt;/div&gt;",
+    "nothing": false
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/explore/loved/get/PAGE</code>
+            <h3>Get Loved Explore Content Data</h3>
+            <p>Retrieves structured JSON data for most loved content in the explore section, paginated.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">PAGE</span>: <span class="param-type">number</span> - The page number for pagination.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "content": [
+        { "id": "post3", "type": "post", "title": "Highly Loved Post", "loves": 1500, "author": "userC" },
+        { "id": "comm3", "type": "community", "name": "Popular Art", "loves": 2000 }
+    ],
+    "has_more": true
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/explore/popular/render/PAGE</code>
+            <h3>Render Popular Explore Content</h3>
+            <p>Retrieves rendered HTML for popular content in the explore section, paginated.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">PAGE</span>: <span class="param-type">number</span> - The page number for pagination.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "rendered": "&lt;div class=\"explore-item\"&gt;...&lt;/div&gt;&lt;div class=\"explore-item\"&gt;...&lt;/div&gt;",
+    "nothing": false
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/explore/popular/get/PAGE</code>
+            <h3>Get Popular Explore Content Data</h3>
+            <p>Retrieves structured JSON data for popular content in the explore section, paginated.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">PAGE</span>: <span class="param-type">number</span> - The page number for pagination.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "content": [
+        { "id": "post4", "type": "post", "title": "Viral Post", "views": 10000, "author": "userD" },
+        { "id": "comm4", "type": "community", "name": "Gaming Hub", "activity_score": 9.5 }
+    ],
+    "has_more": true
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/feed/render?page=x</code>
+            <h3>Render User Feed</h3>
+            <p>Retrieves rendered HTML for the authenticated user's personalized feed, paginated.</p>
+            <h4>Query Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">page</span>: <span class="param-type">number</span> - The page number for pagination.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "rendered": "&lt;div class=\"feed-item\"&gt;...&lt;/div&gt;&lt;div class=\"feed-item\"&gt;...&lt;/div&gt;",
+    "nothing": false
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/explore/communities/recent/render/PAGE</code>
+            <h3>Render Recent Communities in Explore</h3>
+            <p>Retrieves rendered HTML for recently created communities in the explore section, paginated.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">PAGE</span>: <span class="param-type">number</span> - The page number for pagination.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "rendered": "&lt;div class=\"community-card\"&gt;...&lt;/div&gt;&lt;div class=\"community-card\"&gt;...&lt;/div&gt;",
+    "nothing": false
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/explore/communities/activity/render/PAGE</code>
+            <h3>Render Active Communities in Explore</h3>
+            <p>Retrieves rendered HTML for communities with recent activity in the explore section, paginated.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">PAGE</span>: <span class="param-type">number</span> - The page number for pagination.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "rendered": "&lt;div class=\"community-card\"&gt;...&lt;/div&gt;&lt;div class=\"community-card\"&gt;...&lt;/div&gt;",
+    "nothing": false
+}</code></pre>
+        </div>
+
+        <h2>Notification Endpoints</h2>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/notification</code>
+            <h3>Get Notification Count</h3>
+            <p>Retrieves the number of unread notifications for the current user.</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "notifications": 5
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/notifications/render/PAGE</code>
+            <h3>Render Notifications</h3>
+            <p>Retrieves a paginated list of rendered notifications for the current user.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">PAGE</span>: <span class="param-type">number</span> - The page number for pagination.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "rendered": "&lt;div class=\"notification-item\"&gt;...&lt;/div&gt;&lt;div class=\"notification-item\"&gt;...&lt;/div&gt;",
+    "nothing": false
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/notifications/get/PAGE</code>
+            <h3>Get Notifications Data</h3>
+            <p>Retrieves structured JSON data for a paginated list of notifications for the current user.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">PAGE</span>: <span class="param-type">number</span> - The page number for pagination.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "notifications": [
+        { "id": "notif1", "type": "love", "message": "User liked your post.", "read": false, "timestamp": "2024-07-25T15:00:00Z" },
+        { "id": "notif2", "type": "follow", "message": "User started following you.", "read": true, "timestamp": "2024-07-25T14:55:00Z" }
+    ],
+    "has_more": true
+}</code></pre>
+        </div>
+
+        <h2>Settings Endpoints</h2>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/settings/customization</code>
+            <h3>Update User Customization Settings</h3>
+            <p>Updates the display name, description, profile icon, and banner for the authenticated user.</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">display-name*</span>: <span class="param-type">string</span> - The user's new display name.</li>
+                <li><span class="param-name">description*</span>: <span class="param-type">string</span> - The user's new biography/description.</li>
+                <li><span class="param-name">icon*</span>: <span class="param-type">binary file data</span> - New profile icon.</li>
+                <li><span class="param-name">banner*</span>: <span class="param-type">binary file data</span> - New banner image.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Profile customization updated."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/settings/theme</code>
+            <h3>Update User Theme</h3>
+            <p>Changes the user's preferred theme (e.g., light, dark).</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">theme</span>: <span class="param-type">string</span> - The new theme preference (e.g., "light", "dark").</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Theme updated."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/settings/language</code>
+            <h3>Update User Language</h3>
+            <p>Changes the user's preferred language for the application UI.</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">language</span>: <span class="param-type">string</span> - The new language code (e.g., "en", "es").</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Language updated."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/settings/notifications/loves</code>
+            <h3>Toggle Love Notifications</h3>
+            <p>Enables or disables notifications for when content is loved.</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">value</span>: <span class="param-type">boolean</span> - <code>true</code> to enable, <code>false</code> to disable.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Love notifications updated."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/settings/notifications/posts</code>
+            <h3>Toggle Post Notifications</h3>
+            <p>Enables or disables notifications related to posts (e.g., new posts in followed communities).</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">value</span>: <span class="param-type">boolean</span> - <code>true</code> to enable, <code>false</code> to disable.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Post notifications updated."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/settings/notifications/pings</code>
+            <h3>Toggle Ping Notifications</h3>
+            <p>Enables or disables notifications when the user is mentioned or "pinged".</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">value</span>: <span class="param-type">boolean</span> - <code>true</code> to enable, <code>false</code> to disable.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Ping notifications updated."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/settings/notifications/followers</code>
+            <h3>Toggle Follower Notifications</h3>
+            <p>Enables or disables notifications for new followers.</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">value</span>: <span class="param-type">boolean</span> - <code>true</code> to enable, <code>false</code> to disable.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Follower notifications updated."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/settings/preferences/horizontal_content_scrolling</code>
+            <h3>Toggle Horizontal Content Scrolling Preference</h3>
+            <p>Sets the user's preference for horizontal content scrolling in the UI.</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">value</span>: <span class="param-type">boolean</span> - <code>true</code> to enable, <code>false</code> to disable.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Horizontal scrolling preference updated."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/settings/preferences/events_ui</code>
+            <h3>Toggle Events UI Preference</h3>
+            <p>Sets the user's preference for displaying events in the UI.</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">value</span>: <span class="param-type">boolean</span> - <code>true</code> to enable, <code>false</code> to disable.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Events UI preference updated."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/settings/referrals/generate</code>
+            <h3>Generate New Referral Link</h3>
+            <p>Generates a new referral link for the authenticated user.</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "link": "https://darflen.com/join?ref=NEW_REFERRAL_CODE",
+    "message": "New referral link generated."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/settings/links</code>
+            <h3>Update User External Links</h3>
+            <p>Updates external links associated with the user's profile.</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">title[]*</span>: <span class="param-type">string</span> - Multiple titles for external links.</li>
+                <li><span class="param-name">link[]*</span>: <span class="param-type">string</span> - Multiple URLs for external links.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "External links updated."
+}</code></pre>
+        </div>
+
+        <h2>Moderation & Internal Endpoints</h2>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/bans/USER_ID/ban</code>
+            <h3>Ban User (Internal)</h3>
+            <p>Bans a user from the platform. Requires moderator authentication.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">USER_ID</span>: <span class="param-type">string</span> - The ID of the user to ban.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_MODERATOR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">reason</span>: <span class="param-type">string</span> - The reason for the ban.</li>
+                <li><span class="param-name">password</span>: <span class="param-type">string</span> - Moderator's password for verification.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "User banned successfully."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/bans/USER_ID/unban</code>
+            <h3>Unban User (Internal)</h3>
+            <p>Unbans a user from the platform. Requires moderator authentication.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">USER_ID</span>: <span class="param-type">string</span> - The ID of the user to unban.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_MODERATOR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">password</span>: <span class="param-type">string</span> - Moderator's password for verification.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "User unbanned successfully."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/bans/USER_ID/edit</code>
+            <h3>Edit User Ban Reason (Internal)</h3>
+            <p>Modifies the reason for an existing user ban. Requires moderator authentication.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">USER_ID</span>: <span class="param-type">string</span> - The ID of the banned user.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_MODERATOR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">reason</span>: <span class="param-type">string</span> - The new reason for the ban.</li>
+                <li><span class="param-name">password</span>: <span class="param-type">string</span> - Moderator's password for verification.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Ban reason updated.",
+    "review_time": 1737341709 // Unix timestamp of last review
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/reports/REPORT_ID/discard</code>
+            <h3>Discard Report (Internal)</h3>
+            <p>Discards a specific report, marking it as resolved or irrelevant. Requires moderator authentication.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">REPORT_ID</span>: <span class="param-type">string</span> - The ID of the report to discard.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_MODERATOR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">password</span>: <span class="param-type">string</span> - Moderator's password for verification.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Report discarded."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/settings/internal/USER_ID/customization</code>
+            <h3>Update User Internal Customization (Internal)</h3>
+            <p>Allows internal administrators to modify user flags (e.g., administrator status, verified status, bug hunter status).</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">USER_ID</span>: <span class="param-type">string</span> - The ID of the user to customize.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_ADMIN_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">administrator</span>: <span class="param-type">boolean</span> - <code>true</code> or <code>false</code> to set/unset administrator status.</li>
+                <li><span class="param-name">user-verified</span>: <span class="param-type">boolean</span> - <code>true</code> or <code>false</code> to set/unset user verified status.</li>
+                <li><span class="param-name">user-bug-hunter</span>: <span class="param-type">boolean</span> - <code>true</code> or <code>false</code> to set/unset bug hunter status.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "User internal customization updated."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/communities/COMMUNITY/settings/internal/customization</code>
+            <h3>Update Community Internal Customization (Internal)</h3>
+            <p>Allows internal administrators to modify community flags (e.g., verified status, disabled status).</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">COMMUNITY</span>: <span class="param-type">string</span> - The unique name or ID of the community.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_ADMIN_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">group-verified</span>: <span class="param-type">boolean</span> - <code>true</code> or <code>false</code> to set/unset community verified status.</li>
+                <li><span class="param-name">group-disabled</span>: <span class="param-type">boolean</span> - <code>true</code> or <code>false</code> to enable/disable the community.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Community internal customization updated."
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/interactions/internal/INTERACTION_ID/edit</code>
+            <h3>Edit Interaction Internally (Internal)</h3>
+            <p>Allows internal administrators to edit the content of any post, comment, or reply.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">INTERACTION_ID</span>: <span class="param-type">string</span> - The ID of the interaction (post, comment, or reply).</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_ADMIN_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">textarea</span>: <span class="param-type">string</span> - The updated text content of the interaction.</li>
+                <li><span class="param-name">audience*</span>: <span class="param-type">string</span> - Optional: The updated audience setting for posts.</li>
+                <li><span class="param-name">files[]*</span>: <span class="param-type">binary file data</span> - Optional: New or updated file uploads.</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Interaction edited internally."
+}</code></pre>
+        </div>
+
+        <h2>Statistics Endpoints</h2>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/statistics/interactions</code>
+            <h3>Get Global Interaction Statistics</h3>
+            <p>Retrieves global data for interaction statistics (posts, comments, replies) over time.</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "data": {
+        "labels": ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+        "posts": [100, 120, 150, 130, 180, 200],
+        "comments": [50, 60, 75, 65, 90, 110],
+        "replies": [20, 25, 30, 28, 35, 40]
+    }
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/statistics/engagements</code>
+            <h3>Get Global Engagement Statistics</h3>
+            <p>Retrieves global data for user engagement (e.g., loves, shares) over time.</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "data": {
+        "labels": ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+        "loves": [300, 350, 400, 380, 450, 500],
+        "reposts": [50, 60, 70, 65, 80, 90]
+    }
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/statistics/interactions?user=USERNAME</code>
+            <h3>Get User Interaction Statistics</h3>
+            <p>Retrieves interaction statistics (posts, comments, replies) for a specific user over time.</p>
+            <h4>Query Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">user</span>: <span class="param-type">string</span> - The username of the target user.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "data": {
+        "labels": ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+        "posts": [10, 12, 15, 13, 18, 20],
+        "comments": [5, 6, 7, 6, 9, 11],
+        "replies": [2, 2, 3, 2, 3, 4]
+    }
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/statistics/engagements?user=USERNAME</code>
+            <h3>Get User Engagement Statistics</h3>
+            <p>Retrieves engagement statistics (e.g., loves received, reposts received) for a specific user over time.</p>
+            <h4>Query Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">user</span>: <span class="param-type">string</span> - The username of the target user.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "data": {
+        "labels": ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+        "loves_received": [30, 35, 40, 38, 45, 50],
+        "reposts_received": [5, 6, 7, 6, 8, 9]
+    }
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/statistics/biggest_lovers</code>
+            <h3>Get Biggest Lovers</h3>
+            <p>Retrieves a list of users who have given the most "loves".</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "users": [
+        { "id": "user1", "username": "LoveMaster", "loves_given": 1000 },
+        { "id": "user2", "username": "HeartGiver", "loves_given": 950 }
+    ]
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-get">GET</span> <code>/statistics/biggest_posters</code>
+            <h3>Get Biggest Posters</h3>
+            <p>Retrieves a list of users who have created the most posts.</p>
+            <h4>Request Headers:</h4>
+            <pre><code>Accept: application/json</code></pre>
+            <h4>Request Body:</h4>
+            <p>None.</p>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "users": [
+        { "id": "user1", "username": "ContentKing", "posts_count": 500 },
+        { "id": "user2", "username": "StoryTeller", "posts_count": 480 }
+    ]
+}</code></pre>
+        </div>
+
+        <h2>Poll Endpoints</h2>
+
+        <div class="endpoint-card">
+            <span class="method-tag method-post">POST</span> <code>/polls/POST_ID/vote</code>
+            <h3>Vote on Poll</h3>
+            <p>Casts a vote on a specific poll within a post.</p>
+            <h4>Path Parameters:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">POST_ID</span>: <span class="param-type">string</span> - The ID of the post containing the poll.</li>
+            </ul>
+            <h4>Request Headers:</h4>
+            <pre><code>Content-Type: multipart/form-data
+Authorization: Bearer YOUR_AUTH_TOKEN</code></pre>
+            <h4>Request Body:</h4>
+            <ul class="param-list">
+                <li><span class="param-name">option</span>: <span class="param-type">number</span> - The index of the chosen poll option (0-indexed).</li>
+                <li><span class="param-name">csrf_token</span>: <span class="param-type">string</span> - CSRF token.</li>
+            </ul>
+            <h4>Example Response:</h4>
+            <pre><code>{
+    "code": "success",
+    "message": "Vote cast successfully.",
+    "poll_results": {
+        "option_0": 25,
+        "option_1": 75
+    }
+}</code></pre>
+        </div>
+
+    </div>
+</body>
+</html>
