@@ -33,6 +33,7 @@
   #profile-box #bio p,
   #profile-box #status p {
     color: #888;
+    background: transparent;
   }
   
   #profile-box .user-content {
@@ -78,9 +79,6 @@
     top: 0;
     right: 0;
     padding-right: 15px;
-    overlflow: auto;
-    border: 1px solid #eee;
-    box-shadow:0 2px 3px rgba(34, 25, 25, 0.5);
     padding: 5px 10px;
     width: 280px;
   }
@@ -163,7 +161,7 @@
   
   #bio, #status {
     width: 300px;
-    height: 104px;
+    height: 238px;
     padding: 0px;
     padding-right: 5px;
   }
@@ -177,12 +175,12 @@
   #bio form,
   #status form {
     margin-bottom: 0px;
-    height:104px;
+    height: 238px;
   }
   
   #bio textarea,
   #status textarea {
-    height: 100px;
+    height: 238px;
     width: 100%;
     overflow-x: hidden;
     overflow-y: auto;
