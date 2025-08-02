@@ -3024,7 +3024,7 @@ span[data-control-comment-count] {
     background-color: #fff;
     float: left;
     position: absolute;
-    top: 49px;
+    top: 47px;
     left: 0;
     min-width: 160px;
     max-width: 220px;
@@ -4743,7 +4743,7 @@ span[data-control-comment-count] {
 #topnav ul.account-nav>li.join-scratch {
 }
 
-#topnav ul.account-nav>li:hover {
+#topnav ul.account-nav>li:hover, #topnav ul.account-nav>li.open {
     background-image: linear-gradient(180deg, #A7BCC9, #637785 45%, #425562 55%, #34475D);
     border-radius: 5px;
     border: 2px solid #344755;
@@ -4833,7 +4833,6 @@ span[data-control-comment-count] {
 }
 
 #topnav ul.account-nav.logged-in li:hover {
-    background-color: #7854c0
 }
 
 #topnav ul.account-nav.logged-in>li>span {
@@ -4907,7 +4906,6 @@ span[data-control-comment-count] {
     width: 100%;
     border: 2px solid transparent;
     border-top: 0px;
-    margin-top: 1px;
     border-image: linear-gradient(#2a302d, #889caa 20%, transparent);
     border-image-slice: 1;
     border-bottom: 0px;
@@ -4918,7 +4916,6 @@ span[data-control-comment-count] {
 }
 
 #topnav ul.account-nav .logged-in-user.dropdown.open {
-    background-color: #7854c0!important
 }
 
 #topnav ul.account-nav ul.user-nav li {
@@ -5952,4 +5949,21 @@ input.hidden[type="file"] {
     left: -10000px;
     width: 1000px;
     height: 1000px
+}
+.win7 * {font-size: 10pt !important;}
+.win7:has(label) {
+    max-width: 300px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.win7:has(label) * {
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+input[type="range"] {
+    box-shadow: none;
+    border: none;
 }
