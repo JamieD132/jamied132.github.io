@@ -490,12 +490,9 @@ input[type="checkbox"]:focus,select:focus {
     color: inherit
 }
 
-.button,button {
+.button, button {
     line-height: 30px;
-    border: 1px solid #eee;
-    border-color: #855cd6;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
+    border: 1px solid #3c7fb1;
     border-radius: 5px;
     display: inline-block;
     font-weight: bold;
@@ -503,26 +500,16 @@ input[type="checkbox"]:focus,select:focus {
     cursor: pointer;
     overflow: visible;
     font-weight: normal;
-    background-color: #855cd6;
     color: #fff;
-    background-image: -webkit-linear-gradient(top,#855cd6,#855cd6);
-    background-image: -moz-linear-gradient(top,#855cd6,#855cd6);
-    background-image: -ms-linear-gradient(top,#855cd6,#855cd6);
-    background-image: -o-linear-gradient(top,#855cd6,#855cd6);
-    background-image: linear-gradient(top,#855cd6,#855cd6);
-    filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#855cd6,endColorStr=#855cd6);
-    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
-    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
     box-sizing: border-box;
-    transition: all .25s ease-in-out;
-    -webkit-transition: all .25s ease-in-out;
-    -moz-transition: all .25s ease-in-out;
     cursor: pointer;
     margin: 3px;
     height: 32px;
     vertical-align: middle;
-    text-shadow: none
+    text-shadow: none;
+    background: linear-gradient(#e5f4fc,#c4e5f6 30% 50%,#98d1ef 50%,#68b3db);
+    transition-duration: 400ms;
 }
 
 button.button {
@@ -539,16 +526,7 @@ button.button {
 }
 
 .button:hover,button:hover {
-    background-image: -webkit-linear-gradient(top,#7854c0,#7854c0);
-    background-image: -moz-linear-gradient(top,#7854c0,#7854c0);
-    background-image: -ms-linear-gradient(top,#7854c0,#7854c0);
-    background-image: -o-linear-gradient(top,#7854c0,#7854c0);
-    background-image: linear-gradient(top,#7854c0,#7854c0);
-    -webkit-transition: .1s linear all;
-    -moz-transition: .1s linear all;
-    -ms-transition: .1s linear all;
-    -o-transition: .1s linear all;
-    transition: .1s linear all;
+    background: linear-gradient(#c3dae7, #a8cbdd 30% 50%, #7bb4d2 50%, #4d9bc5);
     cursor: pointer;
     text-decoration: none
 }
@@ -590,25 +568,14 @@ button.button {
 .button.grey,button {
     text-shadow: 0 1px #fff;
     font-weight: normal;
-    background-color: #efefef;
     color: #666;
     border-color: #999;
     display: inline-block;
-    background-color: #e6e6e6;
-    background-repeat: no-repeat;
-    background-image: -webkit-linear-gradient(top,#fff,#ccc);
-    background-image: -moz-linear-gradient(top,#fff,#ccc);
-    background-image: -ms-linear-gradient(top,#fff,#ccc);
-    background-image: -o-linear-gradient(top,#fff,#ccc);
-    background-image: linear-gradient(top,#fff,#ccc)
+    background: linear-gradient(#f2f2f2 45%,#ebebeb 45%,#cfcfcf);
+    box-shadow: inset 0 0 0 1px #fffc;
 }
 
-.button.grey:hover,button:hover {
-    background-image: -webkit-linear-gradient(#e6e6e6,#e6e6e6);
-    background-image: -moz-linear-gradient(#e6e6e6,#e6e6e6);
-    background-image: -ms-linear-gradient(#e6e6e6,#e6e6e6);
-    background-image: -o-linear-gradient(#e6e6e6,#e6e6e6);
-    background-image: linear-gradient(#e6e6e6,#e6e6e6)
+button:hover {
 }
 
 .button.grey:hover .dropdown-toggle:after,.button.grey.on .dropdown-toggle:after,button:hover .dropdown-toggle:after,button.on .dropdown-toggle:after {
@@ -2657,7 +2624,7 @@ body.admin #explore-bar [data-content="view"] {
 }
 
 #comments .comments li {
-    border-bottom: 1px solid #ccc;
+    border-bottom: 2px solid #ccc;
     clear: both;
     margin-bottom: 0;
     padding: 0
@@ -5973,12 +5940,4 @@ input.hidden[type="file"] {
 input[type="range"] {
     box-shadow: none;
     border: none;
-}
-.viewport::-webkit-scrollbar {
-    display: none;
-}
-
-.doing h3 {
-    color: white;
-    text-shadow: 1px 1px black;
 }
