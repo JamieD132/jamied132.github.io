@@ -4577,17 +4577,15 @@ span[data-control-comment-count] {
 }
 
 #topnav .logo span {
-    background: url(logo.png) no-repeat left center;
-    background-size: 75px;
-    background-position-x:2px;
-    width: 80px;
+    background: url(img/kelpnet2.png) no-repeat left center;
+    background-size: 100px;
+    background-position: 2px 16px;
+    width: 104px;
     height: 50px;
     display: inline-block
 }
 
-#topnav .logo:hover span {
-    background-image: url(logo_hover.png)
-}
+#topnav .logo:hover span {background-size: 110px;width: 114px;background-position: 2px 14px;}
 
 #topnav ul.site-nav {
     list-style-type: none;
