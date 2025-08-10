@@ -96,6 +96,7 @@ html,body {
 #allpagecontent {
     background-image: url("https://jamied132.is-a.dev/elaruu/img/arches.png");
     background-color: #f5fdff;
+    overflow-x:hidden;
 }
 
 body.staging {
