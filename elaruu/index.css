@@ -3458,8 +3458,8 @@ span[data-control-comment-count] {
 }
 
 #footer #footer-menu li {
-    margin-right: 15px;
-    padding-right: 15px
+    /* margin-right: 15px; */
+    /* padding-right: 15px; */
 }
 
 #footer #footer-menu li.last {
