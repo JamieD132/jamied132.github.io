@@ -25,7 +25,9 @@
     width: 310px;
     padding-left: 20px;
     padding-bottom: 10px;
+    padding-top: 10px;
     position: relative;
+    border-right: 1px solid #768894;
   }
   
   #profile-box #bio textarea,
@@ -39,7 +41,7 @@
   #profile-box .user-content {
     width: 642px;
     position: relative;
-    height: 290px;
+    height: 100%;
   }
   
   #profile-box .doing {
@@ -47,15 +49,15 @@
     position: absolute;
     top: 0;
     right: 0;
-    background: #869ba8;
-    height: 280px;
+    /* background: #869ba8; */
+    height: 272px;
     padding: 10px;
-    border-left: 1px solid #ddd;
+    border-left: 1px solid #768894;
     width: 265px;
   }
   
   #profile-box .inner {
-    padding: 10px 0px 0px 0px!important;
+    /* padding: 10px 0px 0px 0px!important; */
   }
   
   #profile-data .footer {
@@ -79,7 +81,7 @@
     top: 0;
     right: 0;
     padding-right: 15px;
-    padding: 5px 10px;
+    padding: 10px 10px;
     width: 280px;
   }
   
@@ -228,10 +230,11 @@
     overflow: hidden;
     text-overflow: ellipsis;
     display: block;
+    font-weight: 900;
   }
   .player h3 {
-      margin-top: -6px;
-      margin-bottom: 6px
+      /* margin-top: -6px; */
+      margin-bottom: 6px;
   }
   
   .player .title h4 {
