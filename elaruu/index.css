@@ -6026,3 +6026,14 @@ a#comment-user {
 
 .doing h3 {
 }
+
+span.noai {
+    background-color: lightgrey;
+    font-weight: 900;
+    color: black;
+    text-shadow: 1px 1px white;
+    padding: 5px;
+    display: inline-block;
+    margin-bottom: 5px;
+    border-radius: 100px;
+}
