@@ -2635,12 +2635,12 @@ body.admin #explore-bar [data-content="view"] {
     left: 45%
 }
 
-#comments ul.comments,#comments ul.comments ul {
+#comments ul.comments, #comments ul.comments .replies {
     list-style-type: none;
     margin: 0
 }
 
-#comments .comments li {
+#comments .comments> li {
     border-bottom: 2px solid #ccc;
     clear: both;
     margin-bottom: 0;
@@ -2687,12 +2687,12 @@ body.admin #explore-bar [data-content="view"] {
     border-bottom: 0
 }
 
-#comments ul.comments ul {
+#comments ul.comments .replies {
     margin-left: 60px;
     margin-top: 1em
 }
 
-#comments ul.comments ul li {
+#comments ul.comments .replies li {
     border-bottom: 0;
     border-top: 1px solid #ccc
 }
