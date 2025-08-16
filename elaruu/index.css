@@ -2706,33 +2706,33 @@ body.admin #explore-bar [data-content="view"] {
     cursor: pointer
 }
 
-#comments .comment {
+.comment {
     margin: 5px 20px;
     padding: 10px 0;
     position: relative
 }
 
-#comments .comment:after {
+.comment:after {
     content: "";
     display: block;
     height: 0;
     clear: both
 }
 
-#comments .removed {
+.removed {
     background-color: #fcc;
     display: none
 }
 
-#comments .just_restored {
+.just_restored {
     background-color: #cfc!important
 }
 
-#comments .comment.just_removed {
+.comment.just_removed {
     background-color: #fcc
 }
 
-#comments .comment.just_restored {
+.comment.just_restored {
     background-color: #cfc!important
 }
 
@@ -2740,19 +2740,19 @@ body.admin #explore-bar [data-content="view"] {
     margin-left: 10px
 }
 
-#comments .comment .actions-wrap {
+.comment .actions-wrap {
     position: absolute;
     top: 0;
     right: 0
 }
 
-#comments .comment .actions {
+.comment .actions {
     float: right;
     margin-left: 10px;
     cursor: pointer
 }
 
-#comments .comment.on .actions {
+.comment.on .actions {
     display: block!important
 }
 
@@ -2768,7 +2768,7 @@ img.avatar {
     box-shadow: 6px 6px 10px #0004;
 }
 
-#comments .comment .info {
+.comment .info {
     display: block;
     position: relative;
     float: left;
@@ -2785,42 +2785,42 @@ img.avatar {
     width: 400px
 }
 
-#comments .comment .info .name {
+.comment .info .name {
     font-weight: bold;
     line-height: 11px;
     margin-bottom: 6px
 }
 
-#comments .comment .info .name a {
+.comment .info .name a {
     color: #333
 }
 
-#comments .comment .info .name a:hover {
+.comment .info .name a:hover {
     color: #855cd6
 }
 
-#comments .comment .info .content {
+.comment .info .content {
     margin-bottom: 5px;
     overflow: hidden
 }
 
-#comments .info .content tbody {
+.info .content tbody {
     border: 1px solid;
 }
 
-#comments .info .content th {
+.info .content th {
     margin: 5px;
     padding: 5px;
     border: 1px solid;
 }
 
-#comments .info .content td {
+.info .content td {
     margin: 5px;
     padding: 5px;
     border: 1px solid;
 }
 
-#comments .info .content code {
+.info .content code {
     background-color: black;
     padding: 5px;
     color: white;
@@ -2828,105 +2828,105 @@ img.avatar {
     border-radius: 5px;
 }
 
-#comments .info .content pre code {
+.info .content pre code {
     display: block;
 }
 
-#comments .info .content li {
+.info .content li {
     border: none;
 }
 
-#comments .info .content ul {
+.info .content ul {
     margin: 0 0 1em 2em;
     list-style-type: disc;
 }
 
-#comments .info .content ul li {
+.info .content ul li {
     border: none;
 }
 
-#comments .info .content ul li:has(p input[type=checkbox]) {
+.info .content ul li:has(p input[type=checkbox]) {
     list-style-type:none;
     margin-left:-18px;
 }
-#comments .info .content ul li p input[type=checkbox]{
+.info .content ul li p input[type=checkbox]{
     margin-right:2px;
 }
-#comments .info .content h1{
+.info .content h1{
     margin-bottom:0;
     font-size:28pt;
 }
-#comments .info .content h2{
+.info .content h2{
     font-size:23pt;
 }
-#comments .info .content h3{
+.info .content h3{
     font-size:19pt;
 }
-#comments .info .content h4{
+.info .content h4{
     font-size:17pt;
 }
-#comments .info .content h5{
+.info .content h5{
     font-size:15pt;
 }
-#comments .info .content h6{
+=.info .content h6{
     font-size:12pt;
 }
 
-#comments .comment .info .time {
+.comment .info .time {
     color: #999
 }
-#comments .comment .info .like-button{
+.comment .info .like-button{
     margin-left:10px;
     cursor:pointer;
 }
-#comments .comment .info .like-text{
+.comment .info .like-text{
     margin-left:5px;
     cursor: pointer;
 }
-#comments .comment .info .reply {
+.comment .info .reply {
     margin-left: 10px;
     cursor: pointer
 }
 
-#comments .comment form {
+.comment form {
     margin-top: 0;
     margin-bottom: 0;
     padding-top: 10px
 }
 
-#comments .posting {
+.posting {
     background: url(/elaruu/loading.gif) #fff no-repeat center center;
     border: 0;
     cursor: default
 }
 
-#comments .posting>span,#comments .posting+div {
+.posting>span,.posting+div {
     visibility: hidden
 }
 
-#comments .comment form textarea {
+.comment form textarea {
     width: 400px
 }
 
-#comments .comment .report,#comments .comment .delete {
+.comment .report,.comment .delete {
     cursor: pointer;
     color: #999
 }
 
-#comments .comment .report {
+.comment .report {
     display: none
 }
 
-#comments .comment:hover .report {
+.comment:hover .report {
     display: block
 }
 
-#comments .notification {
+.notification {
     margin-left: 10px;
     color: #F00
 }
 
-#comments .comment .delete {
+.comment .delete {
     font-size: 1.2em;
     color: #555;
     margin: 0 1px
@@ -5990,7 +5990,7 @@ a#comment-user {
     /* float: left; */
 }
 
-#comments .comment .info:before {
+.comment .info:before {
     content: '';
     display: block;
     width: 10px;
@@ -6002,7 +6002,7 @@ a#comment-user {
     box-shadow: 4px 0 10px -5px inset;
 }
 
-#comments .comment .info:after {
+.comment .info:after {
     content: '';
     display: block;
     position: absolute;
@@ -6013,7 +6013,7 @@ a#comment-user {
     top: 10px;
 }
 
-#comments .comment:before {
+.comment:before {
     content: '';
     position: absolute;
     width: 10px;
