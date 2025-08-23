@@ -1734,7 +1734,7 @@ body.admin.closed #admin-panel .expand {
 
 #admin-panel .clear-mute-score {
     float: right;
-    color: #855cd6;
+    color: #8ca1ae;
     cursor: pointer
 }
 
@@ -2796,7 +2796,7 @@ img.avatar {
 }
 
 .comment .info .name a:hover {
-    color: #855cd6
+    color: #8ca1ae
 }
 
 .comment .info .content {
@@ -3497,7 +3497,7 @@ span[data-control-comment-count] {
 }
 
 #footer #footer-menu li a {
-    color: #855cd6
+    color: #8ca1ae
 }
 
 #footer ul.footer-col {
@@ -3975,7 +3975,7 @@ span[data-control-comment-count] {
 }
 
 .deletion-canceled a {
-    color: #855cd6
+    color: #8ca1ae
 }
 
 #email-resend-box {
@@ -3998,7 +3998,7 @@ span[data-control-comment-count] {
 }
 
 #email-resend-box a {
-    color: #855cd6
+    color: #8ca1ae
 }
 
 #email-resend-box input[type="button"] {
@@ -4734,7 +4734,7 @@ span[data-control-comment-count] {
 }
 
 #topnav ul.account-nav>li:last-child {
-    border-right: 1px solid #855cd6
+    border-right: 1px solid #8ca1ae
 }
 
 #topnav ul.account-nav>li.sign-in:hover,#topnav ul.account-nav>li.sign-in.open {
@@ -4772,19 +4772,19 @@ span[data-control-comment-count] {
     right: 0!important;
     left: auto;
     margin-top: 18px;
-    background-color: #855cd6;
-    border-color: #855cd6;
+    background-color: #8ca1ae;
+    border-color: #8ca1ae;
     border-top-left-radius: 4px
 }
 
 #topnav ul.account-nav .sign-in .popover .arrow {
     right: 10%;
     left: auto;
-    border-bottom-color: #855cd6
+    border-bottom-color: #8ca1ae
 }
 
 #topnav ul.account-nav .sign-in .popover .arrow:after {
-    border-bottom-color: #855cd6
+    border-bottom-color: #8ca1ae
 }
 
 #topnav ul.account-nav .sign-in form label,#topnav ul.account-nav .sign-in form .forgot-password a {
@@ -4850,7 +4850,8 @@ span[data-control-comment-count] {
 }
 
 #topnav ul.account-nav .messages .messages-icon {
-    background: url(/elaruu/img/notifs.png) no-repeat center center;
+    background: url(/elaruu/img/nomail.svg) no-repeat center center;
+    background-size: 65%;
     display: block;
     width: 42px;
     height: 35px;
@@ -4935,7 +4936,7 @@ span[data-control-comment-count] {
 #topnav li.logout.divider input {
     width: 100%;
     border: 0;
-    background-color: #855cd6;
+    background-color: #8ca1ae;
     box-shadow: none;
     margin: 0;
     color: white;
