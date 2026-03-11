@@ -1,0 +1,173 @@
+:root{
+    --beige-600:#645544;
+    --beige-500:#8d7b68;
+    --beige-400:#a4907c;
+    --beige-300:#c8b6a6;
+    --beige-200:#f2e7db;
+    --beige-100:#faf5ef;
+    --pink-600:#81112f;
+    --pink-500:#b71e4f;
+    --pink-400:#d42b6f;
+    --pink-300:#e85c8f;
+    --pink-200:#f28fba;
+    --pink-100:#f9c1d5;
+}
+html[data-theme=tumbleweed] {
+    --nav-background: var(--beige-400);
+    --nav-border: 1px solid var(--beige-500);
+    --nav-background-selected: var(--beige-500);
+    --nav-search-border: 1px solid var(--beige-300);
+    --nav-search-background: var(--beige-200);
+    --default-background-color: var(--beige-300);
+    --default-text-color: var(--beige-600);
+    --default-box-shadow: 0 3px 4px -1px #09090c56, 0 2px 3px -2px #09090c56;
+    --filter-barely-invert: var(--filter-invert);
+    --default-background-color-dark: var(--beige-400);
+    --default-background-color-darker: var(--beige-500);
+    --default-background-color-darkest: var(--beige-500);
+    --form-border-color: var(--beige-400);
+    --form-hover-background-color: var(--beige-400);
+    --form-hover-border-color: var(--beige-600);
+    --form-focus-border-color: var(--beige-600);
+    --poll-background-color-focus: var(--beige-200);
+    --poll-border-color: var(--beige-400);
+    --poll-border-color-focus: var(--beige-200);
+    --poll-progrss-background-color-focus: var(--beige-200);
+    --poll-border-color-voted: var(--brand-700);
+    --poll-border-color-voted-focus: var(--brand-700);
+    --poll-progress-background-color-voted: var(--brand-500);
+    --poll-progress-background-color-voted-focus: var(--brand-600);
+    --poll-time-color: var(--beige-600);
+    --user-poster-background-color-focus: var(--form-hover-background-color);
+    --user-poster-border-color-focus: var(--form-hover-border-color);
+    --user-poster-border-color: var(--form-border-color);
+    --group-card-hover-background: var(--dark-850);
+    --text-spoilers-color: var(--beige-600);
+    --nav-search-background-selected: var(--beige-300);
+    --nav-text-color: var(--beige-100);
+    --footer-text-color-activated: var(--beige-500);
+    --group-card-hover-background: var(--light-400);
+}
+html[data-theme=tumbleweed] #website {
+    background-color: var(--beige-200)
+}
+html[data-theme=darfette] {
+    --nav-background: var(--pink-400);
+    --nav-border: 1px solid var(--pink-500);
+    --nav-background-selected: var(--pink-500);
+    --nav-search-border: 1px solid var(--pink-300);
+    --nav-search-background: var(--pink-200);
+    --default-background-color: var(--pink-300);
+    --default-text-color: var(--pink-600);
+    --default-box-shadow: 0 3px 4px -1px #09090c56, 0 2px 3px -2px #09090c56;
+    --filter-barely-invert: var(--filter-invert);
+    --default-background-color-dark: var(--pink-400);
+    --default-background-color-darker: var(--pink-500);
+    --default-background-color-darkest: var(--pink-500);
+    --form-border-color: var(--pink-400);
+    --form-hover-background-color: var(--pink-400);
+    --form-hover-border-color: var(--pink-600);
+    --form-focus-border-color: var(--pink-600);
+    --poll-background-color-focus: var(--pink-200);
+    --poll-border-color: var(--pink-400);
+    --poll-border-color-focus: var(--pink-200);
+    --poll-progrss-background-color-focus: var(--pink-200);
+    --poll-border-color-voted: var(--brand-700);
+    --poll-border-color-voted-focus: var(--brand-700);
+    --poll-progress-background-color-voted: var(--brand-500);
+    --poll-progress-background-color-voted-focus: var(--brand-600);
+    --poll-time-color: var(--pink-600);
+    --user-poster-background-color-focus: var(--form-hover-background-color);
+    --user-poster-border-color-focus: var(--form-hover-border-color);
+    --user-poster-border-color: var(--form-border-color);
+    --group-card-hover-background: var(--dark-850);
+    --text-spoilers-color: var(--pink-600);
+    --nav-search-background-selected: var(--pink-300);
+    --nav-text-color: var(--pink-100);
+    --footer-text-color-activated: var(--pink-500);
+    --group-card-hover-background: var(--light-400);
+}
+html[data-theme=darfette] #website {
+    background-color: var(--pink-200)
+}
+html[data-theme=darf] {
+    --nav-background: var(--brand-500);
+    --nav-border: 1px solid var(--brand-700);
+    --nav-background-selected: var(--brand-600);
+    --nav-search-border: 1px solid var(--brand-300);
+    --nav-search-background: var(--brand-200);
+    --default-background-color: var(--brand-500);
+    --default-text-color: var(--brand-900);
+    --default-box-shadow: 0 3px 4px -1px #09090c56, 0 2px 3px -2px #09090c56;
+    --filter-barely-invert: var(--filter-invert);
+    --default-background-color-dark: var(--brand-600);
+    --default-background-color-darker: var(--brand-700);
+    --default-background-color-darkest: var(--brand-800);
+    --form-border-color: var(--brand-700);
+    --form-hover-background-color: var(--brand-400);
+    --form-hover-border-color: var(--brand-600);
+    --form-focus-border-color: var(--brand-600);
+    --poll-background-color-focus: var(--brand-200);
+    --poll-border-color: var(--brand-700);
+    --poll-border-color-focus: var(--brand-200);
+    --poll-progrss-background-color-focus: var(--brand-200);
+    --poll-border-color-voted: var(--brand-700);
+    --poll-border-color-voted-focus: var(--brand-700);
+    --poll-progress-background-color-voted: var(--brand-300);
+    --poll-progress-background-color-voted-focus: var(--brand-100);
+    --poll-time-color: var(--brand-800);
+    --user-poster-background-color-focus: var(--form-hover-background-color);
+    --user-poster-border-color-focus: var(--form-hover-border-color);
+    --user-poster-border-color: var(--form-border-color);
+    --group-card-hover-background: var(--dark-850);
+    --text-spoilers-color: var(--brand-900);
+    --nav-search-background-selected: var(--brand-300);
+    --nav-text-color: var(--light-100);
+    --footer-text-color-activated: var(--brand-500);
+    --group-card-hover-background: var(--light-400);
+}
+html[data-theme=darf] #website {
+    background-color: var(--brand-300)
+}
+html[data-theme=daylightcontrast] {
+    --nav-background: var(--light-100);
+    --nav-border: 1px solid var(--dark-900);
+    --nav-background-selected: var(--light-200);
+    --nav-search-border: 1px solid var(--dark-900);
+    --nav-search-background: var(--light-200);
+    --nav-search-background-selected: var(--light-400);
+    --nav-icon-filter: var(--filter-barely-invert);
+    --nav-text-color: var(--default-text-color);
+    --default-background-color: var(--light-100);
+    --default-text-color: var(--dark-900);
+    --default-box-shadow: 0 0 0px 1px var(--dark-700);
+    --filter-barely-invert: invert(0);
+    --default-background-color-dark: var(--light-300);
+    --default-background-color-darker: var(--light-400);
+    --default-background-color-darkest: var(--light-500);
+    --form-border-color: var(--dark-900);
+    --form-hover-background-color: var(--light-200);
+    --form-hover-border-color: var(--dark-900);
+    --form-focus-border-color: var(--dark-900);
+    --poll-background-color-focus: var(--light-500);
+    --poll-border-color: var(--dark-900);
+    --poll-border-color-focus: var(--dark-900);
+    --poll-border-color-voted: var(--dark-900);
+    --poll-border-color-voted-focus: var(--dark-900);
+    --poll-progrss-background-color:var(--light-500);
+    --poll-progrss-background-color-focus:var(--light-900);
+    --poll-progress-background-color-voted: var(--brand-300);
+    --poll-progress-background-color-voted-focus: var(--brand-200);
+    --poll-time-color: var(--dark-900);
+    --user-poster-background-color-focus: var(--form-hover-background-color);
+    --user-poster-border-color-focus: var(--form-hover-border-color);
+    --user-poster-border-color: var(--form-border-color);
+    --group-card-hover-background: var(--dark-850);
+    --text-spoilers-color: var(--dark-900);
+    --footer-text-color-activated: var(--dark-100);
+    --group-card-hover-background: var(--light-400);
+}
+
+html[data-theme=daylightcontrast] .lb-dropdown .lb-dropdown-separator,html[data-theme=daylight] .lb-dropdown-disconnected .lb-dropdown-separator {
+    border-top: 1px solid var(--dark-900)
+}
